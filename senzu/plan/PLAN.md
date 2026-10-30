@@ -31,7 +31,7 @@
 |---|---|---|
 | F1 | Walking skeleton: proyecto Astro + tokens + layout base (nav/footer/toggle) que buildea y se ve | done |
 | F2 | Hero del landing: editorial 2 col con CTA copiable (Cortex placeholder estático) | done |
-| F3 | Cortex island: grafo interactivo React (hover, nodos activos, activación 2 saltos) | todo |
+| F3 | Cortex island: grafo interactivo React (hover, nodos activos, activación 2 saltos) | done |
 | F4 | Resto del landing: How it works + benchmarks resumidos + quick-start + open source | todo |
 | F5 | Página `/benchmarks` completa | todo |
 | F6 | Página `/docs` completa (instalación por anfitrión) | todo |
@@ -106,14 +106,16 @@
 - Devlog: `senzu/devlog/2026-10-30/011-cortex-island.md`
 - Nota: implementado con SVG + estado React (sin rAF ni animejs: la interacción no lo necesita); la respiración es CSS y respeta reduced-motion. Lógica pura separada del render → testeable con Vitest (D-014)
 
-### F3-T2 · Integrar el Cortex en hero y sección Demo  [S] [todo]
+### F3-T2 · Integrar el Cortex en hero y sección Demo  [S] [done]
 - Para qué: reemplazar el placeholder del hero y crear la sección "Demo Cortex" con la island real
 - Skill: ui-ux-pro-max + blueprint §Demo Cortex
 - Archivos: `src/components/landing/DemoCortex.astro`, actualizar `Hero.astro`, `index.astro`
 - Hecho cuando: Cortex con `client:visible` en el hero (versión ambiente) y en la sección demo (versión interactiva con leyenda); H2 "How it stores and recalls what matters."
 - Verificar: ui-verify `/`; la island hidrata solo al entrar en viewport (comprobar en Network/consola)
 - Depende de: F3-T1, F2-T1
-- Devlog: —
+- Verificado: `astro check` 0 err · `build` Complete · ui-verify 375/768/1440 → 0 problemas; dos islands hidratan sin errores de consola
+- Cumple: el hero muestra el grafo ambiente y la sección demo el interactivo con leyenda; ancla `#demo` operativa
+- Devlog: `senzu/devlog/2026-10-30/012-integrar-cortex-y-ancho.md`
 
 ---
 
@@ -197,7 +199,14 @@
 ---
 
 ## Tareas ad hoc (fuera del plan original)
-### — (ninguna todavía)
+
+### X-T1 · Ensanchar el contenedor del sitio  [S] [done]
+- Para qué: el usuario veía demasiado margen lateral; que el contenido ocupe más pantalla
+- Qué se hizo: contenedor de nav/hero/demo/footer `max-w-6xl` → `max-w-[1400px]` + padding lateral `px-6 sm:px-8 lg:px-12`; hero a `1.1fr/1fr` gap-16; Cortex SVG a 520px
+- Verificado: ui-verify 375/768/1440 → 0 problemas; margen lateral en 1440px de ~144px a ~48px
+- Cumple: el contenido ocupa más ancho y el margen lateral se reduce a un tercio (era el «Para qué»: sobraba espacio lateral)
+- Devlog: `senzu/devlog/2026-10-30/012-integrar-cortex-y-ancho.md`
+- Nota: patrón de contenedor fijado para las secciones F4–F6. Ancho 1400px pendiente de confirmar con el usuario.
 
 ## Cambios al plan
 | Fecha | Cambio | Motivo |

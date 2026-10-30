@@ -15,3 +15,4 @@ Registro correlativo de todas las entradas del proyecto.
 | 009 | 2026-10-30 | Layout base: nav + footer + theme toggle | feature | — | F1-T3 |
 | 010 | 2026-10-30 | Hero editorial 2 columnas con Cortex placeholder | feature | — | F2-T1 |
 | 011 | 2026-10-30 | Grafo del Cortex interactivo (island React + lógica testeada) | feature | — | F3-T1 |
+| 012 | 2026-10-30 | Integrar el Cortex (hero+demo) y ensanchar el contenedor | feature | 010 | F3-T2 · X-T1 |

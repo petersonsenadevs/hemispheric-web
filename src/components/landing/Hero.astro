@@ -1,12 +1,12 @@
 ---
-import CortexPlaceholder from './CortexPlaceholder.astro';
+import Cortex from '../cortex/Cortex.tsx';
 
 // Install command shown in the hero. Exact command is still a placeholder (D-008).
 const INSTALL_CMD = 'hemispheric install --claude';
 ---
 
 <section
-  class="mx-auto grid min-h-screen max-w-6xl items-center gap-12 px-6 pt-28 pb-16 lg:grid-cols-[55fr_45fr] lg:gap-20 lg:pt-16"
+  class="mx-auto grid min-h-screen max-w-[1400px] items-center gap-12 px-6 pt-28 pb-16 sm:px-8 lg:grid-cols-[1.1fr_1fr] lg:gap-16 lg:px-12 lg:pt-16"
 >
   <div class="flex flex-col items-start">
     <p class="mb-7 font-mono text-xs tracking-[0.12em] text-accent uppercase">
@@ -63,7 +63,7 @@ const INSTALL_CMD = 'hemispheric install --claude';
   </div>
 
   <div>
-    <CortexPlaceholder />
+    <Cortex client:visible showFact={false} />
   </div>
 </section>
 
