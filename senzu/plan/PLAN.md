@@ -29,7 +29,7 @@
 
 | Fase | Entregable verificable por el usuario | Estado |
 |---|---|---|
-| F1 | Walking skeleton: proyecto Astro + tokens + layout base (nav/footer/toggle) que buildea y se ve | todo |
+| F1 | Walking skeleton: proyecto Astro + tokens + layout base (nav/footer/toggle) que buildea y se ve | done |
 | F2 | Hero del landing: editorial 2 col con CTA copiable (Cortex placeholder estático) | todo |
 | F3 | Cortex island: grafo interactivo React (hover, nodos activos, activación 2 saltos) | todo |
 | F4 | Resto del landing: How it works + benchmarks resumidos + quick-start + open source | todo |
@@ -63,14 +63,17 @@
 - Cumple: el design system está en el proyecto; cualquier componente usa ya los tokens y las 3 fuentes
 - Devlog: `senzu/devlog/2026-10-30/008-design-system-integrado.md`
 
-### F1-T3 · Layout base (nav + footer + toggle)  [M] [todo]
+### F1-T3 · Layout base (nav + footer + toggle)  [M] [done]
 - Para qué: el marco común de las 3 páginas: navegación, cambio de tema y pie
 - Skill: ui-ux-pro-max §references/es (stack astro) + §pro-rules (a11y, focus)
 - Archivos: `src/layouts/BaseLayout.astro` (head/SEO slots, nav transparente→scroll oscuro, footer), `src/components/ThemeToggle` (island mínima, localStorage, sin flash), `src/components/Nav.astro`
 - Hecho cuando: nav con links (Demo · Benchmarks · Docs · GitHub) y toggle dark/light sin parpadeo inicial; footer con licencia/GitHub; tap targets ≥44px (finding ui-verify 005)
 - Verificar: ui-verify `/` (375/768/1440) sin scroll horizontal y toggle funcional
 - Depende de: F1-T2
-- Devlog: —
+- Verificado: `astro check` 0 err · `build` Complete · ui-verify 375/768/1440 → 0 problemas (burger probado); dark y light capturados
+- Cumple: hay marco común (nav fijo con scroll-darken, toggle sin flash, footer) reutilizable por todas las páginas
+- Devlog: `senzu/devlog/2026-10-30/009-layout-base.md`
+- Nota: ThemeToggle implementado como `<script>` vanilla (no island React) — más ligero para un toggle de clase; cumple D-004
 
 ---
 

@@ -1,0 +1,49 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** When true the main content sits under the fixed nav (hero paints behind it). */
+  heroOverlay?: boolean;
+}
+
+const {
+  title = 'Hemispheric — Memory for your agent',
+  description = 'Free, offline, deterministic memory for your coding agent. No server, no embeddings, no API key. Works where you already work: Claude Code, Codex and more.',
+  heroOverlay = false,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="color-scheme" content="dark light" />
+    {/* Anti-flash: apply the saved theme before first paint. Default is dark. */}
+    <script is:inline>
+      if (localStorage.getItem('theme') === 'light') {
+        document.documentElement.classList.add('light');
+      }
+    </script>
+  </head>
+  <body class="bg-background text-foreground">
+    <a
+      href="#main"
+      class="fixed -top-20 left-4 z-[100] inline-flex min-h-11 items-center rounded-md bg-surface px-4 py-2 text-foreground transition-[top] duration-200 focus:top-4"
+    >
+      Skip to content
+    </a>
+    <Nav />
+    <main id="main" class={heroOverlay ? '' : 'pt-16'}>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

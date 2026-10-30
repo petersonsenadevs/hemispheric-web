@@ -1,29 +1,25 @@
 ---
-import '../styles/global.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Hemispheric — Memory for your agent</title>
-  </head>
-  <body class="min-h-screen bg-background text-foreground">
-    <main class="mx-auto flex min-h-screen max-w-3xl flex-col justify-center gap-6 px-6">
-      <p class="font-mono text-sm tracking-widest text-accent uppercase">
-        Design system check
-      </p>
-      <h1 class="font-display text-6xl leading-none">
-        Memory for your <em>agent.</em>
-      </h1>
-      <p class="max-w-prose text-lg text-muted">
-        Free. Offline. No server. This page only verifies the tokens: background,
-        foreground, muted, the amber accent and the three font families.
-      </p>
-      <code class="w-fit rounded-md bg-code-bg px-3 py-2 font-mono text-sm text-foreground">
-        hemispheric install --claude
-      </code>
-    </main>
-  </body>
-</html>
+<BaseLayout>
+  <section class="mx-auto flex max-w-3xl flex-col gap-6 px-6 py-24">
+    <p class="font-mono text-sm tracking-widest text-accent uppercase">
+      Base layout check
+    </p>
+    <h1 class="font-display text-6xl leading-none">
+      Memory for your <em>agent.</em>
+    </h1>
+    <p class="max-w-prose text-lg text-muted">
+      Walking skeleton: fixed nav that darkens on scroll, a theme toggle that
+      persists, and a footer. The hero and the rest of the page come next.
+    </p>
+    <code
+      class="w-fit rounded-md bg-code-bg px-3 py-2 font-mono text-sm text-foreground"
+    >
+      hemispheric install --claude
+    </code>
+    <div class="h-[120vh]" aria-hidden="true"></div>
+    <p class="text-muted">Scroll down to see the nav darken.</p>
+  </section>
+</BaseLayout>
