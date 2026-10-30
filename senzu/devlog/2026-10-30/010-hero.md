@@ -24,7 +24,7 @@ Primera cara real de la web. Dirección B + hero editorial de A (D-011).
 - En móvil: columna única, texto arriba y Cortex debajo (blueprint).
 
 ## Commits
-- `<hash>` feat: hero editorial 2 columnas con Cortex placeholder
+- `57de07e` feat: hero editorial 2 columnas con Cortex placeholder
 
 ## Decisiones / incidencias
 - **Bug corregido en el Cortex:** la animación CSS `transform: scale()` sobrescribía el `transform="translate()"`
