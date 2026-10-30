@@ -1,0 +1,9 @@
+{
+  "_sello": "senzu:inmutable",
+  "_generado": "/adoptar 2026-10-30 (proyecto nuevo, sin codigo previo) — no editar a mano; para cambiar: borrar y re-ejecutar /adoptar",
+  "rules": [
+    { "files": "\\.(astro|ts|tsx|mjs)$", "forbid": "from ['\"]@astrojs/tailwind['\"]", "why": "Tailwind 4 se integra con @tailwindcss/vite, no con la integracion v3 @astrojs/tailwind" },
+    { "files": "src[\\\\/]components[\\\\/].*\\.astro$", "forbid": "\\sstyle=\"", "why": "sin estilos inline en componentes .astro: usa clases Tailwind y tokens del design system (MASTER.md)" },
+    { "files": "\\.(astro|tsx)$", "forbid": "dangerouslySetInnerHTML", "why": "sin HTML crudo inyectado: evita XSS y mantiene el render declarativo" }
+  ]
+}

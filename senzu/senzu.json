@@ -1,0 +1,33 @@
+{
+  "stack": "astro",
+  "tools": [
+    "claude",
+    "codex"
+  ],
+  "extraSkills": [],
+  "bundles": [],
+  "standardsRoot": "C:\\Users\\Black\\.senzu",
+  "frontProfile": {
+    "label": "Astro + React islands + Tailwind",
+    "stacks": [
+      "astro",
+      "react",
+      "shadcn",
+      "html-tailwind"
+    ]
+  },
+  "frontProfileSource": "default",
+  "seleccion": {
+    "modo": "categorias",
+    "grupos": [
+      "front",
+      "motion",
+      "design",
+      "growth",
+      "security",
+      "ops"
+    ],
+    "perfil": "front"
+  },
+  "lang": "es"
+}

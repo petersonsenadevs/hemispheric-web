@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hemispheric · Ronda 1 · Maqueta A</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --background: #0A0A0A;
+  --surface: #111111;
+  --surface-raised: #1A1A1A;
+  --border: #222222;
+  --border-strong: #333333;
+  --foreground: #F5F5F5;
+  --muted: #A3A3A3;
+  --subtle: #525252;
+  --accent: #B45309;
+  --on-accent: #FEF3C7;
+  --code-bg: #0D0D0D;
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'Courier New', 'Lucida Console', monospace;
+  --radius: 6px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-family: var(--font-sans);
+  background: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+/* ── Nav ─────────────────────────────────────────────────────── */
+nav {
+  position: sticky;
+  top: 36px;
+  z-index: 40;
+  background: rgba(10,10,10,0.92);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 0 2.5rem;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--foreground);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.nav-logo span { color: var(--accent); }
+
+.nav-links { display: flex; gap: 2.25rem; list-style: none; }
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 200ms;
+  cursor: pointer;
+}
+.nav-links a:hover { color: var(--foreground); }
+
+/* ── Hero ────────────────────────────────────────────────────── */
+.hero {
+  min-height: calc(100vh - 36px - 58px);
+  display: grid;
+  grid-template-columns: 55fr 45fr;
+  align-items: center;
+  gap: 5rem;
+  padding: 7rem 2.5rem 6rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 1.75rem;
+}
+
+h1.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 4.5vw, 4.5rem);
+  font-weight: 400;
+  line-height: 1.06;
+  color: var(--foreground);
+  letter-spacing: -0.025em;
+  margin-bottom: 1.5rem;
+}
+
+h1.hero-title em {
+  font-style: italic;
+  color: var(--muted);
+}
+
+.hero-sub {
+  font-size: 1.0625rem;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-bottom: 2.75rem;
+  max-width: 44ch;
+}
+
+.hero-actions { display: flex; flex-direction: column; gap: 0.875rem; align-items: flex-start; }
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  padding: 13px 26px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity 200ms, transform 180ms;
+  line-height: 1;
+}
+.btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); }
+.btn-primary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.btn-primary svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+.code-snippet {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 16px;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--foreground);
+  cursor: pointer;
+  transition: border-color 200ms;
+  user-select: all;
+}
+.code-snippet:hover { border-color: var(--border-strong); }
+.code-snippet .prompt { color: var(--accent); user-select: none; }
+.code-snippet .hint { color: var(--subtle); font-family: var(--font-sans); font-size: 0.6875rem; font-style: italic; user-select: none; padding-left: 0.5rem; border-left: 1px solid var(--border); }
+
+/* ── Cortex SVG ──────────────────────────────────────────────── */
+.cortex-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.cortex-svg { width: 100%; max-width: 420px; height: auto; overflow: visible; }
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 0.65; }
+  50% { transform: scale(1.07); opacity: 1; }
+}
+@keyframes breathe-active {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.14); }
+}
+@keyframes glow-fade {
+  0%, 100% { opacity: 0.18; }
+  50% { opacity: 0.45; }
+}
+@keyframes edge-pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+}
+
+.node-g { transform-box: fill-box; transform-origin: center; }
+.node-inactive { animation: breathe 3.4s ease-in-out infinite; }
+.node-inactive.d1 { animation-delay: 0.4s; }
+.node-inactive.d2 { animation-delay: 0.9s; }
+.node-inactive.d3 { animation-delay: 1.4s; }
+.node-inactive.d4 { animation-delay: 1.9s; }
+.node-active-g { animation: breathe-active 3s ease-in-out infinite; }
+.node-glow { animation: glow-fade 3s ease-in-out infinite; }
+.edge-active { animation: edge-pulse 3s ease-in-out infinite; }
+
+/* ── Benchmarks ──────────────────────────────────────────────── */
+.benchmarks {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 6rem 2.5rem;
+}
+
+.section-inner { max-width: 900px; margin: 0 auto; }
+
+h2.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 400;
+  color: var(--foreground);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+}
+
+.section-lead {
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.65;
+  max-width: 62ch;
+  margin-bottom: 3rem;
+}
+
+.bench-sublabel {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--subtle);
+  margin-bottom: 0.75rem;
+}
+
+.table-wrap { overflow-x: auto; }
+
+table.bench-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.75rem;
+  min-width: 500px;
+}
+
+table.bench-table th {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--subtle);
+  text-align: left;
+  padding: 0 2rem 0.875rem 0;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+table.bench-table td {
+  padding: 1rem 2rem 1rem 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+table.bench-table td:first-child { color: var(--foreground); font-weight: 500; }
+
+.bench-num {
+  font-family: var(--font-mono);
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+.bench-num.hl { color: var(--accent); }
+.bench-pending { font-family: var(--font-mono); font-size: 0.75rem; color: var(--subtle); }
+
+tr.highlight-row td { background: rgba(180,83,9,0.05); }
+tr.highlight-row td:first-child { color: var(--accent) !important; }
+tr.highlight-row .bench-num.hl { font-size: 1.625rem; }
+
+.bench-honest {
+  font-style: italic;
+  font-size: 0.875rem;
+  color: var(--subtle);
+  line-height: 1.65;
+  border-left: 2px solid var(--border-strong);
+  padding-left: 1rem;
+  margin-top: 0.5rem;
+}
+
+.bench-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  color: var(--accent);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: gap 200ms;
+}
+.bench-cta:hover { gap: 0.75rem; }
+
+/* ── Footer ──────────────────────────────────────────────────── */
+footer {
+  padding: 2rem 2.5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-copy { font-family: var(--font-mono); font-size: 0.75rem; color: var(--subtle); }
+
+.footer-links { display: flex; gap: 2rem; list-style: none; }
+.footer-links a { font-size: 0.8125rem; color: var(--subtle); text-decoration: none; transition: color 180ms; }
+.footer-links a:hover { color: var(--muted); }
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.5rem; min-height: auto; }
+  .cortex-wrap { order: 2; }
+  .hero-text { order: 1; }
+  .cortex-svg { max-width: 320px; }
+}
+@media (max-width: 600px) {
+  nav { padding: 0 1.25rem; }
+  .nav-links { gap: 1.25rem; }
+  .nav-links li:nth-child(n+3) { display: none; }
+  .benchmarks { padding: 4rem 1.25rem; }
+  footer { padding: 1.5rem 1.25rem; flex-direction: column; align-items: flex-start; }
+  .footer-links { flex-wrap: wrap; gap: 1.25rem; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* Focus */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ── Opinion system (no tocar) ───────────────────────────────── */
+.ds-banner { position: sticky; top: 0; z-index: 50; background: #111; color: #fff; font: 600 13px/1.4 system-ui, sans-serif; padding: 8px 16px; display: flex; gap: 12px; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+.ds-banner small { opacity: .75; font-weight: 400; }
+.ds-banner button { font: inherit; background: #fff; color: #111; border: 0; border-radius: 6px; padding: 4px 10px; cursor: pointer; }
+body.ds-ver [data-pieza] { outline: 2px dashed rgba(255, 64, 129, .7); outline-offset: 3px; position: relative; }
+body.ds-ver [data-pieza]::before { content: attr(data-pieza); position: absolute; top: -12px; left: -6px; z-index: 40; background: #ff4081; color: #fff; font: 700 11px/1 system-ui, sans-serif; padding: 3px 6px; border-radius: 4px; letter-spacing: .02em; }
+body.ds-ver [data-nuevo]::before { content: attr(data-pieza) " · NUEVO"; background: #00897b; }
+body.ds-ver [data-fijado]::before { content: attr(data-pieza) " · FIJADO"; background: #555; }
+.ds-op-boton { position: fixed; right: 16px; bottom: 16px; z-index: 60; font: 600 14px system-ui, sans-serif; background: #111; color: #fff; border: 0; border-radius: 999px; padding: 12px 18px; box-shadow: 0 6px 20px rgba(0,0,0,.25); cursor: pointer; }
+.ds-op { box-sizing: border-box; position: fixed; right: 16px; bottom: 72px; z-index: 60; width: min(380px, calc(100vw - 32px)); max-height: 70vh; overflow: auto; background: #fff; color: #111; border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,.3); font: 14px/1.4 system-ui, sans-serif; padding: 14px; display: none; }
+.ds-op.abierto { display: block; }
+.ds-op h3 { margin: 10px 0 4px; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: #666; }
+.ds-op .fila { display: flex; gap: 8px; align-items: center; padding: 6px 0; border-bottom: 1px solid #eee; }
+.ds-op .fila span { flex: 1; }
+.ds-op .fila b { font-size: 12px; color: #ff4081; }
+.ds-op .fila button { border: 1px solid #ddd; background: #fff; border-radius: 8px; padding: 4px 8px; cursor: pointer; font-size: 16px; min-width: 40px; min-height: 36px; }
+.ds-op .fila button.si { background: #e0f2f1; border-color: #00897b; }
+.ds-op .fila button.no { background: #fce4ec; border-color: #d81b60; }
+.ds-op textarea { width: 100%; box-sizing: border-box; min-height: 70px; margin-top: 8px; font: inherit; border: 1px solid #ddd; border-radius: 8px; padding: 8px; }
+.ds-op .copiar { width: 100%; margin-top: 8px; background: #111; color: #fff; border: 0; border-radius: 8px; padding: 10px; font: 600 14px system-ui, sans-serif; cursor: pointer; }
+.ds-op .aviso { font-size: 12px; color: #00897b; min-height: 1em; margin-top: 6px; }
+</style>
+</head>
+<body>
+
+<!-- BANNER PROPUESTA -->
+<div class="ds-banner" id="ds-banner">
+  <span>PROPUESTA · Ronda 1 · Maqueta A — baja fidelidad, para elegir dirección <small>Editorial: texto izquierda, Cortex derecha</small></span>
+  <button type="button" id="ds-ver">Ver piezas</button>
+</div>
+
+<!-- NAV -->
+<nav data-pieza="A·L1" data-cat="Layout" data-desc="Nav: logo izquierda, links derecha, fondo oscuro sticky">
+  <a class="nav-logo" href="#">Hemispheric<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#cortex">Demo</a></li>
+    <li><a href="#benchmarks">Benchmarks</a></li>
+    <li><a href="#install">Install</a></li>
+    <li><a href="#">GitHub</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">Open source · Claude Code · Codex</p>
+
+    <h1 class="hero-title"
+        data-pieza="A·T1"
+        data-cat="Tipografía"
+        data-desc="H1 en Instrument Serif 400, ~4.5rem, con em italic para variante">
+      Memory for<br>your <em>agent.</em>
+    </h1>
+
+    <p class="hero-sub"
+       data-pieza="A·X1"
+       data-cat="Textos y tono"
+       data-desc="Subtítulo: beneficios concretos, sin palabrería">
+      Free. Offline. Zero dependencies.<br>
+      Hooks into Claude Code and Codex and keeps what your agent learns — across sessions, across projects.
+    </p>
+
+    <div class="hero-actions"
+         data-pieza="A·B1"
+         data-cat="Botones"
+         data-desc="CTA principal ámbar + snippet de instalación copiable">
+      <a class="btn-primary" href="#install">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M8 2v9M4 7l4 4 4-4"/><line x1="2" y1="14" x2="14" y2="14"/>
+        </svg>
+        Install for Claude Code
+      </a>
+      <div class="code-snippet" title="Click to select" tabindex="0">
+        <span class="prompt">$</span>
+        <span>hemispheric install --claude</span>
+        <span class="hint">copy</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CORTEX -->
+  <div class="cortex-wrap" id="cortex"
+       data-pieza="A·M1"
+       data-cat="Movimiento"
+       data-desc="Cortex SVG: grafo de memoria con animación de respiración en nodos">
+    <svg class="cortex-svg" viewBox="0 0 420 360" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Cortex memory graph" role="img">
+      <defs>
+        <filter id="glow-a" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="5" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="glow-edge" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="2" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <!-- Edges (background) -->
+      <line class="edge" x1="210" y1="175" x2="90" y2="100"/>
+      <line class="edge" x1="210" y1="175" x2="340" y2="95"/>
+      <line class="edge" x1="210" y1="175" x2="75" y2="255"/>
+      <line class="edge" x1="210" y1="175" x2="345" y2="265"/>
+      <line class="edge" x1="210" y1="175" x2="210" y2="320"/>
+      <line class="edge" x1="90" y1="100" x2="75" y2="255"/>
+      <line class="edge" x1="340" y1="95" x2="345" y2="265"/>
+
+      <!-- Active edges (claude connections) -->
+      <line class="edge-active" x1="210" y1="175" x2="90" y2="100" filter="url(#glow-edge)" stroke="rgba(180,83,9,0.5)" stroke-width="1.5"/>
+      <line class="edge-active" x1="210" y1="175" x2="340" y2="95" filter="url(#glow-edge)" stroke="rgba(180,83,9,0.4)" stroke-width="1.5" style="animation-delay:0.5s"/>
+
+      <!-- Node: proyecto -->
+      <g class="node-g node-inactive d1" transform="translate(90,100)">
+        <circle r="22" fill="#0F0F0F" stroke="#333" stroke-width="1"/>
+        <circle r="7" fill="#F5F5F5" opacity="0.75"/>
+        <text x="0" y="36" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#A3A3A3" letter-spacing="0.04em">project</text>
+      </g>
+
+      <!-- Node: stack -->
+      <g class="node-g node-inactive d2" transform="translate(340,95)">
+        <circle r="22" fill="#0F0F0F" stroke="#333" stroke-width="1"/>
+        <circle r="7" fill="#F5F5F5" opacity="0.75"/>
+        <text x="0" y="36" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#A3A3A3" letter-spacing="0.04em">stack</text>
+      </g>
+
+      <!-- Node: memoria -->
+      <g class="node-g node-inactive d3" transform="translate(75,255)">
+        <circle r="22" fill="#0F0F0F" stroke="#333" stroke-width="1"/>
+        <circle r="7" fill="#F5F5F5" opacity="0.75"/>
+        <text x="0" y="36" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#A3A3A3" letter-spacing="0.04em">memory</text>
+      </g>
+
+      <!-- Node: astro -->
+      <g class="node-g node-inactive d4" transform="translate(345,265)">
+        <circle r="22" fill="#0F0F0F" stroke="#333" stroke-width="1"/>
+        <circle r="7" fill="#F5F5F5" opacity="0.75"/>
+        <text x="0" y="36" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#A3A3A3" letter-spacing="0.04em">astro</text>
+      </g>
+
+      <!-- Node: fecha -->
+      <g class="node-g node-inactive" style="animation-delay:2.4s" transform="translate(210,320)">
+        <circle r="18" fill="#0F0F0F" stroke="#2a2a2a" stroke-width="1"/>
+        <circle r="5" fill="#F5F5F5" opacity="0.55"/>
+        <text x="0" y="30" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#525252" letter-spacing="0.04em">date</text>
+      </g>
+
+      <!-- Node: claude (ACTIVE) -->
+      <g class="node-g node-active-g" transform="translate(210,175)">
+        <!-- glow ring -->
+        <circle class="node-glow" r="32" fill="rgba(180,83,9,0.18)"/>
+        <circle r="24" fill="#1A0A00" stroke="#B45309" stroke-width="1.5" filter="url(#glow-a)"/>
+        <circle r="9" fill="#B45309"/>
+        <text x="0" y="40" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#B45309" font-weight="600" letter-spacing="0.06em">claude</text>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Mobile cortex label (V) -->
+  <div data-pieza="A·V1"
+       data-cat="Versión móvil"
+       data-desc="En móvil: texto arriba, Cortex debajo a ancho completo; nav colapsa a 2 links"
+       style="display:none"></div>
+</section>
+
+<!-- BENCHMARKS -->
+<section class="benchmarks" id="benchmarks"
+         data-pieza="A·C1"
+         data-cat="Color"
+         data-desc="Acento ámbar #B45309 para highlight del motor en temporal; tablas sobre surface #111">
+  <div class="section-inner">
+    <h2 class="section-title"
+        data-pieza="A·T2"
+        data-cat="Tipografía"
+        data-desc="H2 secciones en Instrument Serif 400, ~3rem">
+      The numbers,<br>unedited.
+    </h2>
+    <p class="section-lead">
+      Measured with Qwen3-8B local as both respondent and judge. The comparison is fair — same ruler for all. Absolute numbers are not comparable to mem0/Zep leaderboards (which use GPT-4o).
+    </p>
+
+    <p class="bench-sublabel">LoCoMo benchmark · 1,986 questions · full dataset</p>
+    <div class="table-wrap">
+      <table class="bench-table">
+        <thead>
+          <tr>
+            <th>Engine</th>
+            <th>Overall</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Hemispheric</strong></td>
+            <td><span class="bench-num hl">25.6%</span></td>
+            <td style="color: var(--subtle); font-size:0.8125rem;">free · offline · no server</td>
+          </tr>
+          <tr>
+            <td>Embedding e5</td>
+            <td><span class="bench-num">28.0%</span></td>
+            <td style="color: var(--subtle); font-size:0.8125rem;">free · requires vector DB</td>
+          </tr>
+          <tr>
+            <td>mem0</td>
+            <td><span class="bench-num">21.1%</span></td>
+            <td style="color: var(--subtle); font-size:0.8125rem;">paid · cloud</td>
+          </tr>
+          <tr>
+            <td>Zep / Graphiti</td>
+            <td><span class="bench-pending">in progress</span></td>
+            <td style="color: var(--subtle); font-size:0.8125rem;">paid · cloud</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="bench-sublabel">Temporal reasoning (cat2) — where it counts</p>
+    <div class="table-wrap">
+      <table class="bench-table">
+        <thead>
+          <tr>
+            <th>Engine</th>
+            <th>Temporal (cat2)</th>
+            <th>vs mem0</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight-row">
+            <td><strong>Hemispheric</strong></td>
+            <td><span class="bench-num hl">16.2%</span></td>
+            <td style="color: var(--accent); font-size:0.875rem; font-weight:600;">+206%</td>
+          </tr>
+          <tr>
+            <td>mem0</td>
+            <td><span class="bench-num">5.3%</span></td>
+            <td style="color: var(--subtle);">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="bench-honest">
+      Hemispheric stores facts with date and temporal context. mem0 doesn't. That's why it almost doubles mem0 on temporal recall — and why "when" matters more than "what" for long-running agents.
+    </p>
+
+    <a class="bench-cta" href="#">
+      Reproduce this benchmark
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-copy">Hemispheric · MIT License</p>
+  <ul class="footer-links">
+    <li><a href="#">GitHub</a></li>
+    <li><a href="#">Docs</a></li>
+    <li><a href="#">Benchmarks</a></li>
+  </ul>
+</footer>
+
+<!-- Opinion panel -->
+<button type="button" class="ds-op-boton" id="ds-op-boton">Tu opinión</button>
+<div class="ds-op" id="opinion" role="dialog" aria-label="Tu opinión sobre esta maqueta">
+  <strong>¿Qué te gusta y qué no?</strong>
+  <div id="ds-lista"></div>
+  <textarea id="ds-comentario" placeholder="Algo más: «más aire», «el ámbar muy apagado»…"></textarea>
+  <button type="button" class="copiar" id="ds-copiar">Copiar para pegarlo en el chat</button>
+  <div class="aviso" id="ds-aviso" aria-live="polite"></div>
+</div>
+
+<script>
+(function () {
+  function textoOpinion(titulo, piezas, votos, comentario) {
+    var si = [], no = [];
+    piezas.forEach(function (p) {
+      var t = p.id + ' (' + p.cat + ': ' + p.desc + ')';
+      if (votos[p.id] === 'si') si.push(t);
+      if (votos[p.id] === 'no') no.push(t);
+    });
+    var l = ['Opinión · ' + titulo];
+    l.push('Me gusta: ' + (si.length ? si.join('; ') : '—'));
+    l.push('No me gusta: ' + (no.length ? no.join('; ') : '—'));
+    if (comentario && comentario.trim()) l.push('Comentario: ' + comentario.trim());
+    return l.join('\n');
+  }
+  if (typeof document === 'undefined') { if (typeof module !== 'undefined') module.exports = { textoOpinion: textoOpinion }; return; }
+  var clave = 'ds-opinion:' + location.pathname;
+  var estado = { votos: {}, comentario: '' };
+  try { estado = JSON.parse(localStorage.getItem(clave)) || estado; } catch (e) {}
+  var guardar = function () { try { localStorage.setItem(clave, JSON.stringify(estado)); } catch (e) {} };
+  var piezas = [].slice.call(document.querySelectorAll('[data-pieza]:not([data-fijado])')).map(function (el) {
+    return { id: el.getAttribute('data-pieza'), cat: el.getAttribute('data-cat') || 'Otros', desc: el.getAttribute('data-desc') || '', el: el };
+  });
+  var lista = document.getElementById('ds-lista');
+  var porCat = {};
+  piezas.forEach(function (p) { (porCat[p.cat] = porCat[p.cat] || []).push(p); });
+  Object.keys(porCat).forEach(function (cat) {
+    var h = document.createElement('h3'); h.textContent = cat; lista.appendChild(h);
+    porCat[cat].forEach(function (p) {
+      var fila = document.createElement('div'); fila.className = 'fila';
+      var etq = document.createElement('span');
+      etq.innerHTML = '<b></b> '; etq.querySelector('b').textContent = p.id; etq.appendChild(document.createTextNode(p.desc));
+      etq.style.cursor = 'pointer';
+      etq.onclick = function () { document.body.classList.add('ds-ver'); p.el.scrollIntoView({ behavior: 'smooth', block: 'center' }); };
+      fila.appendChild(etq);
+      ['si', 'no'].forEach(function (v) {
+        var b = document.createElement('button'); b.type = 'button'; b.textContent = v === 'si' ? 'Sí' : 'No';
+        b.setAttribute('aria-label', (v === 'si' ? 'Me gusta ' : 'No me gusta ') + p.id);
+        var pintar = function () { b.className = estado.votos[p.id] === v ? v : ''; };
+        b.onclick = function () { estado.votos[p.id] = estado.votos[p.id] === v ? undefined : v; guardar(); render(); };
+        b._pintar = pintar; fila.appendChild(b);
+      });
+      lista.appendChild(fila);
+    });
+  });
+  function render() { [].forEach.call(lista.querySelectorAll('button'), function (b) { b._pintar && b._pintar(); }); }
+  render();
+  var com = document.getElementById('ds-comentario');
+  com.value = estado.comentario || '';
+  com.oninput = function () { estado.comentario = com.value; guardar(); };
+  document.getElementById('ds-ver').onclick = function () { document.body.classList.toggle('ds-ver'); };
+  document.getElementById('ds-op-boton').onclick = function () { document.getElementById('opinion').classList.toggle('abierto'); };
+  document.getElementById('ds-copiar').onclick = function () {
+    var t = textoOpinion(document.title, piezas, estado.votos, estado.comentario);
+    var aviso = document.getElementById('ds-aviso');
+    var plan = function () { com.value = t; com.select(); aviso.textContent = 'Selecciona el texto de arriba y cópialo (Ctrl+C).'; };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(function () { aviso.textContent = 'Copiado. Pégalo en el chat.'; }, plan);
+    else plan();
+  };
+})();
+</script>
+</body>
+</html>
