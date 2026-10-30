@@ -26,7 +26,7 @@ Iconos SVG inline (no emojis), `aria-hidden` en los decorativos, nombre accesibl
 GitHub URL y licencia siguen como placeholder (riesgos ya registrados en PLAN.md).
 
 ## Commits
-- `<hash>` feat: layout base (nav fijo, footer y theme toggle)
+- `0355217` feat: layout base (nav fijo, footer y theme toggle)
 
 ## Verificación
 
