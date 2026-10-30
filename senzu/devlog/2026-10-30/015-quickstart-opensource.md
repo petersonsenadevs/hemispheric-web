@@ -20,7 +20,7 @@
 Licencia, URL del repo y nº de estrellas siguen como placeholder (riesgos en PLAN.md).
 
 ## Commits
-- `<hash>` feat: secciones quick-start y open source + CopyCommand reutilizable
+- `da26c65` feat: secciones quick-start y open source + CopyCommand reutilizable
 
 ## Verificación
 
