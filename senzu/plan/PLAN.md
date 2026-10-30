@@ -41,14 +41,16 @@
 
 ## F1 — Walking skeleton
 
-### F1-T1 · Inicializar proyecto Astro  [S] [doing]
+### F1-T1 · Inicializar proyecto Astro  [S] [done]
 - Para qué: tener el esqueleto que buildea, sobre el que construir todo lo demás
 - Skill: code-quality §references/astro.md (solo "setup/estructura") — o sin skill si el scaffolding es directo
 - Archivos: `package.json`, `astro.config.mjs` (output static, integración React + Tailwind 4), `tsconfig.json`, `src/pages/index.astro`
 - Hecho cuando: `npm create astro` con plantilla mínima, React y Tailwind 4 añadidos, `/` renderiza un "hello" y buildea
 - Verificar: `npx astro check` y `npm run build` sin errores
 - Depende de: —
-- Devlog: —
+- Verificado: `astro check` → 0 errors/0 warnings/0 hints · `npm run build` → 1 page built, Complete
+- Cumple: hay un esqueleto Astro que compila y buildea; base lista para F1-T2
+- Devlog: `senzu/devlog/2026-10-30/007-scaffold-astro.md` (commit `59e4f97`)
 
 ### F1-T2 · Integrar el design system  [S] [todo]
 - Para qué: que todo lo que se maquete salga ya con la paleta, tipografía y tokens decididos

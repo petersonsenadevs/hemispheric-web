@@ -20,7 +20,8 @@ Scaffold del proyecto Astro desde cero (directorio no vacío, montado a mano en 
 - `.gitignore`: dist, .astro, node_modules, .env, senzu/ui-verify.
 
 ## Commits
-- `<hash>` chore: scaffold inicial de Astro + React + Tailwind 4
+- `59e4f97` chore: scaffold inicial del proyecto (Astro + React + Tailwind 4)
+  (rama `feat/scaffold-astro`; repo git inicializado en este commit)
 
 ## Verificación
 
