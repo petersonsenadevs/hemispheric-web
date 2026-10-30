@@ -17,3 +17,4 @@ Registro correlativo de todas las entradas del proyecto.
 | 011 | 2026-10-30 | Grafo del Cortex interactivo (island React + lógica testeada) | feature | — | F3-T1 |
 | 012 | 2026-10-30 | Integrar el Cortex (hero+demo) y ensanchar el contenedor | feature | 010 | F3-T2 · X-T1 |
 | 013 | 2026-10-30 | Sección How it works (pasos alternados con SVG) | feature | — | F4-T1 |
+| 014 | 2026-10-30 | Sección Benchmarks resumida con matiz honesto | feature | — | F4-T2 |

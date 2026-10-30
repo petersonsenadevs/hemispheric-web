@@ -1,0 +1,98 @@
+---
+// Condensed benchmarks for the landing. Full table + methodology live on /benchmarks (D-013).
+// Numbers are real (LoCoMo, 1,986 questions, Qwen3-8B local). Zep still running (F8-T9).
+const rows = [
+  { engine: 'Hemispheric', overall: '25.6%', note: 'free · offline · no server', highlight: true },
+  { engine: 'Embedding e5', overall: '28.0%', note: 'free · vector DB required', highlight: false },
+  { engine: 'mem0', overall: '21.1%', note: 'paid · cloud', highlight: false },
+  { engine: 'Zep / Graphiti', overall: 'running', overallPending: true, note: 'paid · cloud', highlight: false },
+];
+---
+
+<section id="benchmarks" class="scroll-mt-16 border-y border-border bg-surface">
+  <div class="mx-auto max-w-[1400px] px-6 py-24 sm:px-8 lg:px-12">
+    <header class="mx-auto mb-12 max-w-2xl text-center">
+      <h2 class="font-display text-4xl leading-tight text-foreground sm:text-5xl">
+        The numbers, unedited.
+      </h2>
+      <p class="mt-5 text-lg leading-relaxed text-muted">
+        Measured with Qwen3-8B running locally as both respondent and judge — the
+        same ruler for every engine, so the head-to-head is fair. Not comparable
+        to mem0/Zep's official leaderboards, which use GPT-4o.
+      </p>
+    </header>
+
+    <div class="mx-auto max-w-3xl">
+      <p class="mb-3 font-mono text-xs tracking-wider text-subtle uppercase">
+        LoCoMo · 1,986 questions · full dataset
+      </p>
+      <table class="w-full border-collapse text-left">
+        <thead>
+          <tr class="border-b border-border">
+            <th scope="col" class="py-3 text-sm font-medium text-muted">Engine</th>
+            <th scope="col" class="py-3 text-right text-sm font-medium text-muted">Overall</th>
+            <th scope="col" class="hidden py-3 pl-6 text-sm font-medium text-muted sm:table-cell">Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            rows.map((row) => (
+              <tr class="border-b border-border/60">
+                <td class="py-4 text-foreground">
+                  {row.highlight ? <strong class="font-semibold">{row.engine}</strong> : row.engine}
+                </td>
+                <td class="py-4 text-right font-mono tabular-nums">
+                  {
+                    row.overallPending ? (
+                      <span class="text-sm text-subtle italic">{row.overall}</span>
+                    ) : (
+                      <span class={row.highlight ? 'text-lg text-accent' : 'text-lg text-foreground'}>
+                        {row.overall}
+                      </span>
+                    )
+                  }
+                </td>
+                <td class="hidden py-4 pl-6 text-sm text-subtle sm:table-cell">{row.note}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+
+      <!-- Temporal highlight -->
+      <div class="mt-10 rounded-lg border border-accent/30 bg-background p-6">
+        <p class="mb-4 font-mono text-xs tracking-wider text-accent uppercase">
+          Temporal reasoning (cat2)
+        </p>
+        <div class="flex flex-wrap items-end gap-x-10 gap-y-4">
+          <div>
+            <p class="font-mono text-3xl tabular-nums text-accent">16.2%</p>
+            <p class="mt-1 text-sm text-muted">Hemispheric</p>
+          </div>
+          <div>
+            <p class="font-mono text-3xl tabular-nums text-foreground">5.3%</p>
+            <p class="mt-1 text-sm text-muted">mem0</p>
+          </div>
+          <p class="font-mono text-sm font-semibold text-accent">+206% vs mem0</p>
+        </div>
+      </div>
+
+      <p class="mt-8 leading-relaxed text-muted">
+        Hemispheric stores facts with explicit date and temporal context. That's
+        why it almost doubles mem0 on temporal recall — and why it matters for
+        long-running agents that need to remember <em class="text-foreground not-italic">when</em>,
+        not just <em class="text-foreground not-italic">what</em>.
+      </p>
+
+      <a
+        href="/benchmarks"
+        class="mt-8 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-accent transition-opacity hover:opacity-80"
+      >
+        See full benchmarks
+        <svg class="size-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

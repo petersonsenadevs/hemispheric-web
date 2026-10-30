@@ -133,14 +133,16 @@
 - Devlog: `senzu/devlog/2026-10-30/013-how-it-works.md`
 - Nota: numeración "01 — …" vetada por el muro anti-IA; eyebrows sin número (Capture/Store/Retrieve)
 
-### F4-T2 · Sección Benchmarks resumida  [S] [todo]
+### F4-T2 · Sección Benchmarks resumida  [S] [done]
 - Para qué: dar la prueba en el landing sin volcar la página entera; CTA a `/benchmarks` (D-013)
 - Skill: ui-ux-pro-max + blueprint §Benchmarks
 - Archivos: `src/components/landing/BenchmarksSummary.astro`
 - Hecho cuando: tabla corta LoCoMo (Motor 25,6% · Embedding 28,0% · mem0 21,1% · Zep ⏳) + destacado cat2 temporal (16,2% vs 5,3%) + matiz honesto en cursiva + CTA "See full benchmarks →" a `/benchmarks`; números en Geist Mono tabular
 - Verificar: ui-verify `/`; enlace a `/benchmarks` presente
 - Depende de: F1-T3
-- Devlog: —
+- Verificado: `astro check` 0 err · `build` Complete · ui-verify 375/768/1440 → 0 problemas; CTA a /benchmarks presente
+- Cumple: el landing muestra la prueba resumida con el matiz honesto y enlaza al detalle
+- Devlog: `senzu/devlog/2026-10-30/014-benchmarks-resumen.md`
 
 ### F4-T3 · Sección quick-start + open source  [S] [todo]
 - Para qué: cerrar el landing con la acción (instalar) y la confianza (open source)
