@@ -1,0 +1,150 @@
+---
+// "How it works": three alternating steps, each with its own SVG diagram
+// (no identical cards — D-010). SVG colors use tokens so they adapt to light.
+---
+
+<section id="how" class="scroll-mt-16">
+  <div class="mx-auto max-w-[1400px] px-6 py-24 sm:px-8 lg:px-12">
+    <header class="mx-auto mb-16 max-w-2xl text-center">
+      <h2 class="font-display text-4xl leading-tight text-foreground sm:text-5xl">
+        How it works.
+      </h2>
+      <p class="mt-5 text-lg leading-relaxed text-muted">
+        No embeddings, no vector database, no API calls. The Cortex runs entirely
+        on your machine, stores facts in a local graph, and retrieves them with
+        two-hop activation — in milliseconds.
+      </p>
+    </header>
+
+    <div class="flex flex-col gap-20 lg:gap-28">
+      <!-- Step — Capture -->
+      <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+        <div>
+          <p class="mb-3 font-mono text-sm tracking-widest text-accent uppercase">Capture</p>
+          <h3 class="mb-4 font-display text-3xl leading-tight text-foreground">
+            Your agent talks.<br />The hook listens.
+          </h3>
+          <p class="max-w-prose leading-relaxed text-muted">
+            Hemispheric installs as a <code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">PostToolUse</code>
+            hook in Claude Code. After every tool call, it extracts facts from the
+            exchange — file paths, decisions, project context — and writes them to
+            the local Cortex graph.
+          </p>
+        </div>
+        <div class="flex justify-center">
+          <svg class="step-diagram w-full max-w-[320px]" viewBox="0 0 300 200" fill="none" role="img" aria-label="Capture: Claude Code sends each exchange through a PostToolUse hook that extracts facts into cortex.json" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="70" width="90" height="60" rx="6" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1.5" />
+            <text x="55" y="97" text-anchor="middle" font-size="9" fill="var(--muted)">claude</text>
+            <text x="55" y="112" text-anchor="middle" font-size="9" fill="var(--muted)">code</text>
+            <line x1="100" y1="100" x2="160" y2="100" stroke="var(--cortex-node-active)" stroke-width="1.5" opacity="0.6" />
+            <polygon points="160,96 168,100 160,104" fill="var(--cortex-node-active)" opacity="0.6" />
+            <text x="130" y="91" text-anchor="middle" font-size="7.5" fill="var(--subtle)">PostToolUse</text>
+            <rect x="168" y="78" width="76" height="44" rx="4" fill="var(--surface-raised)" stroke="var(--cortex-node-active)" stroke-width="1.5" />
+            <text x="206" y="97" text-anchor="middle" font-size="9" fill="var(--cortex-node-active)">hook</text>
+            <text x="206" y="112" text-anchor="middle" font-size="8" fill="var(--accent-glow)">extract</text>
+            <line x1="206" y1="122" x2="206" y2="155" stroke="var(--border-strong)" stroke-width="1.5" />
+            <polygon points="202,155 206,163 210,155" fill="var(--border-strong)" />
+            <rect x="155" y="163" width="102" height="30" rx="4" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1" />
+            <text x="206" y="182" text-anchor="middle" font-size="9" fill="var(--muted)">cortex.json</text>
+            <circle cx="55" cy="160" r="16" fill="none" stroke="var(--border)" stroke-width="1" />
+            <path d="M47 160 l6 6 10-12" stroke="var(--subtle)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <text x="55" y="183" text-anchor="middle" font-size="7.5" fill="var(--subtle)">zero friction</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Step — Store (reversed on desktop) -->
+      <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+        <div class="lg:order-2">
+          <p class="mb-3 font-mono text-sm tracking-widest text-accent uppercase">Store</p>
+          <h3 class="mb-4 font-display text-3xl leading-tight text-foreground">
+            Facts, not vectors.<br />Dates, not embeddings.
+          </h3>
+          <p class="max-w-prose leading-relaxed text-muted">
+            Each fact lands in a lightweight JSON graph with its entity name, date
+            and temporal context. No server, no cloud, no API key. The entire
+            Cortex is a single file you own.
+          </p>
+        </div>
+        <div class="flex justify-center lg:order-1">
+          <svg class="step-diagram w-full max-w-[320px]" viewBox="0 0 300 200" fill="none" role="img" aria-label="Store: a fact node carries its entity, date, value and neighbour links in a local cortex.json file" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="150" cy="100" r="28" fill="var(--surface-raised)" stroke="var(--cortex-node-active)" stroke-width="1.5" />
+            <circle cx="150" cy="100" r="9" fill="var(--cortex-node-active)" />
+            <text x="150" y="136" text-anchor="middle" font-size="9" fill="var(--cortex-node-active)">fact</text>
+            <line x1="127" y1="81" x2="60" y2="48" stroke="var(--border)" stroke-width="1" />
+            <rect x="10" y="28" width="64" height="28" rx="4" fill="var(--surface)" stroke="var(--border)" stroke-width="1" />
+            <text x="42" y="42" text-anchor="middle" font-size="8" fill="var(--muted)">entity</text>
+            <text x="42" y="52" text-anchor="middle" font-size="7.5" fill="var(--subtle)">"astro"</text>
+            <line x1="150" y1="72" x2="150" y2="32" stroke="var(--border)" stroke-width="1" />
+            <rect x="103" y="10" width="94" height="28" rx="4" fill="var(--surface)" stroke="var(--border)" stroke-width="1" />
+            <text x="150" y="24" text-anchor="middle" font-size="8" fill="var(--muted)">date</text>
+            <text x="150" y="34" text-anchor="middle" font-size="7.5" fill="var(--subtle)">2026-10-30</text>
+            <line x1="173" y1="81" x2="236" y2="48" stroke="var(--border)" stroke-width="1" />
+            <rect x="222" y="28" width="64" height="28" rx="4" fill="var(--surface)" stroke="var(--border)" stroke-width="1" />
+            <text x="254" y="42" text-anchor="middle" font-size="8" fill="var(--muted)">value</text>
+            <text x="254" y="52" text-anchor="middle" font-size="7.5" fill="var(--subtle)">v5.x</text>
+            <line x1="127" y1="118" x2="60" y2="155" stroke="var(--border)" stroke-width="1" />
+            <rect x="10" y="148" width="64" height="28" rx="4" fill="var(--surface)" stroke="var(--border)" stroke-width="1" />
+            <text x="42" y="162" text-anchor="middle" font-size="8" fill="var(--subtle)">project</text>
+            <text x="42" y="172" text-anchor="middle" font-size="7.5" fill="var(--subtle)">→ stack</text>
+            <line x1="173" y1="118" x2="236" y2="155" stroke="var(--border)" stroke-width="1" />
+            <rect x="222" y="148" width="64" height="28" rx="4" fill="var(--surface)" stroke="var(--border)" stroke-width="1" />
+            <text x="254" y="162" text-anchor="middle" font-size="8" fill="var(--subtle)">session</text>
+            <text x="254" y="172" text-anchor="middle" font-size="7.5" fill="var(--subtle)">→ date</text>
+            <text x="150" y="195" text-anchor="middle" font-size="7.5" fill="var(--subtle)">cortex.json · local · yours</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Step — Retrieve -->
+      <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+        <div>
+          <p class="mb-3 font-mono text-sm tracking-widest text-accent uppercase">Retrieve</p>
+          <h3 class="mb-4 font-display text-3xl leading-tight text-foreground">
+            Two-hop activation.<br />No semantic search needed.
+          </h3>
+          <p class="max-w-prose leading-relaxed text-muted">
+            When your agent needs context, the Cortex activates the matching node
+            and spreads one hop out — surfacing related facts without a vector DB or
+            embedding model. Deterministic. Offline. Instant.
+          </p>
+        </div>
+        <div class="flex justify-center">
+          <svg class="step-diagram w-full max-w-[320px]" viewBox="0 0 300 220" fill="none" role="img" aria-label="Retrieve: a query activates the matching node (hop 0) and spreads to related nodes (hop 1)" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="90" width="60" height="40" rx="4" fill="var(--surface)" stroke="var(--border)" stroke-width="1" />
+            <text x="40" y="108" text-anchor="middle" font-size="7.5" fill="var(--subtle)">query</text>
+            <text x="40" y="120" text-anchor="middle" font-size="7.5" fill="var(--subtle)">"astro"</text>
+            <line x1="70" y1="110" x2="105" y2="110" stroke="var(--cortex-node-active)" stroke-width="1.5" opacity="0.6" />
+            <polygon points="105,106 113,110 105,114" fill="var(--cortex-node-active)" opacity="0.6" />
+            <circle cx="145" cy="110" r="26" fill="var(--surface-raised)" stroke="var(--cortex-node-active)" stroke-width="2" />
+            <circle cx="145" cy="110" r="9" fill="var(--cortex-node-active)" />
+            <text x="145" y="144" text-anchor="middle" font-size="9" fill="var(--cortex-node-active)">astro</text>
+            <line x1="165" y1="91" x2="207" y2="56" stroke="var(--cortex-node-active)" stroke-width="1.5" opacity="0.4" />
+            <circle cx="222" cy="46" r="18" fill="var(--surface-raised)" stroke="var(--accent-glow)" stroke-width="1.5" />
+            <circle cx="222" cy="46" r="6" fill="var(--accent-glow)" opacity="0.8" />
+            <text x="222" y="70" text-anchor="middle" font-size="8" fill="var(--accent-glow)">stack</text>
+            <line x1="171" y1="110" x2="218" y2="110" stroke="var(--cortex-node-active)" stroke-width="1.5" opacity="0.4" />
+            <circle cx="236" cy="110" r="18" fill="var(--surface-raised)" stroke="var(--accent-glow)" stroke-width="1.5" />
+            <circle cx="236" cy="110" r="6" fill="var(--accent-glow)" opacity="0.8" />
+            <text x="236" y="134" text-anchor="middle" font-size="8" fill="var(--accent-glow)">project</text>
+            <line x1="165" y1="129" x2="207" y2="162" stroke="var(--cortex-node-active)" stroke-width="1.5" opacity="0.4" />
+            <circle cx="222" cy="174" r="18" fill="var(--surface-raised)" stroke="var(--accent-glow)" stroke-width="1.5" />
+            <circle cx="222" cy="174" r="6" fill="var(--accent-glow)" opacity="0.8" />
+            <text x="222" y="198" text-anchor="middle" font-size="8" fill="var(--accent-glow)">date</text>
+            <circle cx="14" cy="207" r="5" fill="var(--surface-raised)" stroke="var(--cortex-node-active)" stroke-width="1.5" />
+            <text x="24" y="211" font-size="7.5" fill="var(--muted)">hop 0 · match</text>
+            <circle cx="150" cy="207" r="5" fill="var(--surface-raised)" stroke="var(--accent-glow)" stroke-width="1.5" />
+            <text x="160" y="211" font-size="7.5" fill="var(--subtle)">hop 1 · related</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .step-diagram text {
+    font-family: var(--font-mono);
+    letter-spacing: 0.02em;
+  }
+</style>

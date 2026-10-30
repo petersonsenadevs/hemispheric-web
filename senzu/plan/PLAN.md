@@ -121,14 +121,17 @@
 
 ## F4 — Resto del landing
 
-### F4-T1 · Sección "How it works" (pasos alternados)  [M] [todo]
+### F4-T1 · Sección "How it works" (pasos alternados)  [M] [done]
 - Para qué: explicar el motor sin cards idénticas ni ilustraciones stock (D-010)
 - Skill: ui-ux-pro-max + blueprint; SVG propios por paso
 - Archivos: `src/components/landing/HowItWorks.astro` + SVG de los 3 pasos (hook flow, graph node, two-hop)
 - Hecho cuando: 3 pasos alternados (texto izq/der) con su diagrama SVG; labels SVG ≥12px (finding 005); responsive a columna única
 - Verificar: ui-verify `/` 375/768/1440
 - Depende de: F1-T3
-- Devlog: —
+- Verificado: `astro check` 0 err · `build` Complete · ui-verify 375/768/1440 → 0 problemas
+- Cumple: el motor se explica en 3 pasos con diagramas propios, sin cards idénticas (D-010)
+- Devlog: `senzu/devlog/2026-10-30/013-how-it-works.md`
+- Nota: numeración "01 — …" vetada por el muro anti-IA; eyebrows sin número (Capture/Store/Retrieve)
 
 ### F4-T2 · Sección Benchmarks resumida  [S] [todo]
 - Para qué: dar la prueba en el landing sin volcar la página entera; CTA a `/benchmarks` (D-013)
