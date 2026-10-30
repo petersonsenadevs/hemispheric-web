@@ -17,7 +17,7 @@
 - Añadida al landing tras la sección Demo.
 
 ## Commits
-- `<hash>` feat: seccion How it works (pasos alternados con diagramas SVG)
+- `60f90e5` feat: seccion How it works (pasos alternados con diagramas SVG)
 
 ## Decisiones / incidencias
 - El muro `code-hygiene` vetó la numeración de secciones ("01 — Capture") como patrón anti-IA. Cambiado a
