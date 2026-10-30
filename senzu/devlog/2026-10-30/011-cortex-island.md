@@ -25,7 +25,7 @@ La killer feature: el grafo de memoria interactivo (island React, client-side pu
 - Vitest instalado; scripts `test` / `test:watch` en package.json.
 
 ## Commits
-- `<hash>` feat: Cortex interactivo (grafo 2 saltos, island React + lógica testeada)
+- `1b66aca` feat: Cortex interactivo (grafo 2 saltos, island React testeada)
 
 ## Verificación
 
