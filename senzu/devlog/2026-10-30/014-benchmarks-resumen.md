@@ -17,7 +17,7 @@
 - Añadida al landing tras How it works.
 
 ## Commits
-- `<hash>` feat: seccion benchmarks resumida con matiz honesto
+- `8db6271` feat: seccion benchmarks resumida con matiz honesto
 
 ## Verificación
 
