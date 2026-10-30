@@ -1,0 +1,85 @@
+---
+import CortexPlaceholder from './CortexPlaceholder.astro';
+
+// Install command shown in the hero. Exact command is still a placeholder (D-008).
+const INSTALL_CMD = 'hemispheric install --claude';
+---
+
+<section
+  class="mx-auto grid min-h-screen max-w-6xl items-center gap-12 px-6 pt-28 pb-16 lg:grid-cols-[55fr_45fr] lg:gap-20 lg:pt-16"
+>
+  <div class="flex flex-col items-start">
+    <p class="mb-7 font-mono text-xs tracking-[0.12em] text-accent uppercase">
+      Open source · Claude Code · Codex
+    </p>
+
+    <h1
+      class="mb-6 font-display text-5xl leading-[1.06] tracking-tight text-foreground sm:text-6xl lg:text-7xl"
+    >
+      Memory for<br />your <em class="text-muted italic">agent.</em>
+    </h1>
+
+    <p class="mb-10 max-w-[44ch] text-lg leading-relaxed text-muted">
+      Free. Offline. Zero dependencies. Hooks into Claude Code and Codex and
+      keeps what your agent learns — across sessions, across projects.
+    </p>
+
+    <div class="flex flex-col items-start gap-4">
+      <a
+        href="/docs"
+        class="inline-flex min-h-11 items-center gap-2.5 rounded-md bg-accent px-6 font-sans text-sm font-semibold text-on-accent transition-[opacity,transform] hover:-translate-y-px hover:opacity-90"
+      >
+        <svg class="size-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M8 2v9M4 7l4 4 4-4"></path>
+          <line x1="2" y1="14" x2="14" y2="14"></line>
+        </svg>
+        Install for Claude Code
+      </a>
+
+      <button
+        id="copy-install"
+        type="button"
+        data-cmd={INSTALL_CMD}
+        aria-label={`Copy install command: ${INSTALL_CMD}`}
+        class="group inline-flex min-h-11 items-center gap-3 rounded-md border border-border bg-code-bg px-4 font-mono text-sm text-foreground transition-colors hover:border-border-strong"
+      >
+        <span class="text-accent" aria-hidden="true">$</span>
+        <code>{INSTALL_CMD}</code>
+        <span
+          class="copy-label border-l border-border pl-3 font-sans text-xs text-subtle italic"
+          aria-hidden="true"
+        >
+          copy
+        </span>
+      </button>
+
+      <a
+        href="#demo"
+        class="inline-flex min-h-11 items-center text-sm text-muted transition-colors hover:text-foreground"
+      >
+        See the demo ↓
+      </a>
+    </div>
+  </div>
+
+  <div>
+    <CortexPlaceholder />
+  </div>
+</section>
+
+<script>
+  const btn = document.getElementById('copy-install');
+  btn?.addEventListener('click', async () => {
+    const cmd = btn.dataset.cmd ?? '';
+    const label = btn.querySelector('.copy-label');
+    try {
+      await navigator.clipboard.writeText(cmd);
+      if (label) {
+        label.textContent = 'copied';
+        setTimeout(() => (label.textContent = 'copy'), 1500);
+      }
+    } catch {
+      /* clipboard unavailable (e.g. non-secure context): no-op */
+    }
+  });
+</script>

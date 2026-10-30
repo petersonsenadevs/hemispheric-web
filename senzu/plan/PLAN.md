@@ -30,7 +30,7 @@
 | Fase | Entregable verificable por el usuario | Estado |
 |---|---|---|
 | F1 | Walking skeleton: proyecto Astro + tokens + layout base (nav/footer/toggle) que buildea y se ve | done |
-| F2 | Hero del landing: editorial 2 col con CTA copiable (Cortex placeholder estático) | todo |
+| F2 | Hero del landing: editorial 2 col con CTA copiable (Cortex placeholder estático) | done |
 | F3 | Cortex island: grafo interactivo React (hover, nodos activos, activación 2 saltos) | todo |
 | F4 | Resto del landing: How it works + benchmarks resumidos + quick-start + open source | todo |
 | F5 | Página `/benchmarks` completa | todo |
@@ -79,14 +79,16 @@
 
 ## F2 — Hero del landing
 
-### F2-T1 · Hero editorial 2 columnas  [M] [todo]
+### F2-T1 · Hero editorial 2 columnas  [M] [done]
 - Para qué: lo primero que ve el dev; comunica el producto y ofrece el CTA sin scroll (D-011)
 - Skill: ui-ux-pro-max §references/es (stack astro) + blueprint §Hero
 - Archivos: `src/components/landing/Hero.astro`, `src/pages/index.astro`
 - Hecho cuando: grid 55/45 (texto izq, hueco Cortex der con placeholder estático); H1 "Memory for your agent." en Instrument Serif; sub "Free. Offline. No server."; CTA `hemispheric install --claude` copiable (Geist Mono) + CTA "See the demo ↓"; eyebrow y labels mono ≥12px (finding 005); en móvil columna única, CTA ancho completo
 - Verificar: ui-verify `/` 375/768/1440; clic en copiar funciona
 - Depende de: F1-T3
-- Devlog: —
+- Verificado: `astro check` 0 err · `build` Complete · ui-verify 375/768/1440 → 0 problemas (CTA 228×44px visible sin scroll); copia al portapapeles con feedback; móvil texto arriba + Cortex debajo
+- Cumple: el dev ve el claim, el Cortex y el CTA de instalación sin hacer scroll
+- Devlog: `senzu/devlog/2026-10-30/010-hero.md`
 
 ---
 
