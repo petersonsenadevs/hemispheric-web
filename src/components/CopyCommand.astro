@@ -1,0 +1,42 @@
+---
+interface Props {
+  cmd: string;
+  class?: string;
+}
+const { cmd, class: className = '' } = Astro.props;
+---
+
+<button
+  type="button"
+  data-cmd={cmd}
+  aria-label={`Copy command: ${cmd}`}
+  class:list={[
+    'copy-command group inline-flex min-h-11 items-center gap-3 rounded-md border border-border bg-code-bg px-4 font-mono text-sm text-foreground transition-colors hover:border-border-strong',
+    className,
+  ]}
+>
+  <span class="text-accent" aria-hidden="true">$</span>
+  <code>{cmd}</code>
+  <span class="copy-label border-l border-border pl-3 font-sans text-xs text-subtle italic" aria-hidden="true">
+    copy
+  </span>
+</button>
+
+<script>
+  // One handler for every copy-command button on the page.
+  document.querySelectorAll<HTMLButtonElement>('.copy-command').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const cmd = btn.dataset.cmd ?? '';
+      const label = btn.querySelector('.copy-label');
+      try {
+        await navigator.clipboard.writeText(cmd);
+        if (label) {
+          label.textContent = 'copied';
+          setTimeout(() => (label.textContent = 'copy'), 1500);
+        }
+      } catch {
+        /* clipboard unavailable (non-secure context): no-op */
+      }
+    });
+  });
+</script>

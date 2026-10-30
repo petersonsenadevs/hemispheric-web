@@ -1,5 +1,6 @@
 ---
 import Cortex from '../cortex/Cortex.tsx';
+import CopyCommand from '../CopyCommand.astro';
 
 // Install command shown in the hero. Exact command is still a placeholder (D-008).
 const INSTALL_CMD = 'hemispheric install --claude';
@@ -36,22 +37,7 @@ const INSTALL_CMD = 'hemispheric install --claude';
         Install for Claude Code
       </a>
 
-      <button
-        id="copy-install"
-        type="button"
-        data-cmd={INSTALL_CMD}
-        aria-label={`Copy install command: ${INSTALL_CMD}`}
-        class="group inline-flex min-h-11 items-center gap-3 rounded-md border border-border bg-code-bg px-4 font-mono text-sm text-foreground transition-colors hover:border-border-strong"
-      >
-        <span class="text-accent" aria-hidden="true">$</span>
-        <code>{INSTALL_CMD}</code>
-        <span
-          class="copy-label border-l border-border pl-3 font-sans text-xs text-subtle italic"
-          aria-hidden="true"
-        >
-          copy
-        </span>
-      </button>
+      <CopyCommand cmd={INSTALL_CMD} />
 
       <a
         href="#demo"
@@ -66,20 +52,3 @@ const INSTALL_CMD = 'hemispheric install --claude';
     <Cortex client:visible showFact={false} />
   </div>
 </section>
-
-<script>
-  const btn = document.getElementById('copy-install');
-  btn?.addEventListener('click', async () => {
-    const cmd = btn.dataset.cmd ?? '';
-    const label = btn.querySelector('.copy-label');
-    try {
-      await navigator.clipboard.writeText(cmd);
-      if (label) {
-        label.textContent = 'copied';
-        setTimeout(() => (label.textContent = 'copy'), 1500);
-      }
-    } catch {
-      /* clipboard unavailable (e.g. non-secure context): no-op */
-    }
-  });
-</script>

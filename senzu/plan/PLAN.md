@@ -32,7 +32,7 @@
 | F1 | Walking skeleton: proyecto Astro + tokens + layout base (nav/footer/toggle) que buildea y se ve | done |
 | F2 | Hero del landing: editorial 2 col con CTA copiable (Cortex placeholder estático) | done |
 | F3 | Cortex island: grafo interactivo React (hover, nodos activos, activación 2 saltos) | done |
-| F4 | Resto del landing: How it works + benchmarks resumidos + quick-start + open source | todo |
+| F4 | Resto del landing: How it works + benchmarks resumidos + quick-start + open source | done |
 | F5 | Página `/benchmarks` completa | todo |
 | F6 | Página `/docs` completa (instalación por anfitrión) | todo |
 | F7 | Pulido: SEO/meta, a11y final y verificación global de las 3 páginas | todo |
@@ -144,14 +144,16 @@
 - Cumple: el landing muestra la prueba resumida con el matiz honesto y enlaza al detalle
 - Devlog: `senzu/devlog/2026-10-30/014-benchmarks-resumen.md`
 
-### F4-T3 · Sección quick-start + open source  [S] [todo]
+### F4-T3 · Sección quick-start + open source  [S] [done]
 - Para qué: cerrar el landing con la acción (instalar) y la confianza (open source)
 - Skill: ui-ux-pro-max + blueprint §Instalación/§Open source
 - Archivos: `src/components/landing/QuickStart.astro`, `src/components/landing/OpenSource.astro`
 - Hecho cuando: quick-start con snippet copiable + CTA "Full docs →" a `/docs`; open source con licencia (MIT placeholder), badge GitHub stars estático, CTA "View the code →"
 - Verificar: ui-verify `/`; enlaces a `/docs` y GitHub presentes
 - Depende de: F1-T3
-- Devlog: —
+- Verificado: `astro check` 0 err · `build` Complete · ui-verify 375/768/1440 → 0 problemas; copia al portapapeles confirmada (Playwright); enlaces a /docs y GitHub presentes
+- Cumple: el landing cierra con la acción (instalar) y la confianza (open source); snippet reutilizable (CopyCommand)
+- Devlog: `senzu/devlog/2026-10-30/015-quickstart-opensource.md`
 
 ---
 

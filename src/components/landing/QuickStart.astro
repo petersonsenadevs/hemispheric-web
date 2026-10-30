@@ -1,0 +1,45 @@
+---
+import CopyCommand from '../CopyCommand.astro';
+
+// Exact command still a placeholder (D-008). Full per-host instructions live on /docs.
+const INSTALL_CMD = 'hemispheric install --claude';
+const hosts = ['Claude Code', 'Codex', 'Senzu', 'Obsidian', 'Standalone'];
+---
+
+<section id="install" class="scroll-mt-16">
+  <div class="mx-auto max-w-[1400px] px-6 py-24 sm:px-8 lg:px-12">
+    <div class="mx-auto flex max-w-2xl flex-col items-center text-center">
+      <h2 class="font-display text-4xl leading-tight text-foreground sm:text-5xl">
+        Plug it in where you already work.
+      </h2>
+      <p class="mt-5 text-lg leading-relaxed text-muted">
+        One command. No account, no cloud, no API key — the hook writes to a
+        local file you own.
+      </p>
+
+      <div class="mt-8">
+        <CopyCommand cmd={INSTALL_CMD} />
+      </div>
+
+      <ul class="mt-8 flex flex-wrap justify-center gap-2" aria-label="Supported hosts">
+        {
+          hosts.map((host) => (
+            <li class="rounded-full border border-border px-3 py-1 font-mono text-xs text-muted">
+              {host}
+            </li>
+          ))
+        }
+      </ul>
+
+      <a
+        href="/docs"
+        class="mt-8 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-accent transition-opacity hover:opacity-80"
+      >
+        Full docs
+        <svg class="size-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
