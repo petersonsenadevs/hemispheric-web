@@ -9,9 +9,21 @@ import '../styles/global.css';
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Hemispheric — Memory for your agent</title>
   </head>
-  <body>
-    <main class="grid min-h-screen place-items-center">
-      <h1 class="text-3xl font-semibold">Hemispheric</h1>
+  <body class="min-h-screen bg-background text-foreground">
+    <main class="mx-auto flex min-h-screen max-w-3xl flex-col justify-center gap-6 px-6">
+      <p class="font-mono text-sm tracking-widest text-accent uppercase">
+        Design system check
+      </p>
+      <h1 class="font-display text-6xl leading-none">
+        Memory for your <em>agent.</em>
+      </h1>
+      <p class="max-w-prose text-lg text-muted">
+        Free. Offline. No server. This page only verifies the tokens: background,
+        foreground, muted, the amber accent and the three font families.
+      </p>
+      <code class="w-fit rounded-md bg-code-bg px-3 py-2 font-mono text-sm text-foreground">
+        hemispheric install --claude
+      </code>
     </main>
   </body>
 </html>

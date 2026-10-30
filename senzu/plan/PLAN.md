@@ -52,14 +52,16 @@
 - Cumple: hay un esqueleto Astro que compila y buildea; base lista para F1-T2
 - Devlog: `senzu/devlog/2026-10-30/007-scaffold-astro.md` (commit `59e4f97`)
 
-### F1-T2 · Integrar el design system  [S] [todo]
+### F1-T2 · Integrar el design system  [S] [done]
 - Para qué: que todo lo que se maquete salga ya con la paleta, tipografía y tokens decididos
 - Skill: ui-styling §tokens-tailwind (integración Tailwind 4) + design-system (solo si hay que regenerar)
 - Archivos: `src/styles/tokens.css` (desde `senzu/design-system/hemispheric/app.css`), `src/styles/global.css`, fuentes (Instrument Serif, Inter, Geist Mono), `astro.config` import
 - Hecho cuando: `@theme` con dark en `:root` y light en `html.light`; utilidades `bg-background`/`text-foreground`/`text-accent` disponibles; fuentes cargadas (self-host o Google)
 - Verificar: `npx astro check` + capturar `/` y ver fondo `#0A0A0A` y acento ámbar
 - Depende de: F1-T1
-- Devlog: —
+- Verificado: `astro check` 0 err · `build` Complete · CSS con utilidades @theme + 17 @font-face · ui-verify 375/1440 → 0 problemas; captura confirma fondo #0A0A0A y acento ámbar
+- Cumple: el design system está en el proyecto; cualquier componente usa ya los tokens y las 3 fuentes
+- Devlog: `senzu/devlog/2026-10-30/008-design-system-integrado.md`
 
 ### F1-T3 · Layout base (nav + footer + toggle)  [M] [todo]
 - Para qué: el marco común de las 3 páginas: navegación, cambio de tema y pie

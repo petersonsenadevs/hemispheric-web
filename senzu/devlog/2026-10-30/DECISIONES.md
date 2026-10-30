@@ -24,6 +24,14 @@
 - **Motivo:** El landing es escaparate, no documentación. Las páginas de detalle dan más espacio y mejor SEO por tema.
 - **Consecuencias:** El landing tendrá resúmenes con CTAs. El routing Astro gestiona las 3 páginas estáticas.
 
+## dev-008 — Fuentes self-host (@fontsource) en vez de Google Fonts
+
+- **Contexto:** El `app.css` del design system carga las fuentes con `@import` de Google Fonts y no incluía Geist Mono (quedaba en fallback).
+- **Opciones:** Mantener Google Fonts @import / self-host con @fontsource / Astro experimental fonts API.
+- **Elección:** Self-host con `@fontsource` (`instrument-serif`, `inter` variable, `geist-mono` variable).
+- **Motivo:** Sin render-blocking de terceros, sin dependencia de Google en runtime (privacidad/GDPR), y permite usar la Geist Mono real que pide el design system.
+- **Consecuencias:** 17 woff2 empaquetados en el build (20K CSS). El `app.css` sigue siendo asset de diseño (con Google @import); la implementación diverge a propósito. Si se cambian fuentes, se añade/quita el paquete @fontsource correspondiente.
+
 ## dev-006 — Convenciones del proyecto selladas en modo entrevista
 
 - **Contexto:** El muro arranque-guard pidió `/adoptar` antes de escribir `package.json`. Proyecto nuevo sin código previo.

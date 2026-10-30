@@ -11,3 +11,4 @@ Registro correlativo de todas las entradas del proyecto.
 | 005 | 2026-10-30 | Feedback ronda 1: dirección elegida y arquitectura multi-página | decisión | 004 | —     |
 | 006 | 2026-10-30 | Adoptar convenciones (modo entrevista) | infra | — | —     |
 | 007 | 2026-10-30 | Inicializar proyecto Astro | infra | — | F1-T1 |
+| 008 | 2026-10-30 | Integrar el design system (tokens, @theme, fuentes self-host) | feature | 003 | F1-T2 |

@@ -18,3 +18,4 @@ Decisiones activas del proyecto. Máx. 60 líneas. Ver devlog para el detalle.
 | D-012 | Arquitectura multi-página: landing (/), /docs (instalación completa), /benchmarks (tabla LoCoMo completa) | 005 |
 | D-013 | Landing muestra resumen de benchmarks + quick-start con CTAs a /docs y /benchmarks para el detalle | 005 |
 | D-014 | Convenciones selladas (`senzu/conventions.md` + `.json`): código/UI EN, trabajo ES, PascalCase comp./kebab rutas, Tailwind 4 por Vite, Vitest para el Cortex | 006 |
+| D-015 | Fuentes self-host con `@fontsource` (Instrument Serif, Inter var, Geist Mono var); no Google Fonts @import en la web | 008 |
