@@ -29,7 +29,7 @@ Datos **reales** aportados por el usuario desde `D:\dev-standards\tools\eval-pro
 (X-T22, aún sin ejecutar): la web no mezcla los dos.
 
 ## Commits
-- `PENDIENTE` feat: pagina /benchmarks con tabla LoCoMo completa
+- `7fde7b1` feat: pagina /benchmarks con tabla LoCoMo completa
 
 ## Decisiones (resumen)
 - La "sub-tabla por categoría" del plan se resuelve con la tabla principal de 5 categorías reales
