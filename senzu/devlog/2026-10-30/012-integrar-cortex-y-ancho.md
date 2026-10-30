@@ -25,7 +25,7 @@ Feedback del usuario: sobraba margen lateral, el contenido iba estrecho y centra
 El patrón de contenedor queda fijado para las secciones que faltan (F4–F6).
 
 ## Commits
-- `<hash>` feat: integra el Cortex en hero y demo + ensancha el contenedor
+- `5f7b330` feat: integra el Cortex en hero y demo + ensancha el contenedor
 
 ## Verificación
 
