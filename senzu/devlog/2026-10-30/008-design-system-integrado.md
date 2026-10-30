@@ -20,7 +20,7 @@ Integrado el design system de `senzu/design-system/hemispheric/` en el proyecto 
 - `src/pages/index.astro`: página de verificación de tokens (fondo, acento, muted, 3 familias, code-bg).
 
 ## Commits
-- `<hash>` feat: integra el design system (tokens, @theme y fuentes self-host)
+- `9dd6a7c` feat: integra el design system (tokens, @theme y fuentes self-host)
 
 ## Decisiones
 - **dev-008:** fuentes self-host (`@fontsource`) en vez de Google Fonts. Motivo: sin render-blocking de
