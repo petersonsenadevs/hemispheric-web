@@ -14,3 +14,4 @@ Registro correlativo de todas las entradas del proyecto.
 | 008 | 2026-10-30 | Integrar el design system (tokens, @theme, fuentes self-host) | feature | 003 | F1-T2 |
 | 009 | 2026-10-30 | Layout base: nav + footer + theme toggle | feature | — | F1-T3 |
 | 010 | 2026-10-30 | Hero editorial 2 columnas con Cortex placeholder | feature | — | F2-T1 |
+| 011 | 2026-10-30 | Grafo del Cortex interactivo (island React + lógica testeada) | feature | — | F3-T1 |

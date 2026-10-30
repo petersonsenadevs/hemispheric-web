@@ -94,14 +94,17 @@
 
 ## F3 — Cortex island (killer feature)
 
-### F3-T1 · Grafo del Cortex interactivo  [M] [todo]
+### F3-T1 · Grafo del Cortex interactivo  [M] [done]
 - Para qué: el momento de sorpresa visual; muestra cómo el motor conecta y recupera hechos (D-004)
 - Skill: ui-ux-pro-max (patrón) + code-quality §references/react.md (componente, perf). Animación con SVG + rAF client-side; si se decide librería, animejs (ya instalada) — no cargar 3D
 - Archivos: `src/components/cortex/Cortex.tsx` (+ datos de ejemplo `claude → project → stack → astro`), tipos, estilos con tokens
 - Hecho cuando: nodos conectados que "respiran"; hover/focus en nodo muestra el hecho; nodos activos en ámbar; activación a 2 saltos visible (hop 0 ámbar, hop 1 ámbar apagado); `prefers-reduced-motion` desactiva el movimiento; táctil en móvil
 - Verificar: montar en página de prueba, ui-verify + consola sin errores; reduced-motion respetado
 - Depende de: F1-T2
-- Devlog: —
+- Verificado: 11 tests Vitest en verde · `astro check` 0 err · `build` Complete · ui-verify 375/768/1440 → 0 problemas · interacción Playwright (hover cambia hecho y activación) · consola sin errores
+- Cumple: el grafo recupera por activación a 2 saltos y muestra el hecho; la lógica está probada y es determinista
+- Devlog: `senzu/devlog/2026-10-30/011-cortex-island.md`
+- Nota: implementado con SVG + estado React (sin rAF ni animejs: la interacción no lo necesita); la respiración es CSS y respeta reduced-motion. Lógica pura separada del render → testeable con Vitest (D-014)
 
 ### F3-T2 · Integrar el Cortex en hero y sección Demo  [S] [todo]
 - Para qué: reemplazar el placeholder del hero y crear la sección "Demo Cortex" con la island real

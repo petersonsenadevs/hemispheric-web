@@ -1,0 +1,75 @@
+.cortex {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.cortex-svg {
+  width: 100%;
+  max-width: 460px;
+  height: auto;
+  overflow: visible;
+}
+
+.cortex-node {
+  cursor: pointer;
+  outline: none;
+}
+
+.cortex-node circle,
+.cortex-edge {
+  transition:
+    fill var(--duration-normal) var(--ease-out),
+    stroke var(--duration-normal) var(--ease-out),
+    opacity var(--duration-normal) var(--ease-out),
+    stroke-opacity var(--duration-normal) var(--ease-out);
+}
+
+.cortex-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  pointer-events: none;
+  transition: fill var(--duration-normal) var(--ease-out);
+}
+
+/* Keyboard focus ring on the node's outer circle. */
+.cortex-node:focus-visible .cortex-ring {
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-opacity: 1;
+}
+
+/* The seed node breathes gently; disabled under reduced motion by the global rule. */
+.cortex-seed-glow {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cortex-pulse 3s var(--ease-in-out) infinite;
+}
+
+@keyframes cortex-pulse {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.5; }
+}
+
+.cortex-fact {
+  min-height: 3.5rem;
+  max-width: 44ch;
+  text-align: center;
+}
+
+.cortex-fact-label {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+}
+
+.cortex-hint {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--subtle);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
