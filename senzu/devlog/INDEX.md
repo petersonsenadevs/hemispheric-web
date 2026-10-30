@@ -19,3 +19,4 @@ Registro correlativo de todas las entradas del proyecto.
 | 013 | 2026-10-30 | Sección How it works (pasos alternados con SVG) | feature | — | F4-T1 |
 | 014 | 2026-10-30 | Sección Benchmarks resumida con matiz honesto | feature | — | F4-T2 |
 | 015 | 2026-10-30 | Quick-start + Open source + CopyCommand reutilizable | feature | 010 | F4-T3 |
+| 016 | 2026-10-30 | Página /benchmarks completa (tabla LoCoMo 5 categorías) | feature | — | F5-T1 |

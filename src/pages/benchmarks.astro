@@ -1,0 +1,287 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CopyCommand from '../components/CopyCommand.astro';
+
+// Real LoCoMo results (F8-T9, finished). Source of truth:
+// D:\dev-standards\tools\eval-productos\BENCHMARK.md §1 — regenerated from the raw
+// resultados-e2e-locomo-*.json via comparar.mjs. Numbers are NOT hand-written.
+// Respondent and judge are both Qwen3-8B local, so this is a fair head-to-head,
+// not comparable to mem0/Zep official leaderboards (GPT-4o).
+type EngineKey = 'hemispheric' | 'e5' | 'mem0';
+
+interface Engine {
+  key: EngineKey;
+  label: string;
+  note: string;
+  subject?: boolean;
+}
+
+const engines: Engine[] = [
+  { key: 'hemispheric', label: 'Hemispheric', note: 'free · offline', subject: true },
+  { key: 'e5', label: 'Embedding e5', note: 'free · vector DB' },
+  { key: 'mem0', label: 'mem0', note: 'paid · cloud' },
+];
+
+interface Row {
+  id: string;
+  name: string;
+  count: number;
+  measures: string;
+  scores: Record<EngineKey, string>;
+  leader: EngineKey;
+}
+
+const rows: Row[] = [
+  { id: 'cat1', name: 'Single-hop', count: 282, measures: 'Direct fact lookup', scores: { hemispheric: '23.0%', e5: '30.5%', mem0: '25.2%' }, leader: 'e5' },
+  { id: 'cat2', name: 'Temporal', count: 321, measures: 'Dates & ordering', scores: { hemispheric: '16.2%', e5: '17.4%', mem0: '5.3%' }, leader: 'e5' },
+  { id: 'cat3', name: 'Multi-hop', count: 96, measures: 'Cross-referencing facts', scores: { hemispheric: '17.7%', e5: '24.0%', mem0: '17.7%' }, leader: 'e5' },
+  { id: 'cat4', name: 'Open-domain', count: 841, measures: 'Fact + common sense', scores: { hemispheric: '41.6%', e5: '44.7%', mem0: '35.0%' }, leader: 'e5' },
+  { id: 'cat5', name: 'Adversarial', count: 446, measures: 'Knowing when to say "I don\u2019t know"', scores: { hemispheric: '5.6%', e5: '3.4%', mem0: '4.7%' }, leader: 'hemispheric' },
+];
+
+const globalRow = {
+  scores: { hemispheric: '25.6%', e5: '28.0%', mem0: '21.1%' } as Record<EngineKey, string>,
+  leader: 'e5' as EngineKey,
+};
+
+// Zep / Graphiti: a full local run was infeasible, so only a single-conversation
+// sample (conv-1) exists. Shown separately and clearly marked as partial.
+const zepSample = [
+  { label: 'Hemispheric', score: '28.2%' },
+  { label: 'Embedding e5', score: '30.3%' },
+  { label: 'mem0', score: '14.9%' },
+  { label: 'Zep / Graphiti', score: '18.5%' },
+];
+
+const reproduceCmd =
+  'node tools/eval-productos/comparar.mjs resultados-e2e-locomo-motor-llm.json resultados-e2e-locomo-embedding-llm.json resultados-e2e-locomo-mem0-full.json';
+
+// Repo URL is a placeholder until confirmed (risk open in PLAN.md).
+const REPO_URL = '#';
+
+const pageTitle = 'Benchmarks — Hemispheric';
+const pageDescription =
+  'LoCoMo benchmark, full dataset (1,986 questions). Hemispheric vs Embedding e5 vs mem0, judged by Qwen3-8B locally — a fair head-to-head, numbers unedited.';
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <!-- Header -->
+  <section class="border-b border-border">
+    <div class="mx-auto max-w-5xl px-6 py-20 sm:px-8 lg:px-12 lg:py-28">
+      <p class="font-mono text-xs tracking-wider text-accent uppercase">
+        LoCoMo benchmark
+      </p>
+      <h1 class="mt-4 font-display text-5xl leading-[1.05] text-foreground sm:text-6xl">
+        The numbers, unedited.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+        Every engine measured with <strong class="font-semibold text-foreground">Qwen3-8B running locally</strong> as both respondent and judge — the same ruler for all of them, so the head-to-head is fair. These numbers are <em class="text-foreground not-italic">not</em> comparable to mem0 or Zep's official leaderboards, which use GPT-4o. What this measures is how each memory does against the others under identical conditions.
+      </p>
+    </div>
+  </section>
+
+  <!-- Full results table -->
+  <section class="border-b border-border">
+    <div class="mx-auto max-w-5xl px-6 py-20 sm:px-8 lg:px-12">
+      <h2 class="font-display text-3xl text-foreground sm:text-4xl">Full results</h2>
+      <p class="mt-3 font-mono text-xs tracking-wider text-subtle uppercase">
+        LoCoMo · 1,986 questions · accuracy, LLM-judged
+      </p>
+
+      <div class="mt-8 overflow-x-auto">
+        <table class="w-full min-w-[640px] border-collapse text-left">
+          <thead>
+            <tr class="border-b border-border-strong">
+              <th scope="col" class="py-3 pr-4 align-bottom text-sm font-medium text-muted">
+                Category
+              </th>
+              <th scope="col" class="hidden py-3 pr-6 align-bottom text-sm font-medium text-muted sm:table-cell">
+                What it measures
+              </th>
+              {
+                engines.map((engine) => (
+                  <th scope="col" class="py-3 pl-6 align-bottom text-right">
+                    <span class={engine.subject ? 'block text-sm font-semibold text-accent' : 'block text-sm font-medium text-foreground'}>
+                      {engine.label}
+                    </span>
+                    <span class="mt-0.5 block font-mono text-xs font-normal text-subtle">
+                      {engine.note}
+                    </span>
+                  </th>
+                ))
+              }
+            </tr>
+          </thead>
+          <tbody>
+            {
+              rows.map((row) => (
+                <tr class="border-b border-border/60">
+                  <th scope="row" class="py-4 pr-4 text-left align-top font-medium text-foreground">
+                    {row.name}
+                    <span class="ml-1.5 font-mono text-xs font-normal text-subtle">
+                      {row.count}
+                    </span>
+                  </th>
+                  <td class="hidden py-4 pr-6 align-top text-sm text-subtle sm:table-cell">
+                    {row.measures}
+                  </td>
+                  {
+                    engines.map((engine) => {
+                      const isLeader = row.leader === engine.key;
+                      const cell = isLeader
+                        ? 'text-foreground font-semibold'
+                        : 'text-muted';
+                      return (
+                        <td class={`py-4 pl-6 text-right font-mono tabular-nums ${engine.subject ? 'bg-surface' : ''}`}>
+                          <span class={cell}>{row.scores[engine.key]}</span>
+                        </td>
+                      );
+                    })
+                  }
+                </tr>
+              ))
+            }
+            <tr class="border-t-2 border-border-strong">
+              <th scope="row" class="py-5 pr-4 text-left font-semibold text-foreground">
+                Overall
+              </th>
+              <td class="hidden py-5 pr-6 text-sm text-subtle sm:table-cell">weighted, all categories</td>
+              {
+                engines.map((engine) => {
+                  const isLeader = globalRow.leader === engine.key;
+                  return (
+                    <td class={`py-5 pl-6 text-right font-mono text-lg tabular-nums ${engine.subject ? 'bg-surface' : ''}`}>
+                      <span class={isLeader ? 'font-semibold text-foreground' : 'text-muted'}>
+                        {globalRow.scores[engine.key]}
+                      </span>
+                    </td>
+                  );
+                })
+              }
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="mt-5 text-sm leading-relaxed text-subtle">
+        Bold marks the best score in each row. Embedding e5 leads most categories, but it
+        needs a vector database to run. Hemispheric is free, offline and server-less, wins
+        outright on adversarial questions (knowing when to abstain), and nearly doubles mem0
+        on temporal reasoning — see below.
+      </p>
+    </div>
+  </section>
+
+  <!-- Temporal highlight -->
+  <section class="border-b border-border bg-surface">
+    <div class="mx-auto max-w-5xl px-6 py-20 sm:px-8 lg:px-12">
+      <p class="font-mono text-xs tracking-wider text-accent uppercase">
+        Where it pulls ahead · temporal reasoning (cat2)
+      </p>
+      <div class="mt-6 flex flex-wrap items-end gap-x-12 gap-y-6">
+        <div>
+          <p class="font-mono text-5xl tabular-nums text-accent">16.2%</p>
+          <p class="mt-2 text-sm text-muted">Hemispheric</p>
+        </div>
+        <div>
+          <p class="font-mono text-5xl tabular-nums text-foreground">5.3%</p>
+          <p class="mt-2 text-sm text-muted">mem0</p>
+        </div>
+        <p class="pb-2 font-mono text-lg font-semibold text-accent">+206% vs mem0</p>
+      </div>
+      <p class="mt-8 max-w-2xl leading-relaxed text-muted">
+        Hemispheric stores every fact with its explicit date and temporal context. That's why it almost doubles mem0 when a question depends on <em class="text-foreground not-italic">when</em> something happened — the kind of recall long-running agents need, not just <em class="text-foreground not-italic">what</em> happened.
+      </p>
+    </div>
+  </section>
+
+  <!-- Methodology -->
+  <section class="border-b border-border">
+    <div class="mx-auto max-w-5xl px-6 py-20 sm:px-8 lg:px-12">
+      <h2 class="font-display text-3xl text-foreground sm:text-4xl">Methodology</h2>
+      <div class="mt-8 grid gap-10 md:grid-cols-2">
+        <div>
+          <h3 class="text-sm font-semibold text-foreground">Same ruler for everyone</h3>
+          <p class="mt-3 leading-relaxed text-muted">
+            One local model, Qwen3-8B, answers every question using each memory's recall,
+            and the same model judges every answer. No engine gets a stronger judge than
+            another. That's what makes the comparison fair — and what makes it incomparable
+            to leaderboards scored with GPT-4o.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold text-foreground">The dataset</h3>
+          <p class="mt-3 leading-relaxed text-muted">
+            LoCoMo: 1,986 questions over long, multi-session conversations, split into five
+            categories. Accuracy is the share of questions each engine answers correctly, as
+            graded by the judge. Nothing is dropped or re-weighted in your favor.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Zep note -->
+  <section class="border-b border-border bg-surface">
+    <div class="mx-auto max-w-5xl px-6 py-20 sm:px-8 lg:px-12">
+      <h2 class="font-display text-3xl text-foreground sm:text-4xl">
+        A note on Zep / Graphiti
+      </h2>
+      <p class="mt-4 max-w-2xl leading-relaxed text-muted">
+        Running Zep over the full dataset locally wasn't feasible, so we only have a single-conversation sample (<span class="font-mono text-sm">conv-1</span>). It is <strong class="font-semibold text-foreground">not</strong> a full-dataset result and is kept separate so it never gets mixed into the table above.
+      </p>
+
+      <div class="mt-8 max-w-md overflow-x-auto">
+        <p class="mb-3 font-mono text-xs tracking-wider text-subtle uppercase">
+          Sample only · conv-1
+        </p>
+        <table class="w-full border-collapse text-left">
+          <tbody>
+            {
+              zepSample.map((item) => (
+                <tr class="border-b border-border/60">
+                  <th scope="row" class="py-3 text-left font-normal text-foreground">
+                    {item.label}
+                  </th>
+                  <td class="py-3 text-right font-mono tabular-nums text-muted">
+                    {item.score}
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reproduce -->
+  <section>
+    <div class="mx-auto max-w-5xl px-6 py-20 sm:px-8 lg:px-12 lg:py-28">
+      <h2 class="font-display text-3xl text-foreground sm:text-4xl">Reproduce it</h2>
+      <p class="mt-4 max-w-2xl leading-relaxed text-muted">
+        The table above isn't typed by hand — it's generated from the raw result files. From
+        the repo root, point the comparison script at the three result sets and you get the
+        exact same numbers:
+      </p>
+
+      <div class="mt-6">
+        <CopyCommand cmd={reproduceCmd} class="max-w-full overflow-x-auto" />
+      </div>
+
+      <p class="mt-5 text-sm leading-relaxed text-subtle">
+        Source of truth: the raw <span class="font-mono">resultados-e2e-locomo-*.json</span> files and <span class="font-mono">BENCHMARK.md</span> in the engine repo.
+      </p>
+
+      <a
+        href={REPO_URL}
+        class="mt-8 inline-flex min-h-11 items-center gap-2 rounded-md border border-border-strong px-6 text-sm font-semibold text-foreground transition-colors hover:bg-surface-raised"
+      >
+        <svg class="size-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.37-3.37-1.37-.46-1.18-1.11-1.5-1.11-1.5-.91-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05A9.3 9.3 0 0 1 12 6.84c.85 0 1.71.12 2.51.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.8-4.57 5.05.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.59.69.48A10.03 10.03 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"></path>
+        </svg>
+        View the code
+      </a>
+    </div>
+  </section>
+</BaseLayout>

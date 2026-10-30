@@ -33,7 +33,7 @@
 | F2 | Hero del landing: editorial 2 col con CTA copiable (Cortex placeholder estático) | done |
 | F3 | Cortex island: grafo interactivo React (hover, nodos activos, activación 2 saltos) | done |
 | F4 | Resto del landing: How it works + benchmarks resumidos + quick-start + open source | done |
-| F5 | Página `/benchmarks` completa | todo |
+| F5 | Página `/benchmarks` completa | done |
 | F6 | Página `/docs` completa (instalación por anfitrión) | todo |
 | F7 | Pulido: SEO/meta, a11y final y verificación global de las 3 páginas | todo |
 
@@ -159,14 +159,17 @@
 
 ## F5 — Página /benchmarks
 
-### F5-T1 · Página de benchmarks completa  [M] [todo]
+### F5-T1 · Página de benchmarks completa  [M] [done]
 - Para qué: la prueba detallada para el dev escéptico, con metodología reproducible (D-012)
 - Skill: ui-ux-pro-max + blueprint §Benchmarks + brief
 - Archivos: `src/pages/benchmarks.astro`
 - Hecho cuando: tabla LoCoMo completa (1986 preguntas) + sub-tabla por categoría + matiz honesto (Qwen3-8B, no comparable al leaderboard oficial) + sección "cómo reproducir" + CTA repo; fila Zep en `⏳ running`; estilo paper académico
 - Verificar: ui-verify `/benchmarks` 375/768/1440; tabla con scroll horizontal controlado en móvil
 - Depende de: F1-T3
-- Devlog: —
+- Verificado: `astro check` 0 err · `build` 2 pages Complete · ui-verify 375/768/1440 → 0 problemas; scroll horizontal controlado (min-w-[640px] + overflow-x-auto); HTML con espacios inline correctos
+- Cumple: la página muestra las 5 categorías reales × 3 motores con el líder por fila, el destacado temporal, metodología, la nota honesta de Zep (solo muestra) y cómo reproducir. Datos reales de BENCHMARK.md, nada inventado
+- Devlog: `senzu/devlog/2026-10-30/016-pagina-benchmarks.md`
+- Nota: la "sub-tabla por categoría" se resuelve con la tabla principal de 5 categorías (no tabla aparte); Zep sale como muestra conv-1 separada, no como `⏳ running` (ya hay dato parcial real). Bug Astro de whitespace alrededor de inline documentado en el devlog
 
 ---
 
