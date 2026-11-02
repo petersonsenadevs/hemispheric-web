@@ -74,7 +74,7 @@ const pageDescription =
       <h1 class="mt-4 font-display text-5xl leading-[1.05] text-foreground sm:text-6xl">
         The numbers, unedited.
       </h1>
-      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+      <p class="mt-6 max-w-3xl text-lg leading-relaxed text-muted">
         Every engine measured with <strong class="font-semibold text-foreground">Qwen3-8B running locally</strong> as both respondent and judge — the same ruler for all of them, so the head-to-head is fair. These numbers are <em class="text-foreground not-italic">not</em> comparable to mem0 or Zep's official leaderboards, which use GPT-4o. What this measures is how each memory does against the others under identical conditions.
       </p>
     </div>
@@ -189,7 +189,7 @@ const pageDescription =
         </div>
         <p class="pb-2 font-mono text-lg font-semibold text-accent">+206% vs mem0</p>
       </div>
-      <p class="mt-8 max-w-2xl leading-relaxed text-muted">
+      <p class="mt-8 max-w-3xl leading-relaxed text-muted">
         Hemispheric stores every fact with its explicit date and temporal context. That's why it almost doubles mem0 when a question depends on <em class="text-foreground not-italic">when</em> something happened — the kind of recall long-running agents need, not just <em class="text-foreground not-italic">what</em> happened.
       </p>
     </div>
@@ -227,7 +227,7 @@ const pageDescription =
       <h2 class="font-display text-3xl text-foreground sm:text-4xl">
         A note on Zep / Graphiti
       </h2>
-      <p class="mt-4 max-w-2xl leading-relaxed text-muted">
+      <p class="mt-4 max-w-3xl leading-relaxed text-muted">
         Running Zep over the full dataset locally wasn't feasible, so we only have a single-conversation sample (<span class="font-mono text-sm">conv-1</span>). It is <strong class="font-semibold text-foreground">not</strong> a full-dataset result and is kept separate so it never gets mixed into the table above.
       </p>
 
@@ -259,7 +259,7 @@ const pageDescription =
   <section>
     <div class="mx-auto max-w-5xl px-6 py-20 sm:px-8 lg:px-12 lg:py-28">
       <h2 class="font-display text-3xl text-foreground sm:text-4xl">Reproduce it</h2>
-      <p class="mt-4 max-w-2xl leading-relaxed text-muted">
+      <p class="mt-4 max-w-3xl leading-relaxed text-muted">
         The table above isn't typed by hand — it's generated from the raw result files. From
         the repo root, point the comparison script at the three result sets and you get the
         exact same numbers:
