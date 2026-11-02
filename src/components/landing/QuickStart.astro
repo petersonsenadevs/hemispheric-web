@@ -1,9 +1,10 @@
 ---
 import CopyCommand from '../CopyCommand.astro';
 
-// Exact command still a placeholder (D-008). Full per-host instructions live on /docs.
+// Exact command still a placeholder (D-008): pending the real install story (see PLAN F12-T1).
 const INSTALL_CMD = 'hemispheric install --claude';
-const hosts = ['Claude Code', 'Codex', 'Senzu', 'Obsidian', 'Standalone'];
+// Obsidian retirado: descartado como anfitrion (no prometer lo que no hay).
+const hosts = ['Claude Code', 'Codex', 'Senzu', 'Standalone'];
 ---
 
 <section id="install" class="scroll-mt-16">
@@ -31,15 +32,6 @@ const hosts = ['Claude Code', 'Codex', 'Senzu', 'Obsidian', 'Standalone'];
         }
       </ul>
 
-      <a
-        href="/docs"
-        class="mt-8 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-accent transition-opacity hover:opacity-80"
-      >
-        Full docs
-        <svg class="size-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M3 8h10M9 4l4 4-4 4"></path>
-        </svg>
-      </a>
     </div>
   </div>
 </section>
