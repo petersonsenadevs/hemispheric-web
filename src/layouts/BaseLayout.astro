@@ -23,7 +23,7 @@ const {
 } = Astro.props;
 
 const lang = Astro.currentLocale ?? 'en';
-const site = (Astro.site?.href ?? 'https://corvusmem.com/').replace(/\/$/, '');
+const site = (Astro.site?.href ?? 'https://corvusmem.vercel.app/').replace(/\/$/, '');
 const basePath = Astro.url.pathname.replace(/^\/es(?=\/|$)/, '') || '/';
 const enUrl = site + basePath;
 const esUrl = site + (basePath === '/' ? '/es/' : '/es' + basePath);

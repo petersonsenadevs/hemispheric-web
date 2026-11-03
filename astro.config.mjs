@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://corvusmem.com',
+  site: 'https://corvusmem.vercel.app',
   output: 'static',
   i18n: {
     locales: ['en', 'es'],
