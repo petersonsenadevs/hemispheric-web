@@ -1,7 +1,8 @@
 ---
 import '../styles/global.css';
-import { Image } from 'astro:assets';
-import crowLoader from '../assets/brand/cuervo-a-guardian.png';
+import { Image, getImage } from 'astro:assets';
+import alaArribaImg from '../assets/brand/cuervo-ala-arriba.png';
+import alaAbajoImg from '../assets/brand/cuervo-ala-abajo.png';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 
@@ -28,6 +29,9 @@ const enUrl = site + basePath;
 const esUrl = site + (basePath === '/' ? '/es/' : '/es' + basePath);
 const canonical = site + Astro.url.pathname;
 const ogImage = `${site}/og-image.png`;
+// Loader con aleteo: dos fotogramas (alas arriba/abajo) optimizados a webp
+const alaArriba = await getImage({ src: alaArribaImg, width: 300, format: 'webp' });
+const alaAbajo = await getImage({ src: alaAbajoImg, width: 300, format: 'webp' });
 ---
 
 <!doctype html>
@@ -62,7 +66,10 @@ const ogImage = `${site}/og-image.png`;
   <body class="bg-background text-foreground">
     <div id="brand-loader" aria-hidden="true" style="position:fixed;inset:0;z-index:200;display:grid;place-items:center;background:var(--background);">
       <div class="bl-inner">
-        <Image src={crowLoader} alt="" width={180} height={180} class="bl-crow" loading="eager" />
+        <div class="bl-crow" aria-hidden="true">
+          <img src={alaArriba.src} alt="" class="bl-wing bl-wing-up" width="300" height="300" fetchpriority="high" />
+          <img src={alaAbajo.src} alt="" class="bl-wing bl-wing-down" width="300" height="300" />
+        </div>
         <span class="bl-word">Corvusmem<span class="bl-dot">.</span></span>
       </div>
     </div>
@@ -70,7 +77,15 @@ const ogImage = `${site}/og-image.png`;
       #brand-loader { transition: opacity var(--duration-slow, 400ms) var(--ease-out, ease); }
       #brand-loader.is-hidden { opacity: 0; pointer-events: none; }
       #brand-loader .bl-inner { display: grid; justify-items: center; gap: 14px; }
-      #brand-loader .bl-crow { width: clamp(84px, 14vw, 150px); height: auto; opacity: .95; }
+      #brand-loader .bl-crow { position: relative; width: clamp(84px, 14vw, 150px); aspect-ratio: 1; opacity: .95; }
+      #brand-loader .bl-wing { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+      #brand-loader .bl-wing-down { opacity: 0; }
+      @media (prefers-reduced-motion: no-preference) {
+        #brand-loader .bl-wing-up { animation: bl-flap-up .32s linear infinite; }
+        #brand-loader .bl-wing-down { animation: bl-flap-down .32s linear infinite; }
+      }
+      @keyframes bl-flap-up { 0%, 49.9% { opacity: 1; } 50%, 100% { opacity: 0; } }
+      @keyframes bl-flap-down { 0%, 49.9% { opacity: 0; } 50%, 100% { opacity: 1; } }
       #brand-loader .bl-word { font-family: var(--font-display); font-size: clamp(2rem, 6vw, 4rem); color: var(--foreground); letter-spacing: -0.01em; }
       #brand-loader .bl-dot { color: var(--accent); }
       @media (prefers-reduced-motion: reduce) { #brand-loader { transition: none; } }
