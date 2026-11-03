@@ -24,7 +24,7 @@ const hosts = ['Claude Code', 'Codex', 'Standalone'];
         <CopyCommand cmd={INSTALL_CMD} />
       </div>
 
-      <ul class="mt-8 flex flex-wrap justify-center gap-2" aria-label="Supported hosts">
+      <ul class="mt-8 flex flex-wrap justify-center gap-2" aria-label="Supported hosts" data-stagger>
         {
           hosts.map((host) => (
             <li class="rounded-full border border-border px-3 py-1 font-mono text-xs text-muted">

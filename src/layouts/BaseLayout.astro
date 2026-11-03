@@ -90,6 +90,24 @@ const ogImage = `${site}/og-image.png`;
         /* Flotación muy sutil (cuervo del hero, acentos) */
         [data-float] { animation: hemi-float 7s ease-in-out infinite; }
         @keyframes hemi-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+        /* Hover-lift en tarjetas de superficie */
+        .rounded-2xl.bg-surface { transition: transform .25s var(--ease-out, ease), border-color .25s, box-shadow .25s; }
+        /* Glow en los botones de acento (CTA) */
+        .bg-accent { transition: box-shadow .3s var(--ease-out, ease), transform .2s, opacity .2s; }
+        /* Stagger: hijos de un contenedor [data-stagger] entran en cascada */
+        html.js [data-stagger] > * { opacity: 0; transform: translateY(14px); transition: opacity .6s var(--ease-out, cubic-bezier(.22,1,.36,1)), transform .6s var(--ease-out, cubic-bezier(.22,1,.36,1)); }
+        html.js [data-stagger].is-visible > * { opacity: 1; transform: none; }
+        html.js [data-stagger].is-visible > *:nth-child(1) { transition-delay: 60ms; }
+        html.js [data-stagger].is-visible > *:nth-child(2) { transition-delay: 160ms; }
+        html.js [data-stagger].is-visible > *:nth-child(3) { transition-delay: 260ms; }
+        html.js [data-stagger].is-visible > *:nth-child(4) { transition-delay: 360ms; }
+        html.js [data-stagger].is-visible > *:nth-child(5) { transition-delay: 460ms; }
+        html.js [data-stagger].is-visible > *:nth-child(n+6) { transition-delay: 540ms; }
+      }
+      @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+        .rounded-2xl.bg-surface:hover { transform: translateY(-4px); border-color: var(--border-strong); box-shadow: 0 14px 34px -14px rgba(0,0,0,.45); }
+        .bg-accent:hover { box-shadow: 0 0 0 1px var(--accent), 0 10px 26px -8px var(--accent-glow, var(--accent)); }
       }
     </style>
     <script is:inline>
@@ -123,7 +141,7 @@ const ogImage = `${site}/og-image.png`;
     <script is:inline>
       (function () {
         var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        var els = document.querySelectorAll('[data-reveal]');
+        var els = document.querySelectorAll('[data-reveal], [data-stagger]');
         if (reduce || !('IntersectionObserver' in window)) {
           for (var i = 0; i < els.length; i++) els[i].classList.add('is-visible');
           return;
