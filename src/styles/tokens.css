@@ -1,6 +1,6 @@
 /*
   Hemispheric — tokens del design system para Astro + Tailwind 4
-  Fuente de verdad: senzu/design-system/hemispheric/tokens.json (y app.css)
+  Fuente de verdad: design-system/hemispheric/tokens.json (y app.css)
   No editar valores a mano — editar tokens.json y regenerar; aquí solo se adapta
   al proyecto (fuentes self-host via @fontsource, importadas en global.css).
 */

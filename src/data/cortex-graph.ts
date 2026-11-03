@@ -7,7 +7,7 @@ export const cortexGraph: CortexGraph = {
     { id: 'claude', label: 'claude', fact: 'Your coding agent. Everything it learns links back to this node.', x: 240, y: 205 },
     { id: 'project', label: 'project', fact: 'project: hemi-web — an Astro marketing site.', x: 130, y: 115 },
     { id: 'memory', label: 'memory', fact: 'memory: facts stored as a graph on disk. No server, no embeddings.', x: 350, y: 115 },
-    { id: 'user', label: 'user', fact: 'user: prefers Spanish, terse answers, the Senzu method.', x: 125, y: 300 },
+    { id: 'user', label: 'user', fact: 'user: prefers concise answers and an English UI.', x: 125, y: 300 },
     { id: 'host', label: 'host', fact: 'host: also plugs into Codex, not just Claude Code.', x: 355, y: 300 },
     { id: 'stack', label: 'stack', fact: 'stack: Astro + React islands + Tailwind 4.', x: 55, y: 195 },
     { id: 'date', label: 'date', fact: 'last session: 2026-10-30.', x: 240, y: 45 },
