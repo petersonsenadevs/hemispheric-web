@@ -109,6 +109,15 @@ const ogImage = `${site}/og-image.png`;
         .rounded-2xl.bg-surface:hover { transform: translateY(-4px); border-color: var(--border-strong); box-shadow: 0 14px 34px -14px rgba(0,0,0,.45); }
         .bg-accent:hover { box-shadow: 0 0 0 1px var(--accent), 0 10px 26px -8px var(--accent-glow, var(--accent)); }
       }
+
+      /* Barra de progreso de scroll (fina, color de marca) */
+      #scroll-progress { position: fixed; top: 0; left: 0; height: 2px; width: 0; z-index: 150; background: linear-gradient(90deg, var(--accent), var(--accent-glow, var(--accent))); box-shadow: 0 0 10px -1px var(--accent-glow, var(--accent)); transition: width .12s linear; }
+      @media (prefers-reduced-motion: reduce) { #scroll-progress { transition: none; } }
+
+      /* Aura de marca que respira detrás del hero */
+      .hero-aurora { position: absolute; inset: -12% -8% auto -8%; height: 62%; z-index: -20; pointer-events: none; opacity: .16; filter: blur(44px); background: radial-gradient(48% 52% at 34% 32%, var(--accent-glow, var(--accent)), transparent 70%); }
+      @media (prefers-reduced-motion: no-preference) { .hero-aurora { animation: aurora-drift 16s ease-in-out infinite alternate; } }
+      @keyframes aurora-drift { from { transform: translate3d(-3%, -2%, 0) scale(1); } to { transform: translate3d(6%, 3%, 0) scale(1.12); } }
     </style>
     <script is:inline>
       (function () {
@@ -127,6 +136,7 @@ const ogImage = `${site}/og-image.png`;
         window.addEventListener('pageshow', function (e) { if (e.persisted) hide(); });
       })();
     </script>
+    <div id="scroll-progress" aria-hidden="true"></div>
     <a
       href="#main"
       class="fixed -top-20 left-4 z-[100] inline-flex min-h-11 items-center rounded-md bg-surface px-4 py-2 text-foreground transition-[top] duration-200 focus:top-4"
@@ -152,6 +162,22 @@ const ogImage = `${site}/og-image.png`;
           });
         }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
         for (var j = 0; j < els.length; j++) io.observe(els[j]);
+      })();
+      (function () {
+        var bar = document.getElementById('scroll-progress');
+        if (!bar) return;
+        var ticking = false;
+        function update() {
+          var h = document.documentElement;
+          var max = h.scrollHeight - h.clientHeight;
+          var pct = max > 0 ? (h.scrollTop || document.body.scrollTop) / max * 100 : 0;
+          bar.style.width = pct + '%';
+          ticking = false;
+        }
+        function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll);
+        update();
       })();
     </script>
   </body>
