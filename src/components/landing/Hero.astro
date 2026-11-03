@@ -20,24 +20,26 @@ const INSTALL_CMD = 'npx hemispheric install --claude';
     width={820}
     height={820}
     aria-hidden="true"
+    data-float
     class="pointer-events-none absolute inset-y-0 left-0 -z-10 w-[min(52vw,520px)] object-contain object-center opacity-[0.14] select-none"
   />
   <div class="flex flex-col items-start">
-    <p class="mb-7 font-mono text-xs tracking-[0.12em] text-accent uppercase">
+    <p class="mb-7 font-mono text-xs tracking-[0.12em] text-accent uppercase" data-reveal style="--reveal-delay:80ms">
       {t('hero.eyebrow')}
     </p>
 
     <h1
       class="mb-6 font-display text-5xl leading-[1.06] tracking-tight text-foreground sm:text-6xl lg:text-7xl"
+      data-reveal style="--reveal-delay:180ms"
     >
       {t('hero.title.a')}<br />{t('hero.title.b')} <em class="text-muted italic">{t('hero.title.em')}</em>
     </h1>
 
-    <p class="mb-10 max-w-[44ch] text-lg leading-relaxed text-muted">
+    <p class="mb-10 max-w-[44ch] text-lg leading-relaxed text-muted" data-reveal style="--reveal-delay:300ms">
       {t('hero.body')}
     </p>
 
-    <div class="flex flex-col items-start gap-4">
+    <div class="flex flex-col items-start gap-4" data-reveal style="--reveal-delay:420ms">
       <a
         href="#install"
         class="inline-flex min-h-11 items-center gap-2.5 rounded-md bg-accent px-6 font-sans text-sm font-semibold text-on-accent transition-[opacity,transform] hover:-translate-y-px hover:opacity-90"
@@ -60,7 +62,7 @@ const INSTALL_CMD = 'npx hemispheric install --claude';
     </div>
   </div>
 
-  <div>
+  <div data-reveal style="--reveal-delay:360ms">
     <CortexEmbed
       src="/cortex-hero.html"
       title="The Cortex — your agent's memory as a living brain"
