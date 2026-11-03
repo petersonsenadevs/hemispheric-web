@@ -4,6 +4,10 @@
 > la **voz** y propone **direcciones de logo/mascota** con prompts listos para generar en Codex (image-gen). El usuario
 > confirma el mensaje y elige dirección; luego genera el asset y se aplica a web y docs.
 
+> ✅ **DECIDIDO (2026-11-03):** el mensaje de la §1 está **confirmado** por el usuario. Mascota elegida: **B) el cuervo
+> que guarda y recuerda** (§4.B). El usuario genera el asset en Codex con el prompt de §6-B; el agente lo aplica
+> después en loader, Nav, hero y las ilustraciones de las docs.
+
 ---
 
 ## 1. El mensaje (confírmalo o corrígelo)
