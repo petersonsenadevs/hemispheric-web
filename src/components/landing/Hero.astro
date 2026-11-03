@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import crowBg from '../../assets/brand/cuervo-a-guardian.png';
 import CortexEmbed from './CortexEmbed.astro';
 import CopyCommand from '../CopyCommand.astro';
 
@@ -7,8 +9,16 @@ const INSTALL_CMD = 'hemispheric install --claude';
 ---
 
 <section
-  class="mx-auto grid min-h-screen max-w-[1600px] items-center gap-12 px-6 pt-28 pb-16 sm:px-8 lg:grid-cols-[1.1fr_1fr] lg:gap-16 lg:px-12 lg:pt-16"
+  class="relative isolate mx-auto grid min-h-screen max-w-[1600px] items-center gap-12 overflow-hidden px-6 pt-28 pb-16 sm:px-8 lg:grid-cols-[1.1fr_1fr] lg:gap-16 lg:px-12 lg:pt-16"
 >
+  <Image
+    src={crowBg}
+    alt=""
+    width={820}
+    height={820}
+    aria-hidden="true"
+    class="pointer-events-none absolute -bottom-10 right-2 -z-10 w-[min(58vw,460px)] opacity-[0.13] blur-[2px] select-none lg:-bottom-16 lg:right-10"
+  />
   <div class="flex flex-col items-start">
     <p class="mb-7 font-mono text-xs tracking-[0.12em] text-accent uppercase">
       Free for personal use · Claude Code · Codex

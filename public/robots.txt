@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+# Sitemap: añadir la URL absoluta cuando se fije el dominio del deploy.
