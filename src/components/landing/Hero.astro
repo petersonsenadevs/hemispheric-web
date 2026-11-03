@@ -1,5 +1,5 @@
 ---
-import Cortex from '../cortex/Cortex.tsx';
+import CortexEmbed from './CortexEmbed.astro';
 import CopyCommand from '../CopyCommand.astro';
 
 // Install command shown in the hero. Exact command is still a placeholder (D-008).
@@ -49,6 +49,11 @@ const INSTALL_CMD = 'hemispheric install --claude';
   </div>
 
   <div>
-    <Cortex client:visible showFact={false} />
+    <CortexEmbed
+      src="/cortex-hero.html"
+      title="The Cortex — your agent's memory as a living brain"
+      bare
+      frameClass="block h-[360px] w-full border-0 sm:h-[460px] lg:h-[560px]"
+    />
   </div>
 </section>
