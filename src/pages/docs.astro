@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CopyCommand from '../components/CopyCommand.astro';
+import { Image } from 'astro:assets';
+import crowDocs from '../assets/brand/cuervo-b-memoria.png';
 
 // Exact install command still a placeholder (D-008), kept consistent with the rest of the site.
 const INSTALL_CMD = 'hemispheric install --claude';
@@ -47,7 +49,8 @@ const pageDescription =
 <BaseLayout title={pageTitle} description={pageDescription}>
   <!-- Header -->
   <section class="border-b border-border">
-    <div class="mx-auto max-w-5xl px-6 py-20 sm:px-8 lg:px-12 lg:py-28">
+    <div class="mx-auto grid max-w-5xl items-center gap-10 px-6 py-20 sm:px-8 lg:grid-cols-[1.4fr_1fr] lg:px-12 lg:py-28">
+      <div>
       <p class="font-mono text-xs tracking-wider text-accent uppercase">Documentation</p>
       <h1 class="mt-4 font-display text-5xl leading-[1.05] text-foreground sm:text-6xl">
         A memory your agent keeps.
@@ -69,6 +72,16 @@ const pageDescription =
           ))
         }
       </nav>
+      </div>
+      <div class="hidden justify-self-center lg:block">
+        <Image
+          src={crowDocs}
+          alt="The Hemispheric crow, data-art, curled around a stored memory"
+          width={420}
+          height={420}
+          class="w-full max-w-[360px]"
+        />
+      </div>
     </div>
   </section>
 
