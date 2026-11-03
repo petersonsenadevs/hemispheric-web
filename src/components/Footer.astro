@@ -1,6 +1,7 @@
 ---
 // Licencia real (devlog 207): PolyForm Noncommercial + comercial de pago, (C) 2026 Peterson Sena.
-// Sin repo publico ni pagina /docs todavia: no se enlazan destinos que no existen.
+import { Image } from 'astro:assets';
+import crowMark from '../assets/brand/favicon-cuervo.png';
 const CONTACT = 'petersonsena24@gmail.com';
 const year = new Date().getFullYear();
 
@@ -15,13 +16,16 @@ const links = [
   <div
     class="mx-auto flex max-w-[1600px] flex-col gap-4 px-6 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-12"
   >
-    <div class="flex flex-col gap-1">
-      <span class="font-display text-lg leading-none text-foreground">
-        Hemispheric<span class="text-accent">.</span>
-      </span>
-      <span class="font-mono text-xs text-subtle">
-        PolyForm Noncommercial · © {year} Peterson Sena
-      </span>
+    <div class="flex items-center gap-3">
+      <Image src={crowMark} alt="" width={40} height={40} class="size-10" />
+      <div class="flex flex-col gap-1">
+        <span class="font-display text-lg leading-none text-foreground">
+          Hemispheric<span class="text-accent">.</span>
+        </span>
+        <span class="font-mono text-xs text-subtle">
+          PolyForm Noncommercial · © {year} Peterson Sena
+        </span>
+      </div>
     </div>
     <nav class="flex gap-1" aria-label="Footer">
       {
