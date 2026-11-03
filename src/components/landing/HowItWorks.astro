@@ -1,11 +1,13 @@
 ---
 // "How it works": three alternating steps, each with its own SVG diagram
 // (no identical cards — D-010). SVG colors use tokens so they adapt to light.
+// Al inicio, el grafo interactivo (Cortex.tsx) como ilustracion del grafo de memoria (reubicado desde el hero).
+import Cortex from '../cortex/Cortex.tsx';
 ---
 
 <section id="how" class="scroll-mt-16">
   <div class="mx-auto max-w-[1600px] px-6 py-24 sm:px-8 lg:px-12">
-    <header class="mx-auto mb-16 max-w-3xl text-center">
+    <header class="mx-auto mb-12 max-w-3xl text-center">
       <h2 class="font-display text-4xl leading-tight text-foreground sm:text-5xl">
         How it works.
       </h2>
@@ -15,6 +17,13 @@
         two-hop activation — in milliseconds.
       </p>
     </header>
+
+    <div class="mx-auto mb-20 max-w-2xl lg:mb-28">
+      <Cortex client:visible showFact={false} />
+      <p class="mt-4 text-center font-mono text-xs tracking-wide text-subtle">
+        The memory graph — hover a node to follow its links
+      </p>
+    </div>
 
     <div class="flex flex-col gap-20 lg:gap-28">
       <!-- Step — Capture -->

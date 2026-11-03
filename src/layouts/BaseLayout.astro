@@ -34,6 +34,33 @@ const {
     </script>
   </head>
   <body class="bg-background text-foreground">
+    <div id="brand-loader" aria-hidden="true" style="position:fixed;inset:0;z-index:200;display:grid;place-items:center;background:var(--background);">
+      <span class="bl-word">Hemispheric<span class="bl-dot">.</span></span>
+    </div>
+    <style is:global>
+      #brand-loader { transition: opacity var(--duration-slow, 400ms) var(--ease-out, ease); }
+      #brand-loader.is-hidden { opacity: 0; pointer-events: none; }
+      #brand-loader .bl-word { font-family: var(--font-display); font-size: clamp(2rem, 6vw, 4rem); color: var(--foreground); letter-spacing: -0.01em; }
+      #brand-loader .bl-dot { color: var(--accent); }
+      @media (prefers-reduced-motion: reduce) { #brand-loader { transition: none; } }
+    </style>
+    <script is:inline>
+      (function () {
+        var el = document.getElementById('brand-loader');
+        if (!el) return;
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        function hide() { el.classList.add('is-hidden'); }
+        if (reduce) hide(); else setTimeout(hide, 700);   // flash de marca ~700ms desde el arranque, luego se desvanece
+        document.addEventListener('click', function (e) {
+          var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+          if (!a) return;
+          var href = a.getAttribute('href') || '';
+          if (a.target === '_blank' || href.charAt(0) === '#' || href.indexOf('mailto:') === 0 || (a.hostname && a.hostname !== location.hostname)) return;
+          el.classList.remove('is-hidden');
+        }, true);
+        window.addEventListener('pageshow', function (e) { if (e.persisted) hide(); });
+      })();
+    </script>
     <a
       href="#main"
       class="fixed -top-20 left-4 z-[100] inline-flex min-h-11 items-center rounded-md bg-surface px-4 py-2 text-foreground transition-[top] duration-200 focus:top-4"
