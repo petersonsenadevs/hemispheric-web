@@ -1,0 +1,17 @@
+---
+// Embebe la Cortex REAL (cerebro de cortex.mjs, con relieve) generada con datos de demo (Aurora Coffee).
+// Es el HTML autonomo public/cortex-demo.html en un iframe: el cerebro de verdad, no el grafo de juguete.
+interface Props {
+  title?: string;
+}
+const { title = 'Live Cortex demo — a brain you can search' } = Astro.props;
+---
+
+<div class="cortex-embed overflow-hidden rounded-2xl border border-border bg-surface">
+  <iframe
+    src="/cortex-demo.html"
+    title={title}
+    loading="lazy"
+    class="block h-[600px] w-full border-0 sm:h-[680px]"
+  ></iframe>
+</div>

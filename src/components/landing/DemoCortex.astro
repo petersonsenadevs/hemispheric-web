@@ -1,5 +1,5 @@
 ---
-import Cortex from '../cortex/Cortex.tsx';
+import CortexEmbed from './CortexEmbed.astro';
 ---
 
 <section id="demo" class="scroll-mt-16 border-y border-border bg-surface">
@@ -13,7 +13,15 @@ import Cortex from '../cortex/Cortex.tsx';
         date and relevance, and recalls them with two-hop activation — no
         embeddings, no server, instant.
       </p>
+      <p class="mt-4 text-base leading-relaxed text-subtle">
+        Below is the real Cortex, not a picture — a sample project's live memory.
+        Switch to 3D and drag to spin the brain, or type a question in the panel
+        and watch the matching memory light up while the rest dims.
+      </p>
     </div>
-    <Cortex client:visible />
+    <CortexEmbed />
+    <p class="mx-auto mt-5 max-w-3xl text-center font-mono text-xs tracking-wide text-subtle">
+      Live demo · sample data · runs fully in your browser, no server
+    </p>
   </div>
 </section>
