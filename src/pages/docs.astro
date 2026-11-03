@@ -5,7 +5,7 @@ import { Image } from 'astro:assets';
 import crowDocs from '../assets/brand/cuervo-b-memoria.png';
 
 // Exact install command still a placeholder (D-008), kept consistent with the rest of the site.
-const INSTALL_CMD = 'npx hemispheric install --claude';
+const INSTALL_CMD = 'npx corvusmem install --claude';
 const CONTACT = 'petersonsena24@gmail.com';
 
 const toc = [
@@ -23,11 +23,11 @@ const toc = [
 const faqs = [
   {
     q: 'Does my data ever leave my machine?',
-    a: 'No. The memory is a local file you own. No server, no cloud, no API key, no telemetry. Hemispheric runs entirely offline.',
+    a: 'No. The memory is a local file you own. No server, no cloud, no API key, no telemetry. Corvusmem runs entirely offline.',
   },
   {
     q: 'How is this different from mem0 or Zep?',
-    a: 'Those store your memory in their cloud behind an API. Hemispheric keeps everything local and deterministic — same input, same result, no embeddings or vector database involved.',
+    a: 'Those store your memory in their cloud behind an API. Corvusmem keeps everything local and deterministic — same input, same result, no embeddings or vector database involved.',
   },
   {
     q: 'Do I need an embedding model or a vector DB?',
@@ -47,9 +47,9 @@ const faqs = [
   },
 ];
 
-const pageTitle = 'Docs — Hemispheric';
+const pageTitle = 'Docs — Corvusmem';
 const pageDescription =
-  'How Hemispheric works: local, deterministic, offline memory for your coding agent. Install, the Cortex, hosts (Claude Code, Codex), and license.';
+  'How Corvusmem works: local, deterministic, offline memory for your coding agent. Install, the Cortex, hosts (Claude Code, Codex), and license.';
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>
@@ -62,7 +62,7 @@ const pageDescription =
         A memory your agent keeps.
       </h1>
       <p class="mt-6 max-w-3xl text-lg leading-relaxed text-muted">
-        Hemispheric gives your coding agent a real memory — local, deterministic and offline.
+        Corvusmem gives your coding agent a real memory — local, deterministic and offline.
         It hooks into Claude Code and Codex, writes what your agent learns to a file you own, and
         recalls it across sessions and projects. No embeddings, no server, no API key.
       </p>
@@ -82,7 +82,7 @@ const pageDescription =
       <div class="hidden justify-self-center lg:block">
         <Image
           src={crowDocs}
-          alt="The Hemispheric crow, data-art, curled around a stored memory"
+          alt="The Corvusmem crow, data-art, curled around a stored memory"
           width={420}
           height={420}
           class="w-full max-w-[360px]"
@@ -98,7 +98,7 @@ const pageDescription =
       <div class="mt-5 max-w-3xl space-y-4 text-lg leading-relaxed text-muted">
         <p>
           Your agent, with a memory of its own — and it never leaves your machine. Agents forget
-          everything between sessions; Hemispheric is the memory that remembers you and your
+          everything between sessions; Corvusmem is the memory that remembers you and your
           projects, in a single local file you control.
         </p>
         <p>
@@ -179,7 +179,7 @@ const pageDescription =
           <p class="font-mono text-sm tracking-widest text-accent uppercase">Project</p>
           <h3 class="mt-2 font-display text-xl text-foreground">About the project</h3>
           <p class="mt-3 leading-relaxed text-muted">
-            The stack, the client, decisions, deadlines. It lives in the project folder (<code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">.hemispheric/</code>),
+            The stack, the client, decisions, deadlines. It lives in the project folder (<code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">.corvusmem/</code>),
             so your team — and Codex — share it. "The stack is Next" is true no matter who said it.
           </p>
         </div>
@@ -188,7 +188,7 @@ const pageDescription =
           <h3 class="mt-2 font-display text-xl text-foreground">About you</h3>
           <p class="mt-3 leading-relaxed text-muted">
             Who you are and how you like to work — carried across every project. It lives on your machine
-            (<code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">~/.config/hemispheric/</code>),
+            (<code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">~/.config/corvusmem/</code>),
             private to you, never committed. Your agent recalls both at once.
           </p>
         </div>
@@ -209,7 +209,7 @@ const pageDescription =
           no owner, exactly as they should.
         </p>
         <p>
-          You don't configure anything: Hemispheric reads the author from your <code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">git</code>
+          You don't configure anything: Corvusmem reads the author from your <code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">git</code>
           email (or your system user), with no network. For a solo developer it's invisible — it just works.
         </p>
       </div>
@@ -236,7 +236,7 @@ const pageDescription =
           Open your own Cortex from any project folder — no extra setup:
         </p>
         <div class="mt-3">
-          <CopyCommand cmd="npx hemispheric --cortex" />
+          <CopyCommand cmd="npx corvusmem --cortex" />
         </div>
         <p class="mt-3 font-mono text-xs tracking-wide text-subtle">
           It writes a self-contained HTML file (offline, no network) and prints the path — open it in your browser.
@@ -289,11 +289,11 @@ const pageDescription =
           telemetry — your memory lives in local files you own.
         </p>
         <p>
-          Using Hemispheric inside a company or a paid product needs a commercial license.
+          Using Corvusmem inside a company or a paid product needs a commercial license.
         </p>
       </div>
       <a
-        href={`mailto:${CONTACT}?subject=Hemispheric%20commercial%20license`}
+        href={`mailto:${CONTACT}?subject=Corvusmem%20commercial%20license`}
         class="mt-8 inline-flex min-h-11 items-center gap-2 rounded-md border border-border-strong px-6 text-sm font-semibold text-foreground transition-colors hover:bg-surface-raised"
       >
         Get a commercial license

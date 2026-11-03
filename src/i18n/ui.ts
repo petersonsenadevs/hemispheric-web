@@ -8,7 +8,7 @@ export const ui = {
     'nav.cortex': 'Cortex',
     'nav.benchmarks': 'Benchmarks',
     'nav.docs': 'Docs',
-    'nav.home': 'Hemispheric, home',
+    'nav.home': 'Corvusmem, home',
 
     'hero.eyebrow': 'Free for personal use · Claude Code · Codex',
     'hero.title.a': 'Memory for',
@@ -42,7 +42,7 @@ export const ui = {
     'how.body': 'No embeddings, no vector database, no API calls. The Cortex runs entirely on your machine, stores facts in a local graph, and retrieves them with two-hop activation — in milliseconds.',
     'how.graph': 'The memory graph — hover a node to follow its links',
     'how.capture.eyebrow': 'Capture', 'how.capture.title.a': 'Your agent talks.', 'how.capture.title.b': 'The hook listens.',
-    'how.capture.body': 'Hemispheric installs as a PostToolUse hook in Claude Code. After every tool call, it extracts facts from the exchange — file paths, decisions, project context — and writes them to the local Cortex graph.',
+    'how.capture.body': 'Corvusmem installs as a PostToolUse hook in Claude Code. After every tool call, it extracts facts from the exchange — file paths, decisions, project context — and writes them to the local Cortex graph.',
     'how.store.eyebrow': 'Store', 'how.store.title.a': 'Facts, not vectors.', 'how.store.title.b': 'Dates, not embeddings.',
     'how.store.body': 'Each fact lands in a lightweight JSON graph with its entity name, date and temporal context. No server, no cloud, no API key. The entire Cortex is a single file you own.',
     'how.retrieve.eyebrow': 'Retrieve', 'how.retrieve.title.a': 'Two-hop activation.', 'how.retrieve.title.b': 'No semantic search needed.',
@@ -54,7 +54,7 @@ export const ui = {
     'bench.th.engine': 'Engine', 'bench.th.overall': 'Overall', 'bench.th.notes': 'Notes',
     'bench.note.hemi': 'free · offline · no server', 'bench.note.e5': 'free · vector DB required', 'bench.note.mem0': 'paid · cloud', 'bench.running': 'running',
     'bench.temporal': 'Temporal reasoning (cat2)',
-    'bench.temporal.body': 'Hemispheric stores facts with explicit date and temporal context. That’s why it almost doubles mem0 on temporal recall — and why it matters for long-running agents that need to remember when, not just what.',
+    'bench.temporal.body': 'Corvusmem stores facts with explicit date and temporal context. That’s why it almost doubles mem0 on temporal recall — and why it matters for long-running agents that need to remember when, not just what.',
     'bench.full': 'See full benchmarks',
 
     'quick.title': 'Plug it in where you already work.',
@@ -74,7 +74,7 @@ export const ui = {
     'nav.cortex': 'Cortex',
     'nav.benchmarks': 'Benchmarks',
     'nav.docs': 'Docs',
-    'nav.home': 'Hemispheric, inicio',
+    'nav.home': 'Corvusmem, inicio',
 
     'hero.eyebrow': 'Gratis para uso personal · Claude Code · Codex',
     'hero.title.a': 'Memoria para',
@@ -108,7 +108,7 @@ export const ui = {
     'how.body': 'Sin embeddings, sin base vectorial, sin llamadas a una API. La Cortex corre entera en tu máquina, guarda los datos en un grafo local y los recupera con activación a dos saltos — en milisegundos.',
     'how.graph': 'El grafo de memoria — pasa el ratón por un nodo para seguir sus enlaces',
     'how.capture.eyebrow': 'Captura', 'how.capture.title.a': 'Tu agente habla.', 'how.capture.title.b': 'El hook escucha.',
-    'how.capture.body': 'Hemispheric se instala como un hook PostToolUse en Claude Code. Tras cada llamada de herramienta, extrae datos del intercambio — rutas, decisiones, contexto del proyecto — y los escribe en el grafo local de la Cortex.',
+    'how.capture.body': 'Corvusmem se instala como un hook PostToolUse en Claude Code. Tras cada llamada de herramienta, extrae datos del intercambio — rutas, decisiones, contexto del proyecto — y los escribe en el grafo local de la Cortex.',
     'how.store.eyebrow': 'Guarda', 'how.store.title.a': 'Datos, no vectores.', 'how.store.title.b': 'Fechas, no embeddings.',
     'how.store.body': 'Cada dato cae en un grafo JSON ligero con su nombre, su fecha y su contexto temporal. Sin servidor, sin nube, sin API key. Toda la Cortex es un solo archivo que posees.',
     'how.retrieve.eyebrow': 'Recupera', 'how.retrieve.title.a': 'Activación a dos saltos.', 'how.retrieve.title.b': 'Sin búsqueda semántica.',
@@ -120,7 +120,7 @@ export const ui = {
     'bench.th.engine': 'Motor', 'bench.th.overall': 'Global', 'bench.th.notes': 'Notas',
     'bench.note.hemi': 'gratis · offline · sin servidor', 'bench.note.e5': 'gratis · necesita base vectorial', 'bench.note.mem0': 'de pago · nube', 'bench.running': 'en curso',
     'bench.temporal': 'Razonamiento temporal (cat2)',
-    'bench.temporal.body': 'Hemispheric guarda los datos con su fecha y contexto temporal explícitos. Por eso casi dobla a mem0 en recuerdo temporal — y por eso importa para agentes de larga duración que necesitan recordar cuándo, no solo qué.',
+    'bench.temporal.body': 'Corvusmem guarda los datos con su fecha y contexto temporal explícitos. Por eso casi dobla a mem0 en recuerdo temporal — y por eso importa para agentes de larga duración que necesitan recordar cuándo, no solo qué.',
     'bench.full': 'Ver todos los benchmarks',
 
     'quick.title': 'Enchúfalo donde ya trabajas.',

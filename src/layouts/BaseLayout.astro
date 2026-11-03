@@ -15,14 +15,14 @@ interface Props {
 }
 
 const {
-  title = 'Hemispheric — Memory for your agent',
+  title = 'Corvusmem — Memory for your agent',
   description = 'Free, offline, deterministic memory for your coding agent. No server, no embeddings, no API key. Works where you already work: Claude Code, Codex and more.',
   heroOverlay = false,
   hasEs = false,
 } = Astro.props;
 
 const lang = Astro.currentLocale ?? 'en';
-const site = (Astro.site?.href ?? 'https://gethemispheric.com/').replace(/\/$/, '');
+const site = (Astro.site?.href ?? 'https://corvusmem.com/').replace(/\/$/, '');
 const basePath = Astro.url.pathname.replace(/^\/es(?=\/|$)/, '') || '/';
 const enUrl = site + basePath;
 const esUrl = site + (basePath === '/' ? '/es/' : '/es' + basePath);
@@ -63,7 +63,7 @@ const ogImage = `${site}/og-image.png`;
     <div id="brand-loader" aria-hidden="true" style="position:fixed;inset:0;z-index:200;display:grid;place-items:center;background:var(--background);">
       <div class="bl-inner">
         <Image src={crowLoader} alt="" width={180} height={180} class="bl-crow" loading="eager" />
-        <span class="bl-word">Hemispheric<span class="bl-dot">.</span></span>
+        <span class="bl-word">Corvusmem<span class="bl-dot">.</span></span>
       </div>
     </div>
     <style is:global>

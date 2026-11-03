@@ -7,7 +7,7 @@ import CopyCommand from '../components/CopyCommand.astro';
 // resultados-e2e-locomo-*.json via comparar.mjs. Numbers are NOT hand-written.
 // Respondent and judge are both Qwen3-8B local, so this is a fair head-to-head,
 // not comparable to mem0/Zep official leaderboards (GPT-4o).
-type EngineKey = 'hemispheric' | 'e5' | 'mem0';
+type EngineKey = 'corvusmem' | 'e5' | 'mem0';
 
 interface Engine {
   key: EngineKey;
@@ -17,7 +17,7 @@ interface Engine {
 }
 
 const engines: Engine[] = [
-  { key: 'hemispheric', label: 'Hemispheric', note: 'free · offline', subject: true },
+  { key: 'corvusmem', label: 'Corvusmem', note: 'free · offline', subject: true },
   { key: 'e5', label: 'Embedding e5', note: 'free · vector DB' },
   { key: 'mem0', label: 'mem0', note: 'paid · cloud' },
 ];
@@ -32,22 +32,22 @@ interface Row {
 }
 
 const rows: Row[] = [
-  { id: 'cat1', name: 'Single-hop', count: 282, measures: 'Direct fact lookup', scores: { hemispheric: '23.0%', e5: '30.5%', mem0: '25.2%' }, leader: 'e5' },
-  { id: 'cat2', name: 'Temporal', count: 321, measures: 'Dates & ordering', scores: { hemispheric: '16.2%', e5: '17.4%', mem0: '5.3%' }, leader: 'e5' },
-  { id: 'cat3', name: 'Multi-hop', count: 96, measures: 'Cross-referencing facts', scores: { hemispheric: '17.7%', e5: '24.0%', mem0: '17.7%' }, leader: 'e5' },
-  { id: 'cat4', name: 'Open-domain', count: 841, measures: 'Fact + common sense', scores: { hemispheric: '41.6%', e5: '44.7%', mem0: '35.0%' }, leader: 'e5' },
-  { id: 'cat5', name: 'Adversarial', count: 446, measures: 'Knowing when to say "I don\u2019t know"', scores: { hemispheric: '5.6%', e5: '3.4%', mem0: '4.7%' }, leader: 'hemispheric' },
+  { id: 'cat1', name: 'Single-hop', count: 282, measures: 'Direct fact lookup', scores: { corvusmem: '23.0%', e5: '30.5%', mem0: '25.2%' }, leader: 'e5' },
+  { id: 'cat2', name: 'Temporal', count: 321, measures: 'Dates & ordering', scores: { corvusmem: '16.2%', e5: '17.4%', mem0: '5.3%' }, leader: 'e5' },
+  { id: 'cat3', name: 'Multi-hop', count: 96, measures: 'Cross-referencing facts', scores: { corvusmem: '17.7%', e5: '24.0%', mem0: '17.7%' }, leader: 'e5' },
+  { id: 'cat4', name: 'Open-domain', count: 841, measures: 'Fact + common sense', scores: { corvusmem: '41.6%', e5: '44.7%', mem0: '35.0%' }, leader: 'e5' },
+  { id: 'cat5', name: 'Adversarial', count: 446, measures: 'Knowing when to say "I don\u2019t know"', scores: { corvusmem: '5.6%', e5: '3.4%', mem0: '4.7%' }, leader: 'corvusmem' },
 ];
 
 const globalRow = {
-  scores: { hemispheric: '25.6%', e5: '28.0%', mem0: '21.1%' } as Record<EngineKey, string>,
+  scores: { corvusmem: '25.6%', e5: '28.0%', mem0: '21.1%' } as Record<EngineKey, string>,
   leader: 'e5' as EngineKey,
 };
 
 // Zep / Graphiti: a full local run was infeasible, so only a single-conversation
 // sample (conv-1) exists. Shown separately and clearly marked as partial.
 const zepSample = [
-  { label: 'Hemispheric', score: '28.2%' },
+  { label: 'Corvusmem', score: '28.2%' },
   { label: 'Embedding e5', score: '30.3%' },
   { label: 'mem0', score: '14.9%' },
   { label: 'Zep / Graphiti', score: '18.5%' },
@@ -59,9 +59,9 @@ const reproduceCmd =
 // Repo URL is a placeholder until confirmed (risk open in PLAN.md).
 const REPO_URL = '#';
 
-const pageTitle = 'Benchmarks — Hemispheric';
+const pageTitle = 'Benchmarks — Corvusmem';
 const pageDescription =
-  'LoCoMo benchmark, full dataset (1,986 questions). Hemispheric vs Embedding e5 vs mem0, judged by Qwen3-8B locally — a fair head-to-head, numbers unedited.';
+  'LoCoMo benchmark, full dataset (1,986 questions). Corvusmem vs Embedding e5 vs mem0, judged by Qwen3-8B locally — a fair head-to-head, numbers unedited.';
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>
@@ -165,7 +165,7 @@ const pageDescription =
 
       <p class="mt-5 text-sm leading-relaxed text-subtle">
         Bold marks the best score in each row. Embedding e5 leads most categories, but it
-        needs a vector database to run. Hemispheric is free, offline and server-less, wins
+        needs a vector database to run. Corvusmem is free, offline and server-less, wins
         outright on adversarial questions (knowing when to abstain), and nearly doubles mem0
         on temporal reasoning — see below.
       </p>
@@ -183,7 +183,7 @@ const pageDescription =
           <p class="font-mono text-5xl tabular-nums text-accent">
             <span data-count="16.2" data-dec="1" data-suffix="%">16.2%</span>
           </p>
-          <p class="mt-2 text-sm text-muted">Hemispheric</p>
+          <p class="mt-2 text-sm text-muted">Corvusmem</p>
         </div>
         <div>
           <p class="font-mono text-5xl tabular-nums text-foreground">
@@ -196,7 +196,7 @@ const pageDescription =
         </p>
       </div>
       <p class="mt-8 max-w-3xl leading-relaxed text-muted">
-        Hemispheric stores every fact with its explicit date and temporal context. That's why it almost doubles mem0 when a question depends on <em class="text-foreground not-italic">when</em> something happened — the kind of recall long-running agents need, not just <em class="text-foreground not-italic">what</em> happened.
+        Corvusmem stores every fact with its explicit date and temporal context. That's why it almost doubles mem0 when a question depends on <em class="text-foreground not-italic">when</em> something happened — the kind of recall long-running agents need, not just <em class="text-foreground not-italic">what</em> happened.
       </p>
     </div>
   </section>

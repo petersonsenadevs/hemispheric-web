@@ -9,8 +9,8 @@ const lang = getLang(Astro.currentLocale);
 const t = useTranslations(lang);
 
 // Enlaces reales del autor y del producto
-const REPO = 'https://github.com/petersonsenadevs/Hemispheric-claude-codex';
-const NPM = 'https://www.npmjs.com/package/hemispheric';
+const REPO = 'https://github.com/petersonsenadevs/Corvusmem-claude-codex';
+const NPM = 'https://www.npmjs.com/package/corvusmem';
 const LINKEDIN = 'https://www.linkedin.com/in/peterson-sena/';
 const GITHUB = 'https://github.com/petersonsenadevs';
 const COFFEE = 'https://buymeacoffee.com/petersonsena';
@@ -18,7 +18,7 @@ const COFFEE = 'https://buymeacoffee.com/petersonsena';
 const links = [
   { label: t('footer.docs'), href: '/docs' },
   { label: t('footer.benchmarks'), href: '/benchmarks' },
-  { label: t('footer.commercial'), href: `mailto:${CONTACT}?subject=Hemispheric%20commercial%20license` },
+  { label: t('footer.commercial'), href: `mailto:${CONTACT}?subject=Corvusmem%20commercial%20license` },
 ];
 
 const resources = [
@@ -37,7 +37,7 @@ const resources = [
       <Image src={crowMark} alt="" width={40} height={40} class="size-10" />
       <div class="flex flex-col gap-1">
         <span class="font-display text-lg leading-none text-foreground">
-          Hemispheric<span class="text-accent">.</span>
+          Corvusmem<span class="text-accent">.</span>
         </span>
         <span class="font-mono text-xs text-subtle">
           PolyForm Noncommercial · © {year}{' '}

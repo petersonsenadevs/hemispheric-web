@@ -5,7 +5,7 @@ import { getLang, useTranslations, localizedPath } from '../../i18n/utils';
 const lang = getLang(Astro.currentLocale);
 const t = useTranslations(lang);
 const rows = [
-  { engine: 'Hemispheric', overall: '25.6%', note: t('bench.note.hemi'), highlight: true },
+  { engine: 'Corvusmem', overall: '25.6%', note: t('bench.note.hemi'), highlight: true },
   { engine: 'Embedding e5', overall: '28.0%', note: t('bench.note.e5'), highlight: false },
   { engine: 'mem0', overall: '21.1%', note: t('bench.note.mem0'), highlight: false },
   { engine: 'Zep / Graphiti', overall: t('bench.running'), overallPending: true, note: t('bench.note.mem0'), highlight: false },
@@ -68,7 +68,7 @@ const rows = [
         <div class="flex flex-wrap items-end gap-x-10 gap-y-4">
           <div>
             <p class="font-mono text-3xl tabular-nums text-accent">16.2%</p>
-            <p class="mt-1 text-sm text-muted">Hemispheric</p>
+            <p class="mt-1 text-sm text-muted">Corvusmem</p>
           </div>
           <div>
             <p class="font-mono text-3xl tabular-nums text-foreground">5.3%</p>
