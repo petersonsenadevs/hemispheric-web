@@ -8,7 +8,7 @@ import { getLang, useTranslations } from '../../i18n/utils';
 const lang = getLang(Astro.currentLocale);
 const t = useTranslations(lang);
 // Install command shown in the hero. Exact command is still a placeholder (D-008).
-const INSTALL_CMD = 'hemispheric install --claude';
+const INSTALL_CMD = 'npx hemispheric install --claude';
 ---
 
 <section
