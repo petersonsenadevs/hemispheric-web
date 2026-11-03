@@ -3,7 +3,10 @@ import { Image } from 'astro:assets';
 import crowBg from '../../assets/brand/cuervo-a-guardian.png';
 import CortexEmbed from './CortexEmbed.astro';
 import CopyCommand from '../CopyCommand.astro';
+import { getLang, useTranslations } from '../../i18n/utils';
 
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
 // Install command shown in the hero. Exact command is still a placeholder (D-008).
 const INSTALL_CMD = 'hemispheric install --claude';
 ---
@@ -21,18 +24,17 @@ const INSTALL_CMD = 'hemispheric install --claude';
   />
   <div class="flex flex-col items-start">
     <p class="mb-7 font-mono text-xs tracking-[0.12em] text-accent uppercase">
-      Free for personal use · Claude Code · Codex
+      {t('hero.eyebrow')}
     </p>
 
     <h1
       class="mb-6 font-display text-5xl leading-[1.06] tracking-tight text-foreground sm:text-6xl lg:text-7xl"
     >
-      Memory for<br />your <em class="text-muted italic">agent.</em>
+      {t('hero.title.a')}<br />{t('hero.title.b')} <em class="text-muted italic">{t('hero.title.em')}</em>
     </h1>
 
     <p class="mb-10 max-w-[44ch] text-lg leading-relaxed text-muted">
-      Free. Offline. Zero dependencies. Hooks into Claude Code and Codex and
-      keeps what your agent learns — across sessions, across projects.
+      {t('hero.body')}
     </p>
 
     <div class="flex flex-col items-start gap-4">
@@ -44,7 +46,7 @@ const INSTALL_CMD = 'hemispheric install --claude';
           <path d="M8 2v9M4 7l4 4 4-4"></path>
           <line x1="2" y1="14" x2="14" y2="14"></line>
         </svg>
-        Install for Claude Code
+        {t('hero.install')}
       </a>
 
       <CopyCommand cmd={INSTALL_CMD} />
@@ -53,7 +55,7 @@ const INSTALL_CMD = 'hemispheric install --claude';
         href="#demo"
         class="inline-flex min-h-11 items-center text-sm text-muted transition-colors hover:text-foreground"
       >
-        See the demo ↓
+        {t('hero.demo')}
       </a>
     </div>
   </div>

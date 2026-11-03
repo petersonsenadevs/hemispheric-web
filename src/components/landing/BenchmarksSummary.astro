@@ -1,11 +1,14 @@
 ---
 // Condensed benchmarks for the landing. Full table + methodology live on /benchmarks (D-013).
 // Numbers are real (LoCoMo, 1,986 questions, Qwen3-8B local). Zep still running (F8-T9).
+import { getLang, useTranslations, localizedPath } from '../../i18n/utils';
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
 const rows = [
-  { engine: 'Hemispheric', overall: '25.6%', note: 'free · offline · no server', highlight: true },
-  { engine: 'Embedding e5', overall: '28.0%', note: 'free · vector DB required', highlight: false },
-  { engine: 'mem0', overall: '21.1%', note: 'paid · cloud', highlight: false },
-  { engine: 'Zep / Graphiti', overall: 'running', overallPending: true, note: 'paid · cloud', highlight: false },
+  { engine: 'Hemispheric', overall: '25.6%', note: t('bench.note.hemi'), highlight: true },
+  { engine: 'Embedding e5', overall: '28.0%', note: t('bench.note.e5'), highlight: false },
+  { engine: 'mem0', overall: '21.1%', note: t('bench.note.mem0'), highlight: false },
+  { engine: 'Zep / Graphiti', overall: t('bench.running'), overallPending: true, note: t('bench.note.mem0'), highlight: false },
 ];
 ---
 
@@ -13,25 +16,23 @@ const rows = [
   <div class="mx-auto max-w-[1600px] px-6 py-24 sm:px-8 lg:px-12">
     <header class="mx-auto mb-12 max-w-3xl text-center">
       <h2 class="font-display text-4xl leading-tight text-foreground sm:text-5xl">
-        The numbers, unedited.
+        {t('bench.title')}
       </h2>
       <p class="mt-5 text-lg leading-relaxed text-muted">
-        Measured with Qwen3-8B running locally as both respondent and judge — the
-        same ruler for every engine, so the head-to-head is fair. Not comparable
-        to mem0/Zep's official leaderboards, which use GPT-4o.
+        {t('bench.body')}
       </p>
     </header>
 
     <div class="mx-auto max-w-3xl">
       <p class="mb-3 font-mono text-xs tracking-wider text-subtle uppercase">
-        LoCoMo · 1,986 questions · full dataset
+        {t('bench.dataset')}
       </p>
       <table class="w-full border-collapse text-left">
         <thead>
           <tr class="border-b border-border">
-            <th scope="col" class="py-3 text-sm font-medium text-muted">Engine</th>
-            <th scope="col" class="py-3 text-right text-sm font-medium text-muted">Overall</th>
-            <th scope="col" class="hidden py-3 pl-6 text-sm font-medium text-muted sm:table-cell">Notes</th>
+            <th scope="col" class="py-3 text-sm font-medium text-muted">{t('bench.th.engine')}</th>
+            <th scope="col" class="py-3 text-right text-sm font-medium text-muted">{t('bench.th.overall')}</th>
+            <th scope="col" class="hidden py-3 pl-6 text-sm font-medium text-muted sm:table-cell">{t('bench.th.notes')}</th>
           </tr>
         </thead>
         <tbody>
@@ -62,7 +63,7 @@ const rows = [
       <!-- Temporal highlight -->
       <div class="mt-10 rounded-lg border border-accent/30 bg-background p-6">
         <p class="mb-4 font-mono text-xs tracking-wider text-accent uppercase">
-          Temporal reasoning (cat2)
+          {t('bench.temporal')}
         </p>
         <div class="flex flex-wrap items-end gap-x-10 gap-y-4">
           <div>
@@ -78,17 +79,14 @@ const rows = [
       </div>
 
       <p class="mt-8 leading-relaxed text-muted">
-        Hemispheric stores facts with explicit date and temporal context. That's
-        why it almost doubles mem0 on temporal recall — and why it matters for
-        long-running agents that need to remember <em class="text-foreground not-italic">when</em>,
-        not just <em class="text-foreground not-italic">what</em>.
+        {t('bench.temporal.body')}
       </p>
 
       <a
         href="/benchmarks"
         class="mt-8 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-accent transition-opacity hover:opacity-80"
       >
-        See full benchmarks
+        {t('bench.full')}
         <svg class="size-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M3 8h10M9 4l4 4-4 4"></path>
         </svg>

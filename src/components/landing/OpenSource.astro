@@ -4,19 +4,19 @@
 // REPO_URL sigue sin repo publico: el boton de GitHub solo se muestra si algun dia hay URL real.
 const REPO_URL = '#';
 const CONTACT = 'petersonsena24@gmail.com';
-const badges = ['PolyForm Noncommercial', 'Commercial license available', 'v0.x · early'];
+import { getLang, useTranslations } from '../../i18n/utils';
+const t = useTranslations(getLang(Astro.currentLocale));
+const badges = [t('open.badge1'), t('open.badge2'), t('open.badge3')];
 ---
 
 <section class="scroll-mt-16 border-t border-border bg-surface">
   <div class="mx-auto max-w-[1600px] px-6 py-24 sm:px-8 lg:px-12">
     <div class="mx-auto flex max-w-3xl flex-col items-center text-center">
       <h2 class="font-display text-4xl leading-tight text-foreground sm:text-5xl">
-        Free for you. Fair for everyone.
+        {t('open.title')}
       </h2>
       <p class="mt-5 text-lg leading-relaxed text-muted">
-        Free for personal and non-commercial use under PolyForm Noncommercial.
-        Using it inside a company or a paid product needs a commercial license.
-        Zero telemetry — your memory lives in local files you own.
+        {t('open.body')}
       </p>
 
       <div class="mt-8 flex flex-wrap items-center justify-center gap-2">
@@ -33,7 +33,7 @@ const badges = ['PolyForm Noncommercial', 'Commercial license available', 'v0.x 
         href={`mailto:${CONTACT}?subject=Hemispheric%20commercial%20license`}
         class="mt-8 inline-flex min-h-11 items-center gap-2 rounded-md border border-border-strong px-6 text-sm font-semibold text-foreground transition-colors hover:bg-surface-raised"
       >
-        Get a commercial license
+        {t('open.cta')}
       </a>
 
       {

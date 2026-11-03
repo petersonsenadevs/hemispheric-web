@@ -2,13 +2,16 @@
 // Licencia real (devlog 207): PolyForm Noncommercial + comercial de pago, (C) 2026 Peterson Sena.
 import { Image } from 'astro:assets';
 import crowMark from '../assets/brand/favicon-cuervo.png';
+import { getLang, useTranslations, localizedPath } from '../i18n/utils';
 const CONTACT = 'petersonsena24@gmail.com';
 const year = new Date().getFullYear();
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
 
 const links = [
-  { label: 'Docs', href: '/docs' },
-  { label: 'Benchmarks', href: '/benchmarks' },
-  { label: 'Commercial license', href: `mailto:${CONTACT}?subject=Hemispheric%20commercial%20license` },
+  { label: t('footer.docs'), href: '/docs' },
+  { label: t('footer.benchmarks'), href: '/benchmarks' },
+  { label: t('footer.commercial'), href: `mailto:${CONTACT}?subject=Hemispheric%20commercial%20license` },
 ];
 ---
 

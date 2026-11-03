@@ -6,6 +6,11 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://gethemispheric.com',
   output: 'static',
+  i18n: {
+    locales: ['en', 'es'],
+    defaultLocale: 'en',
+    routing: { prefixDefaultLocale: false },
+  },
   integrations: [react()],
   vite: {
     plugins: [tailwindcss()],

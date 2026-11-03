@@ -1,49 +1,25 @@
 ---
 // "Meet the Cortex": slides horizontales que explican el cerebro (F12-T8). Sin dependencias: scroll-snap + un poco
-// de JS para botones, puntos, teclado y estado activo. Respeta prefers-reduced-motion. Tokens del design system.
-const slides = [
-  {
-    eyebrow: 'The brain',
-    title: 'Your memory, alive.',
-    body: 'The Cortex draws everything your agent knows as a living brain of points — one glow per fact. Not a list, not a database dump: the shape of what it remembers.',
-    accent: '01',
-  },
-  {
-    eyebrow: 'Five zones',
-    title: 'Every memory in its place.',
-    body: 'Decisions, goals, project facts, who you are, what was lived — each kind of memory settles in its own region of the brain, by name and meaning.',
-    accent: '02',
-  },
-  {
-    eyebrow: 'Search',
-    title: 'It fires what you ask.',
-    body: 'Type a query and only the matching fact and its connections light up — the rest dims, like a neuron firing. You see the recall happen, you do not guess it.',
-    accent: '03',
-  },
-  {
-    eyebrow: 'Thinking',
-    title: 'It shows how it thinks.',
-    body: 'The zones the agent consulted recently glow brighter. The Cortex is not a static picture — it is a readout of what the memory actually used.',
-    accent: '04',
-  },
-  {
-    eyebrow: 'Yours',
-    title: 'Local, private, offline.',
-    body: 'The whole brain renders from a single local file, with no network and no account. Your memory never leaves your machine.',
-    accent: '05',
-  },
-];
+// de JS para botones, puntos, teclado y estado activo. Respeta prefers-reduced-motion. Tokens del design system. i18n.
+import { getLang, useTranslations } from '../../i18n/utils';
+const t = useTranslations(getLang(Astro.currentLocale));
+const slides = [1, 2, 3, 4, 5].map((n) => ({
+  eyebrow: t(`cortex.s${n}.eyebrow` as any),
+  title: t(`cortex.s${n}.title` as any),
+  body: t(`cortex.s${n}.body` as any),
+  accent: '0' + n,
+}));
 ---
 
 <section id="cortex" class="scroll-mt-16 border-t border-border">
   <div class="mx-auto max-w-[1600px] px-6 py-24 sm:px-8 lg:px-12">
     <header class="mx-auto mb-12 max-w-3xl text-center">
-      <p class="mb-3 font-mono text-sm tracking-widest text-accent uppercase">Meet the Cortex</p>
+      <p class="mb-3 font-mono text-sm tracking-widest text-accent uppercase">{t('cortex.eyebrow')}</p>
       <h2 class="font-display text-4xl leading-tight text-foreground sm:text-5xl">
-        A brain you can read.
+        {t('cortex.title')}
       </h2>
       <p class="mt-5 text-lg leading-relaxed text-muted">
-        The Cortex is the memory, drawn. Swipe through what makes it more than a database.
+        {t('cortex.body')}
       </p>
     </header>
 
@@ -51,7 +27,7 @@ const slides = [
       class="cx-carousel relative"
       role="region"
       aria-roledescription="carousel"
-      aria-label="Meet the Cortex"
+      aria-label={t('cortex.eyebrow')}
     >
       <ul class="cx-track flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4" tabindex="0">
         {
@@ -76,7 +52,7 @@ const slides = [
       </ul>
 
       <div class="mt-6 flex items-center justify-between gap-4">
-        <div class="cx-dots flex gap-2" role="tablist" aria-label="Choose slide">
+        <div class="cx-dots flex gap-2" role="tablist" aria-label={t('cortex.dot')}>
           {
             slides.map((_, i) => (
               <button
@@ -84,7 +60,7 @@ const slides = [
                 class="cx-dot size-2.5 rounded-full border border-border-strong transition-colors"
                 data-i={i}
                 role="tab"
-                aria-label={`Go to slide ${i + 1}`}
+                aria-label={`${t('cortex.dot')} ${i + 1}`}
                 aria-selected={i === 0 ? 'true' : 'false'}
               />
             ))
@@ -94,7 +70,7 @@ const slides = [
           <button
             type="button"
             class="cx-prev grid size-11 place-items-center rounded-md border border-border-strong text-foreground transition-colors hover:bg-surface-raised disabled:opacity-40"
-            aria-label="Previous slide"
+            aria-label={t('cortex.prev')}
           >
             <svg class="size-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M10 3L5 8l5 5" />
@@ -103,7 +79,7 @@ const slides = [
           <button
             type="button"
             class="cx-next grid size-11 place-items-center rounded-md border border-border-strong text-foreground transition-colors hover:bg-surface-raised disabled:opacity-40"
-            aria-label="Next slide"
+            aria-label={t('cortex.next')}
           >
             <svg class="size-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M6 3l5 5-5 5" />

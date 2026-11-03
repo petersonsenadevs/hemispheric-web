@@ -2,17 +2,26 @@
 import { Image } from 'astro:assets';
 import crowMark from '../assets/brand/favicon-cuervo.png';
 import ThemeToggle from './ThemeToggle.astro';
+import { getLang, useTranslations, localizedPath } from '../i18n/utils';
 
-// GitHub repo URL is still a placeholder (risk logged in PLAN.md). Wire the real
-// one before launch.
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+const home = localizedPath('/', lang);
+// GitHub repo URL is still a placeholder (risk logged in PLAN.md). Wire the real one before launch.
 const REPO_URL = '#';
 
+// El landing es bilingue (/ y /es/). Docs y benchmarks son solo-ingles por ahora: sus enlaces NO se localizan.
 const links = [
-  { label: 'Demo', href: '/#demo' },
-  { label: 'Cortex', href: '/#cortex' },
-  { label: 'Benchmarks', href: '/benchmarks' },
-  { label: 'Docs', href: '/docs' },
+  { key: 'nav.demo', href: `${home}#demo` },
+  { key: 'nav.cortex', href: `${home}#cortex` },
+  { key: 'nav.benchmarks', href: '/benchmarks' },
+  { key: 'nav.docs', href: '/docs' },
 ];
+
+// Selector de idioma: lleva al home del otro idioma (lo bilingue es el landing).
+const otherLang = lang === 'es' ? 'en' : 'es';
+const switchHref = localizedPath('/', otherLang);
+const switchLabel = otherLang.toUpperCase();
 ---
 
 <header
@@ -21,9 +30,9 @@ const links = [
 >
   <nav class="mx-auto flex h-full max-w-[1600px] items-center justify-between px-6 sm:px-8 lg:px-12">
     <a
-      href="/"
+      href={home}
       class="flex h-full items-center gap-2 font-display text-xl leading-none text-foreground"
-      aria-label="Hemispheric, home"
+      aria-label={t('nav.home')}
     >
       <Image src={crowMark} alt="" width={28} height={28} class="size-7" />
       <span>Hemispheric<span class="text-accent">.</span></span>
@@ -37,10 +46,17 @@ const links = [
             href={link.href}
             class="flex min-h-11 items-center rounded-md px-3 text-sm text-muted transition-colors hover:text-foreground"
           >
-            {link.label}
+            {t(link.key)}
           </a>
         ))
       }
+      <a
+        href={switchHref}
+        class="flex min-h-11 items-center rounded-md px-3 font-mono text-xs text-muted transition-colors hover:text-foreground"
+        aria-label={`Switch to ${switchLabel}`}
+      >
+        {switchLabel}
+      </a>
       {
         REPO_URL !== '#' && (
           <a
@@ -95,11 +111,19 @@ const links = [
               href={link.href}
               class="flex min-h-11 items-center rounded-md px-3 text-base text-foreground transition-colors hover:bg-surface-raised"
             >
-              {link.label}
+              {t(link.key)}
             </a>
           </li>
         ))
       }
+      <li>
+        <a
+          href={switchHref}
+          class="flex min-h-11 items-center rounded-md px-3 font-mono text-sm text-muted transition-colors hover:bg-surface-raised"
+        >
+          {switchLabel}
+        </a>
+      </li>
       {
         REPO_URL !== '#' && (
           <li>

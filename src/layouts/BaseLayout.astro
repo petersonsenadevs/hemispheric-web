@@ -10,17 +10,28 @@ interface Props {
   description?: string;
   /** When true the main content sits under the fixed nav (hero paints behind it). */
   heroOverlay?: boolean;
+  /** True on pages that have a Spanish version (the landing); emits hreflang alternates. */
+  hasEs?: boolean;
 }
 
 const {
   title = 'Hemispheric — Memory for your agent',
   description = 'Free, offline, deterministic memory for your coding agent. No server, no embeddings, no API key. Works where you already work: Claude Code, Codex and more.',
   heroOverlay = false,
+  hasEs = false,
 } = Astro.props;
+
+const lang = Astro.currentLocale ?? 'en';
+const site = (Astro.site?.href ?? 'https://gethemispheric.com/').replace(/\/$/, '');
+const basePath = Astro.url.pathname.replace(/^\/es(?=\/|$)/, '') || '/';
+const enUrl = site + basePath;
+const esUrl = site + (basePath === '/' ? '/es/' : '/es' + basePath);
+const canonical = site + Astro.url.pathname;
+const ogImage = `${site}/og-image.png`;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -29,12 +40,17 @@ const {
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="color-scheme" content="dark light" />
+    <link rel="canonical" href={canonical} />
+    {hasEs && <link rel="alternate" hreflang="en" href={enUrl} />}
+    {hasEs && <link rel="alternate" hreflang="es" href={esUrl} />}
+    {hasEs && <link rel="alternate" hreflang="x-default" href={enUrl} />}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="/og-image.png" />
+    <meta name="twitter:image" content={ogImage} />
     {/* Anti-flash: apply the saved theme before first paint. Default is dark. */}
     <script is:inline>
       if (localStorage.getItem('theme') === 'light') {

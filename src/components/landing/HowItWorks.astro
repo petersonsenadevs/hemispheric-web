@@ -3,25 +3,25 @@
 // (no identical cards — D-010). SVG colors use tokens so they adapt to light.
 // Al inicio, el grafo interactivo (Cortex.tsx) como ilustracion del grafo de memoria (reubicado desde el hero).
 import Cortex from '../cortex/Cortex.tsx';
+import { getLang, useTranslations } from '../../i18n/utils';
+const t = useTranslations(getLang(Astro.currentLocale));
 ---
 
 <section id="how" class="scroll-mt-16">
   <div class="mx-auto max-w-[1600px] px-6 py-24 sm:px-8 lg:px-12">
     <header class="mx-auto mb-12 max-w-3xl text-center">
       <h2 class="font-display text-4xl leading-tight text-foreground sm:text-5xl">
-        How it works.
+        {t('how.title')}
       </h2>
       <p class="mt-5 text-lg leading-relaxed text-muted">
-        No embeddings, no vector database, no API calls. The Cortex runs entirely
-        on your machine, stores facts in a local graph, and retrieves them with
-        two-hop activation — in milliseconds.
+        {t('how.body')}
       </p>
     </header>
 
     <div class="mx-auto mb-20 max-w-2xl lg:mb-28">
       <Cortex client:visible showFact={false} />
       <p class="mt-4 text-center font-mono text-xs tracking-wide text-subtle">
-        The memory graph — hover a node to follow its links
+        {t('how.graph')}
       </p>
     </div>
 
@@ -29,15 +29,12 @@ import Cortex from '../cortex/Cortex.tsx';
       <!-- Step — Capture -->
       <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
         <div>
-          <p class="mb-3 font-mono text-sm tracking-widest text-accent uppercase">Capture</p>
+          <p class="mb-3 font-mono text-sm tracking-widest text-accent uppercase">{t('how.capture.eyebrow')}</p>
           <h3 class="mb-4 font-display text-3xl leading-tight text-foreground">
-            Your agent talks.<br />The hook listens.
+            {t('how.capture.title.a')}<br />{t('how.capture.title.b')}
           </h3>
           <p class="max-w-prose leading-relaxed text-muted">
-            Hemispheric installs as a <code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">PostToolUse</code>
-            hook in Claude Code. After every tool call, it extracts facts from the
-            exchange — file paths, decisions, project context — and writes them to
-            the local Cortex graph.
+            {t('how.capture.body')}
           </p>
         </div>
         <div class="flex justify-center">
@@ -65,14 +62,12 @@ import Cortex from '../cortex/Cortex.tsx';
       <!-- Step — Store (reversed on desktop) -->
       <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
         <div class="lg:order-2">
-          <p class="mb-3 font-mono text-sm tracking-widest text-accent uppercase">Store</p>
+          <p class="mb-3 font-mono text-sm tracking-widest text-accent uppercase">{t('how.store.eyebrow')}</p>
           <h3 class="mb-4 font-display text-3xl leading-tight text-foreground">
-            Facts, not vectors.<br />Dates, not embeddings.
+            {t('how.store.title.a')}<br />{t('how.store.title.b')}
           </h3>
           <p class="max-w-prose leading-relaxed text-muted">
-            Each fact lands in a lightweight JSON graph with its entity name, date
-            and temporal context. No server, no cloud, no API key. The entire
-            Cortex is a single file you own.
+            {t('how.store.body')}
           </p>
         </div>
         <div class="flex justify-center lg:order-1">
@@ -108,14 +103,12 @@ import Cortex from '../cortex/Cortex.tsx';
       <!-- Step — Retrieve -->
       <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
         <div>
-          <p class="mb-3 font-mono text-sm tracking-widest text-accent uppercase">Retrieve</p>
+          <p class="mb-3 font-mono text-sm tracking-widest text-accent uppercase">{t('how.retrieve.eyebrow')}</p>
           <h3 class="mb-4 font-display text-3xl leading-tight text-foreground">
-            Two-hop activation.<br />No semantic search needed.
+            {t('how.retrieve.title.a')}<br />{t('how.retrieve.title.b')}
           </h3>
           <p class="max-w-prose leading-relaxed text-muted">
-            When your agent needs context, the Cortex activates the matching node
-            and spreads one hop out — surfacing related facts without a vector DB or
-            embedding model. Deterministic. Offline. Instant.
+            {t('how.retrieve.body')}
           </p>
         </div>
         <div class="flex justify-center">

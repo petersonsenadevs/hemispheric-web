@@ -1,27 +1,25 @@
 ---
 import CortexEmbed from './CortexEmbed.astro';
+import { getLang, useTranslations } from '../../i18n/utils';
+const t = useTranslations(getLang(Astro.currentLocale));
 ---
 
 <section id="demo" class="scroll-mt-16 border-y border-border bg-surface">
   <div class="mx-auto max-w-[1600px] px-6 py-24 sm:px-8 lg:px-12">
     <div class="mx-auto mb-14 max-w-3xl text-center">
       <h2 class="font-display text-4xl leading-tight text-foreground sm:text-5xl">
-        How it stores and recalls what matters.
+        {t('demo.title')}
       </h2>
       <p class="mt-5 text-lg leading-relaxed text-muted">
-        Every fact your agent saves is a node. The engine links them by name,
-        date and relevance, and recalls them with two-hop activation — no
-        embeddings, no server, instant.
+        {t('demo.body')}
       </p>
       <p class="mt-4 text-base leading-relaxed text-subtle">
-        Below is the real Cortex, not a picture — a sample project's live memory.
-        Switch to 3D and drag to spin the brain, or type a question in the panel
-        and watch the matching memory light up while the rest dims.
+        {t('demo.hint')}
       </p>
     </div>
     <CortexEmbed />
     <p class="mx-auto mt-5 max-w-3xl text-center font-mono text-xs tracking-wide text-subtle">
-      Live demo · sample data · runs fully in your browser, no server
+      {t('demo.caption')}
     </p>
   </div>
 </section>
