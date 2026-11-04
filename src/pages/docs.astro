@@ -166,6 +166,20 @@ const pageDescription =
           </li>
         </ul>
       </div>
+      <div class="mt-8 max-w-3xl rounded-2xl border border-border bg-surface p-5 min-w-0">
+        <p class="leading-relaxed text-muted">
+          <strong class="font-semibold text-foreground">The mode only decides where Corvus turns on</strong> — not where
+          memory lives. A project's facts always land in that repo's
+          <code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">.corvusmem/</code>,
+          with either install — so you never need a per-project install just to keep memory in the repo.
+          <strong class="font-semibold text-foreground"> For a team:</strong> commit
+          <code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">.corvusmem/</code>
+          (the shared memory) and, with a per-project install,
+          <code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">.claude/settings.json</code>
+          so teammates get the hooks the moment they clone. Never commit
+          <code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">~/.config/corvusmem/</code> — that's your private memory.
+        </p>
+      </div>
       <p class="mt-6 font-mono text-xs tracking-wide text-subtle">
         Works with Claude Code and Codex · the exact command for your host is shown during setup
       </p>
