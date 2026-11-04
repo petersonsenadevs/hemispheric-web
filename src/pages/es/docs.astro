@@ -1,0 +1,430 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CopyCommand from '../../components/CopyCommand.astro';
+import { Image } from 'astro:assets';
+import crowDocs from '../../assets/brand/cuervo-b-memoria.png';
+
+const CONTACT = 'petersonsena24@gmail.com';
+
+const toc = [
+  { id: 'what', label: 'Qué es' },
+  { id: 'install', label: 'Instalación' },
+  { id: 'use', label: 'Cómo usarlo' },
+  { id: 'how', label: 'Cómo funciona' },
+  { id: 'memory', label: 'La memoria' },
+  { id: 'teams', label: 'Equipos' },
+  { id: 'cortex', label: 'El Cortex' },
+  { id: 'hosts', label: 'Anfitriones' },
+  { id: 'license', label: 'Licencia' },
+  { id: 'faq', label: 'Preguntas' },
+];
+
+const faqs = [
+  {
+    q: '¿Mis datos salen alguna vez de mi máquina?',
+    a: 'No. La memoria es un archivo local que es tuyo. Sin servidor, sin nube, sin API key, sin telemetría. Corvusmem funciona entero sin red.',
+  },
+  {
+    q: '¿En qué se diferencia de mem0 o Zep?',
+    a: 'Esos guardan tu memoria en su nube detrás de una API. Corvusmem lo mantiene todo local y determinista — misma entrada, mismo resultado, sin embeddings ni base de datos vectorial.',
+  },
+  {
+    q: '¿Necesito un modelo de embeddings o una base vectorial?',
+    a: 'No. Los hechos se guardan en un grafo local ligero y se recuperan por nombre, fecha y relevancia con activación a dos saltos. Sin embeddings, sin base vectorial.',
+  },
+  {
+    q: '¿Con qué agentes funciona?',
+    a: 'Claude Code y Codex hoy, más una CLI independiente. El motor detecta su anfitrión y se adapta; la memoria es la misma por debajo.',
+  },
+  {
+    q: '¿Qué pasa con un equipo en el mismo proyecto?',
+    a: 'Los hechos del proyecto (stack, decisiones) son comunes a todos. Los hechos personales (tus preferencias, quién eres) se guardan por autor, así que dos compañeros nunca se pisan. El autor se lee de tu email de git, sin configurar nada y sin red.',
+  },
+  {
+    q: '¿Es gratis?',
+    a: 'Gratis para uso personal y no comercial bajo PolyForm Noncommercial. Usarlo dentro de una empresa o un producto de pago necesita una licencia comercial.',
+  },
+];
+
+const pageTitle = 'Docs — Corvusmem';
+const pageDescription =
+  'Cómo funciona Corvusmem: memoria local, determinista y offline para tu agente de código. Instalación, el Cortex, anfitriones (Claude Code, Codex) y licencia.';
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} hasEs>
+  <!-- Cabecera -->
+  <section class="border-b border-border">
+    <div class="mx-auto grid max-w-5xl items-center gap-10 px-6 py-20 sm:px-8 lg:grid-cols-[1.4fr_1fr] lg:px-12 lg:py-28">
+      <div>
+      <p class="font-mono text-xs tracking-wider text-accent uppercase">Documentación</p>
+      <h1 class="mt-4 font-display text-5xl leading-[1.05] text-foreground sm:text-6xl">
+        Una memoria que tu agente conserva.
+      </h1>
+      <p class="mt-6 max-w-3xl text-lg leading-relaxed text-muted">
+        Corvusmem le da a tu agente de código una memoria de verdad — local, determinista y offline.
+        Se engancha a Claude Code y Codex, escribe lo que tu agente aprende en un archivo que es tuyo, y
+        te lo recuerda sesión tras sesión y proyecto tras proyecto. Sin embeddings, sin servidor, sin API key.
+      </p>
+      <nav class="mt-8 flex flex-wrap gap-2" aria-label="En esta página">
+        {
+          toc.map((t) => (
+            <a
+              href={`#${t.id}`}
+              class="rounded-full border border-border px-3 py-1 font-mono text-xs text-muted transition-colors hover:border-border-strong hover:text-foreground"
+            >
+              {t.label}
+            </a>
+          ))
+        }
+      </nav>
+      </div>
+      <div class="hidden justify-self-center lg:block">
+        <Image
+          src={crowDocs}
+          alt="El cuervo de Corvusmem, arte de datos, enroscado alrededor de un recuerdo guardado"
+          width={420}
+          height={420}
+          class="w-full max-w-[360px]"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Qué es -->
+  <section id="what" class="scroll-mt-20 border-b border-border">
+    <div class="mx-auto max-w-5xl px-6 py-16 sm:px-8 lg:px-12" data-reveal>
+      <h2 class="font-display text-3xl text-foreground sm:text-4xl">Qué es</h2>
+      <div class="mt-5 max-w-3xl space-y-4 text-lg leading-relaxed text-muted">
+        <p>
+          Tu agente, con memoria propia — y que nunca sale de tu máquina. Los agentes se olvidan de todo
+          entre sesiones; Corvusmem es la memoria que te recuerda a ti y a tus proyectos, en un único
+          archivo local que tú controlas.
+        </p>
+        <p>
+          Es <strong class="font-semibold text-foreground">determinista</strong> (misma entrada, mismo
+          resultado), <strong class="font-semibold text-foreground">offline</strong> (sin red) y
+          <strong class="font-semibold text-foreground">sin dependencias</strong>. A diferencia de las
+          memorias en la nube, la tuya sigue siendo tuya.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Instalación -->
+  <section id="install" class="scroll-mt-20 border-b border-border">
+    <div class="mx-auto max-w-5xl px-6 py-16 sm:px-8 lg:px-12" data-reveal>
+      <h2 class="font-display text-3xl text-foreground sm:text-4xl">Instalación</h2>
+      <p class="mt-5 max-w-3xl text-lg leading-relaxed text-muted">
+        Un comando. Sin cuenta, sin nube, sin API key — el hook escribe en un archivo local que es tuyo.
+        Elige dónde vive la memoria: solo <strong class="font-semibold text-foreground">este proyecto</strong>,
+        o <strong class="font-semibold text-foreground">todos tus proyectos</strong> a la vez.
+      </p>
+
+      <div class="mt-8 grid gap-4 sm:grid-cols-2">
+        <div class="rounded-2xl border border-border bg-surface p-6 min-w-0">
+          <p class="font-mono text-sm tracking-widest text-accent uppercase">Este proyecto</p>
+          <h3 class="mt-2 font-display text-xl text-foreground">Por proyecto</h3>
+          <p class="mt-3 leading-relaxed text-muted">
+            Córrelo dentro de la carpeta del proyecto. Los hooks se registran en
+            <code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">./.claude/settings.json</code>
+            y la memoria del proyecto vive en
+            <code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">.corvusmem/</code>.
+          </p>
+          <div class="mt-4"><CopyCommand cmd="npx corvusmem install --claude" /></div>
+        </div>
+        <div class="rounded-2xl border border-border bg-surface p-6 min-w-0">
+          <p class="font-mono text-sm tracking-widest text-accent uppercase">Todos los proyectos</p>
+          <h3 class="mt-2 font-display text-xl text-foreground">Global</h3>
+          <p class="mt-3 leading-relaxed text-muted">
+            Añade <code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">--global</code>
+            para registrar los hooks en tu home
+            (<code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">~/.claude/settings.json</code>),
+            y así cada proyecto tiene memoria. Tu memoria personal vive en
+            <code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">~/.config/corvusmem/</code>.
+          </p>
+          <div class="mt-4"><CopyCommand cmd="npx corvusmem install --claude --global" /></div>
+        </div>
+      </div>
+
+      <div class="mt-8 max-w-3xl">
+        <p class="font-mono text-sm tracking-widest text-accent uppercase">Más opciones</p>
+        <ul class="mt-3 space-y-2 leading-relaxed text-muted">
+          <li>
+            <code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">--codex</code>
+            — instala para Codex (vía plugin); la misma memoria por debajo.
+          </li>
+          <li>
+            <code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">--dry-run</code>
+            — enseña exactamente lo que haría, sin escribir nada.
+          </li>
+          <li>
+            <code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">npx corvusmem uninstall</code>
+            — quita los hooks y deja tu memoria y todo lo demás intacto.
+          </li>
+        </ul>
+      </div>
+      <p class="mt-6 font-mono text-xs tracking-wide text-subtle">
+        Funciona con Claude Code y Codex · el comando exacto para tu anfitrión se muestra durante la instalación
+      </p>
+    </div>
+  </section>
+
+  <!-- Cómo usarlo -->
+  <section id="use" class="scroll-mt-20 border-b border-border bg-surface">
+    <div class="mx-auto max-w-5xl px-6 py-16 sm:px-8 lg:px-12" data-reveal>
+      <h2 class="font-display text-3xl text-foreground sm:text-4xl">Cómo usarlo</h2>
+      <p class="mt-5 max-w-3xl text-lg leading-relaxed text-muted">
+        Una vez instalado, tu agente captura y recuerda la memoria solo — no tienes que hacer nada.
+        Cuando quieras <strong class="font-semibold text-foreground">verla</strong> o
+        <strong class="font-semibold text-foreground">dirigirla</strong>, estos comandos funcionan desde cualquier proyecto:
+      </p>
+
+      <div class="mt-8 max-w-3xl space-y-7">
+        <div>
+          <h3 class="font-display text-xl text-foreground">Ver tu memoria — el Cortex</h3>
+          <p class="mt-2 leading-relaxed text-muted">
+            Dibuja toda tu memoria como un cerebro HTML local y te imprime la ruta. Ábrelo en el navegador — funciona sin red.
+          </p>
+          <div class="mt-3"><CopyCommand cmd="npx corvusmem --cortex" /></div>
+        </div>
+
+        <div>
+          <h3 class="font-display text-xl text-foreground">Preguntar qué ya sabe</h3>
+          <p class="mt-2 leading-relaxed text-muted">El mismo recuerdo que recibe tu agente, desde la terminal.</p>
+          <div class="mt-3"><CopyCommand cmd='npx corvusmem --recall "stripe webhook"' /></div>
+        </div>
+
+        <div>
+          <h3 class="font-display text-xl text-foreground">Listar todo, u olvidar un hecho</h3>
+          <div class="mt-3 space-y-2">
+            <CopyCommand cmd="npx corvusmem --list" />
+            <CopyCommand cmd="npx corvusmem --forget <id>" />
+          </div>
+        </div>
+
+        <div>
+          <h3 class="font-display text-xl text-foreground">Añadir un hecho tú mismo</h3>
+          <p class="mt-2 leading-relaxed text-muted">
+            Rara vez hace falta — lo hace el agente — pero puedes. Usa
+            <code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">--scope user</code>
+            para guardarlo en tu memoria personal en vez de la del proyecto.
+          </p>
+          <div class="mt-3"><CopyCommand cmd='npx corvusmem --save --dimension project.stack --value "Astro + Tailwind" --scope project' /></div>
+        </div>
+      </div>
+
+      <p class="mt-7 max-w-3xl leading-relaxed text-muted">
+        Los flags están en inglés con alias en español
+        (<code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">--save</code>/<code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">--guardar</code>,
+        <code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">--recall</code>/<code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">--recordar</code>).
+        Claves y valores funcionan en cualquier idioma — la memoria es agnóstica al idioma.
+      </p>
+    </div>
+  </section>
+
+  <!-- Cómo funciona -->
+  <section id="how" class="scroll-mt-20 border-b border-border">
+    <div class="mx-auto max-w-5xl px-6 py-16 sm:px-8 lg:px-12" data-reveal>
+      <h2 class="font-display text-3xl text-foreground sm:text-4xl">Cómo funciona</h2>
+      <div class="mt-8 grid gap-8 sm:grid-cols-3">
+        <div>
+          <p class="font-mono text-sm tracking-widest text-accent uppercase">Captura</p>
+          <h3 class="mt-2 font-display text-xl text-foreground">El hook escucha</h3>
+          <p class="mt-3 leading-relaxed text-muted">
+            Un hook <code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">PostToolUse</code>
+            lee cada intercambio y saca los hechos — decisiones, rutas de archivo, contexto del proyecto.
+          </p>
+        </div>
+        <div>
+          <p class="font-mono text-sm tracking-widest text-accent uppercase">Guarda</p>
+          <h3 class="mt-2 font-display text-xl text-foreground">Hechos, no vectores</h3>
+          <p class="mt-3 leading-relaxed text-muted">
+            Cada hecho cae en un grafo local ligero con su nombre, su fecha y sus enlaces. Todo el
+            Cortex es un único archivo que es tuyo.
+          </p>
+        </div>
+        <div>
+          <p class="font-mono text-sm tracking-widest text-accent uppercase">Recupera</p>
+          <h3 class="mt-2 font-display text-xl text-foreground">Activación a dos saltos</h3>
+          <p class="mt-3 leading-relaxed text-muted">
+            Una consulta enciende el nodo que coincide y se extiende un salto, sacando los hechos
+            relacionados — sin búsqueda semántica, sin modelo de embeddings. Al instante.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- La memoria -->
+  <section id="memory" class="scroll-mt-20 border-b border-border">
+    <div class="mx-auto max-w-5xl px-6 py-16 sm:px-8 lg:px-12" data-reveal>
+      <h2 class="font-display text-3xl text-foreground sm:text-4xl">La memoria</h2>
+      <div class="mt-5 max-w-3xl space-y-4 text-lg leading-relaxed text-muted">
+        <p>
+          Piénsalo como un cuaderno que tu agente lleva para ti — pero solo apunta lo que es
+          <strong class="font-semibold text-foreground">estable</strong>: decisiones, el stack del proyecto, quién eres,
+          tus preferencias, tus objetivos. La charla de paso se ignora. Cuando algo cambia, el valor nuevo
+          <strong class="font-semibold text-foreground">sustituye</strong> al viejo y el viejo se guarda, fechado, en
+          el histórico — así tu agente nunca trabaja con algo que ya cambiaste.
+        </p>
+        <p>Hay dos tipos de memoria, y no se mezclan nunca:</p>
+      </div>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2">
+        <div class="rounded-2xl border border-border bg-surface p-6 min-w-0">
+          <p class="font-mono text-sm tracking-widest text-accent uppercase">Proyecto</p>
+          <h3 class="mt-2 font-display text-xl text-foreground">Sobre el proyecto</h3>
+          <p class="mt-3 leading-relaxed text-muted">
+            El stack, el cliente, decisiones, plazos. Vive en la carpeta del proyecto (<code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">.corvusmem/</code>),
+            así tu equipo — y Codex — lo comparten. «El stack es Next» es verdad lo diga quien lo diga.
+          </p>
+        </div>
+        <div class="rounded-2xl border border-border bg-surface p-6 min-w-0">
+          <p class="font-mono text-sm tracking-widest text-accent uppercase">Tú</p>
+          <h3 class="mt-2 font-display text-xl text-foreground">Sobre ti</h3>
+          <p class="mt-3 leading-relaxed text-muted">
+            Quién eres y cómo te gusta trabajar — te acompaña en todos tus proyectos. Vive en tu máquina
+            (<code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">~/.config/corvusmem/</code>),
+            privada, nunca se commitea. Tu agente recuerda ambas a la vez.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Equipos -->
+  <section id="teams" class="scroll-mt-20 border-b border-border bg-surface">
+    <div class="mx-auto max-w-5xl px-6 py-16 sm:px-8 lg:px-12" data-reveal>
+      <h2 class="font-display text-3xl text-foreground sm:text-4xl">Equipos — un proyecto, muchas personas</h2>
+      <div class="mt-5 max-w-3xl space-y-4 text-lg leading-relaxed text-muted">
+        <p>
+          Cuando varias personas trabajan en el mismo proyecto, la memoria compartida mantiene separados los
+          hechos <strong class="font-semibold text-foreground">personales</strong> de cada una. Si Ana prefiere Vim y Bob
+          prefiere Emacs, se guardan los dos — ninguno pisa al otro. Los hechos que describen el
+          <strong class="font-semibold text-foreground">proyecto en sí</strong> (stack, decisiones) siguen compartidos y sin
+          dueño, justo como debe ser.
+        </p>
+        <p>
+          No configuras nada: Corvusmem lee el autor de tu email de <code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">git</code>
+          (o tu usuario del sistema), sin red. Para quien trabaja solo es invisible — simplemente funciona.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- El Cortex -->
+  <section id="cortex" class="scroll-mt-20 border-b border-border bg-surface">
+    <div class="mx-auto max-w-5xl px-6 py-16 sm:px-8 lg:px-12" data-reveal>
+      <h2 class="font-display text-3xl text-foreground sm:text-4xl">El Cortex</h2>
+      <div class="mt-5 max-w-3xl space-y-4 text-lg leading-relaxed text-muted">
+        <p>
+          El Cortex dibuja todo lo que tu agente sabe como un cerebro vivo de puntos — un brillo por
+          hecho. Cada tipo de memoria se asienta en su zona: decisiones, objetivos, hechos del proyecto,
+          quién eres, lo vivido.
+        </p>
+        <p>
+          Busca un hecho y solo se encienden su nodo y sus conexiones, como una neurona disparándose. No
+          es un dibujo — es una radiografía de la memoria que tu agente de verdad usa.
+        </p>
+      </div>
+      <div class="mt-8 max-w-xl">
+        <p class="text-base leading-relaxed text-muted">
+          Abre tu propio Cortex desde cualquier carpeta de proyecto — sin configurar nada:
+        </p>
+        <div class="mt-3">
+          <CopyCommand cmd="npx corvusmem --cortex" />
+        </div>
+        <p class="mt-3 font-mono text-xs tracking-wide text-subtle">
+          Escribe un archivo HTML autocontenido (offline, sin red) e imprime la ruta — ábrelo en tu navegador.
+        </p>
+        <ul class="mt-4 space-y-2 leading-relaxed text-muted">
+          <li>
+            <code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">--client</code>
+            — una vista para compartir sin nada privado, para enseñar a un cliente o compañero.
+          </li>
+          <li>
+            <code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">--output &lt;dir&gt;</code>
+            — escribe el HTML en otro sitio;
+            <code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">--lang en|es|…</code>
+            — elige el idioma.
+          </li>
+        </ul>
+      </div>
+      <a
+        href="/es/#demo"
+        class="mt-8 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-accent transition-opacity hover:opacity-80"
+      >
+        Ver el Cortex en vivo
+        <svg class="size-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4"></path>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Anfitriones -->
+  <section id="hosts" class="scroll-mt-20 border-b border-border">
+    <div class="mx-auto max-w-5xl px-6 py-16 sm:px-8 lg:px-12" data-reveal>
+      <h2 class="font-display text-3xl text-foreground sm:text-4xl">Anfitriones</h2>
+      <p class="mt-5 max-w-3xl text-lg leading-relaxed text-muted">
+        El motor detecta dónde corre y se adapta; la memoria es la misma por debajo.
+      </p>
+      <div class="mt-8 grid gap-4 sm:grid-cols-3">
+        {
+          [
+            { h: 'Claude Code', d: 'Los hooks se registran en los ajustes de tu proyecto; los hechos se capturan después de cada llamada a herramienta.' },
+            { h: 'Codex', d: 'Corre por la vía de plugin; el mismo cerebro, el mismo archivo local.' },
+            { h: 'Independiente', d: 'Una CLI simple para cualquier proyecto — lee, escribe y busca la memoria directamente.' },
+          ].map((x) => (
+            <div class="rounded-2xl border border-border bg-surface p-6 min-w-0">
+              <h3 class="font-display text-xl text-foreground">{x.h}</h3>
+              <p class="mt-2 leading-relaxed text-muted">{x.d}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Licencia -->
+  <section id="license" class="scroll-mt-20 border-b border-border">
+    <div class="mx-auto max-w-5xl px-6 py-16 sm:px-8 lg:px-12" data-reveal>
+      <h2 class="font-display text-3xl text-foreground sm:text-4xl">Licencia</h2>
+      <div class="mt-5 max-w-3xl space-y-4 text-lg leading-relaxed text-muted">
+        <p>
+          Gratis para uso personal y no comercial bajo
+          <strong class="font-semibold text-foreground">PolyForm Noncommercial</strong>. Cero
+          telemetría — tu memoria vive en archivos locales que son tuyos.
+        </p>
+        <p>
+          Usar Corvusmem dentro de una empresa o un producto de pago necesita una licencia comercial.
+        </p>
+      </div>
+      <a
+        href={`mailto:${CONTACT}?subject=Corvusmem%20licencia%20comercial`}
+        class="mt-8 inline-flex min-h-11 items-center gap-2 rounded-md border border-border-strong px-6 text-sm font-semibold text-foreground transition-colors hover:bg-surface-raised"
+      >
+        Conseguir una licencia comercial
+      </a>
+    </div>
+  </section>
+
+  <!-- Preguntas frecuentes -->
+  <section id="faq" class="scroll-mt-20">
+    <div class="mx-auto max-w-5xl px-6 py-16 sm:px-8 lg:px-12" data-reveal>
+      <h2 class="font-display text-3xl text-foreground sm:text-4xl">Preguntas frecuentes</h2>
+      <div class="mt-8 max-w-3xl divide-y divide-border border-y border-border">
+        {
+          faqs.map((f) => (
+            <details class="group py-5">
+              <summary class="flex cursor-pointer items-center justify-between gap-4 font-display text-lg text-foreground marker:content-none">
+                {f.q}
+                <span class="text-accent transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+              </summary>
+              <p class="mt-3 leading-relaxed text-muted">{f.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

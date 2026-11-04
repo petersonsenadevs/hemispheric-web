@@ -10,12 +10,12 @@ const home = localizedPath('/', lang);
 // GitHub repo URL is still a placeholder (risk logged in PLAN.md). Wire the real one before launch.
 const REPO_URL = '#';
 
-// El landing es bilingue (/ y /es/). Docs y benchmarks son solo-ingles por ahora: sus enlaces NO se localizan.
+// El landing y las docs son bilingues (/ y /es/). Benchmarks sigue solo-ingles: su enlace NO se localiza.
 const links = [
   { key: 'nav.demo', href: `${home}#demo` },
   { key: 'nav.cortex', href: `${home}#cortex` },
   { key: 'nav.benchmarks', href: '/benchmarks' },
-  { key: 'nav.docs', href: '/docs' },
+  { key: 'nav.docs', href: localizedPath('/docs', lang) },
 ];
 
 // Selector de idioma: lleva al home del otro idioma (lo bilingue es el landing).
