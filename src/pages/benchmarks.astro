@@ -201,6 +201,44 @@ const pageDescription =
     </div>
   </section>
 
+  <!-- Context footprint -->
+  <section id="footprint" class="scroll-mt-20 border-b border-border">
+    <div class="mx-auto max-w-5xl px-6 py-20 sm:px-8 lg:px-12">
+      <p class="font-mono text-xs tracking-wider text-accent uppercase">Context footprint</p>
+      <h2 class="mt-4 font-display text-3xl text-foreground sm:text-4xl">It doesn't bloat your context</h2>
+      <p class="mt-5 max-w-3xl text-lg leading-relaxed text-muted">
+        Accuracy is one axis. The other is what the memory costs your agent's context window on every turn.
+        Corvusmem's footprint is <strong class="font-semibold text-foreground">bounded</strong>: a hard cap of
+        five facts per message keeps it flat whether you've stored ten facts or ten thousand — O(1), not O(n).
+      </p>
+
+      <div data-reveal class="mt-10 grid gap-4 sm:grid-cols-3">
+        <div class="rounded-2xl border border-border bg-surface p-6 min-w-0">
+          <p class="font-mono text-5xl tabular-nums text-foreground">413</p>
+          <p class="mt-2 text-sm text-muted">tokens/message (median) with <span class="text-foreground">10</span> facts stored</p>
+        </div>
+        <div class="rounded-2xl border border-border bg-surface p-6 min-w-0">
+          <p class="font-mono text-5xl tabular-nums text-foreground">413</p>
+          <p class="mt-2 text-sm text-muted">tokens/message (median) with <span class="text-foreground">10,000</span> facts stored</p>
+        </div>
+        <div class="rounded-2xl border border-border bg-surface p-6 min-w-0">
+          <p class="font-mono text-5xl tabular-nums text-accent">0</p>
+          <p class="mt-2 text-sm text-muted">API tokens — no embeddings, no network, nothing leaves your machine</p>
+        </div>
+      </div>
+
+      <p class="mt-8 max-w-3xl leading-relaxed text-muted">
+        Measured with Corvusmem's real recall code and the o200k_base tokenizer: ~423 tokens at the 95th
+        percentile per message, ~363–477 once per session at startup. An embedding memory injects larger
+        retrieved passages and spends API tokens to do it; Corvusmem injects short, capped facts and spends none.
+      </p>
+      <div class="mt-6 max-w-sm">
+        <CopyCommand cmd="npm run bench:tokens" />
+      </div>
+      <p class="mt-3 font-mono text-xs tracking-wide text-subtle">Reproduce it from the Corvusmem repo · deterministic, offline</p>
+    </div>
+  </section>
+
   <!-- Methodology -->
   <section class="border-b border-border">
     <div class="mx-auto max-w-5xl px-6 py-20 sm:px-8 lg:px-12">

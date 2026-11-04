@@ -12,6 +12,7 @@ const toc = [
   { id: 'use', label: 'Cómo usarlo' },
   { id: 'how', label: 'Cómo funciona' },
   { id: 'memory', label: 'La memoria' },
+  { id: 'footprint', label: 'Huella' },
   { id: 'teams', label: 'Equipos' },
   { id: 'cortex', label: 'El Cortex' },
   { id: 'hosts', label: 'Anfitriones' },
@@ -288,6 +289,28 @@ const pageDescription =
           </p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Huella -->
+  <section id="footprint" class="scroll-mt-20 border-b border-border">
+    <div class="mx-auto max-w-5xl px-6 py-16 sm:px-8 lg:px-12" data-reveal>
+      <h2 class="font-display text-3xl text-foreground sm:text-4xl">Huella</h2>
+      <p class="mt-5 max-w-3xl text-lg leading-relaxed text-muted">
+        La memoria apenas toca la ventana de contexto de tu agente — y no crece. Un tope duro de cinco hechos por
+        mensaje mantiene la huella <strong class="font-semibold text-foreground">plana</strong>: unos 413 tokens
+        por mensaje (mediana) tengas 10 hechos o 10.000. O(1), no O(n). Y
+        <strong class="font-semibold text-foreground">cero</strong> tokens de API — sin embeddings, sin red.
+      </p>
+      <a
+        href="/benchmarks#footprint"
+        class="mt-6 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-accent transition-opacity hover:opacity-80"
+      >
+        Ver el benchmark de huella
+        <svg class="size-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4"></path>
+        </svg>
+      </a>
     </div>
   </section>
 
