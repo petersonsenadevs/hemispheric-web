@@ -10,17 +10,18 @@ const home = localizedPath('/', lang);
 // GitHub repo URL is still a placeholder (risk logged in PLAN.md). Wire the real one before launch.
 const REPO_URL = '#';
 
-// El landing y las docs son bilingues (/ y /es/). Benchmarks sigue solo-ingles: su enlace NO se localiza.
+// Landing, docs y benchmarks son bilingues (/ y /es/): los enlaces se localizan.
 const links = [
   { key: 'nav.demo', href: `${home}#demo` },
   { key: 'nav.cortex', href: `${home}#cortex` },
-  { key: 'nav.benchmarks', href: '/benchmarks' },
+  { key: 'nav.benchmarks', href: localizedPath('/benchmarks', lang) },
   { key: 'nav.docs', href: localizedPath('/docs', lang) },
 ];
 
-// Selector de idioma: lleva al home del otro idioma (lo bilingue es el landing).
+// Selector de idioma: lleva a la MISMA pagina en el otro idioma (todas las paginas son bilingues).
 const otherLang = lang === 'es' ? 'en' : 'es';
-const switchHref = localizedPath('/', otherLang);
+const basePath = Astro.url.pathname.replace(/^\/es(?=\/|$)/, '') || '/';
+const switchHref = localizedPath(basePath, otherLang);
 const switchLabel = otherLang.toUpperCase();
 ---
 

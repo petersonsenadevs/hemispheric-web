@@ -1,0 +1,377 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CopyCommand from '../../components/CopyCommand.astro';
+
+// Resultados reales de LoCoMo (F8-T9). Fuente de verdad:
+// D:\dev-standards\tools\eval-productos\BENCHMARK.md §1 — regenerados desde los
+// resultados-e2e-locomo-*.json con comparar.mjs. Los números NO están escritos a mano.
+// Contestador y juez son ambos Qwen3-8B local: es un cara a cara justo, no comparable
+// con los leaderboards oficiales de mem0/Zep (GPT-4o).
+type EngineKey = 'corvusmem' | 'e5' | 'mem0';
+
+interface Engine {
+  key: EngineKey;
+  label: string;
+  note: string;
+  subject?: boolean;
+}
+
+const engines: Engine[] = [
+  { key: 'corvusmem', label: 'Corvusmem', note: 'gratis · offline', subject: true },
+  { key: 'e5', label: 'Embedding e5', note: 'gratis · base vectorial' },
+  { key: 'mem0', label: 'mem0', note: 'de pago · cloud' },
+];
+
+interface Row {
+  id: string;
+  name: string;
+  count: number;
+  measures: string;
+  scores: Record<EngineKey, string>;
+  leader: EngineKey;
+}
+
+const rows: Row[] = [
+  { id: 'cat1', name: 'Un salto', count: 282, measures: 'Búsqueda directa de un hecho', scores: { corvusmem: '23.0%', e5: '30.5%', mem0: '25.2%' }, leader: 'e5' },
+  { id: 'cat2', name: 'Temporal', count: 321, measures: 'Fechas y orden', scores: { corvusmem: '16.2%', e5: '17.4%', mem0: '5.3%' }, leader: 'e5' },
+  { id: 'cat3', name: 'Multi-salto', count: 96, measures: 'Cruce de hechos', scores: { corvusmem: '17.7%', e5: '24.0%', mem0: '17.7%' }, leader: 'e5' },
+  { id: 'cat4', name: 'Dominio abierto', count: 841, measures: 'Hecho + sentido común', scores: { corvusmem: '41.6%', e5: '44.7%', mem0: '35.0%' }, leader: 'e5' },
+  { id: 'cat5', name: 'Adversarial', count: 446, measures: 'Saber cuándo decir «no lo sé»', scores: { corvusmem: '5.6%', e5: '3.4%', mem0: '4.7%' }, leader: 'corvusmem' },
+];
+
+const globalRow = {
+  scores: { corvusmem: '25.6%', e5: '28.0%', mem0: '21.1%' } as Record<EngineKey, string>,
+  leader: 'e5' as EngineKey,
+};
+
+// Zep / Graphiti: una tirada local completa era inviable, así que solo existe una
+// muestra de una conversación (conv-1). Se enseña aparte y marcada como parcial.
+const zepSample = [
+  { label: 'Corvusmem', score: '28.2%' },
+  { label: 'Embedding e5', score: '30.3%' },
+  { label: 'mem0', score: '14.9%' },
+  { label: 'Zep / Graphiti', score: '18.5%' },
+];
+
+const reproduceCmd =
+  'node tools/eval-productos/comparar.mjs resultados-e2e-locomo-motor-llm.json resultados-e2e-locomo-embedding-llm.json resultados-e2e-locomo-mem0-full.json';
+
+// La URL del repo es un placeholder hasta confirmarla.
+const REPO_URL = '#';
+
+const pageTitle = 'Benchmarks — Corvusmem';
+const pageDescription =
+  'Benchmark LoCoMo, dataset completo (1.986 preguntas). Corvusmem vs Embedding e5 vs mem0, juzgado por Qwen3-8B en local — un cara a cara justo, números sin retocar.';
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} hasEs>
+  <!-- Header -->
+  <section class="border-b border-border">
+    <div class="mx-auto max-w-5xl px-6 py-20 sm:px-8 lg:px-12 lg:py-28">
+      <p class="font-mono text-xs tracking-wider text-accent uppercase">
+        Benchmark LoCoMo
+      </p>
+      <h1 class="mt-4 font-display text-5xl leading-[1.05] text-foreground sm:text-6xl">
+        Los números, sin retocar.
+      </h1>
+      <p class="mt-6 max-w-3xl text-lg leading-relaxed text-muted">
+        Cada motor medido con <strong class="font-semibold text-foreground">Qwen3-8B corriendo en local</strong> como contestador y como juez — el mismo rasero para todos, así que el cara a cara es justo. Estos números <em class="text-foreground not-italic">no</em> son comparables con los leaderboards oficiales de mem0 o Zep, que usan GPT-4o. Lo que esto mide es cómo se comporta cada memoria frente a las demás en condiciones idénticas.
+      </p>
+    </div>
+  </section>
+
+  <!-- Full results table -->
+  <section class="border-b border-border">
+    <div class="mx-auto max-w-5xl px-6 py-20 sm:px-8 lg:px-12">
+      <h2 class="font-display text-3xl text-foreground sm:text-4xl">Resultados completos</h2>
+      <p class="mt-3 font-mono text-xs tracking-wider text-subtle uppercase">
+        LoCoMo · 1.986 preguntas · precisión, juzgado por LLM
+      </p>
+
+      <div class="mt-8 overflow-x-auto">
+        <table class="w-full min-w-[640px] border-collapse text-left">
+          <thead>
+            <tr class="border-b border-border-strong">
+              <th scope="col" class="py-3 pr-4 align-bottom text-sm font-medium text-muted">
+                Categoría
+              </th>
+              <th scope="col" class="hidden py-3 pr-6 align-bottom text-sm font-medium text-muted sm:table-cell">
+                Qué mide
+              </th>
+              {
+                engines.map((engine) => (
+                  <th scope="col" class="py-3 pl-6 align-bottom text-right">
+                    <span class={engine.subject ? 'block text-sm font-semibold text-accent' : 'block text-sm font-medium text-foreground'}>
+                      {engine.label}
+                    </span>
+                    <span class="mt-0.5 block font-mono text-xs font-normal text-subtle">
+                      {engine.note}
+                    </span>
+                  </th>
+                ))
+              }
+            </tr>
+          </thead>
+          <tbody>
+            {
+              rows.map((row) => (
+                <tr class="border-b border-border/60 transition-colors hover:bg-surface/60">
+                  <th scope="row" class="py-4 pr-4 text-left align-top font-medium text-foreground">
+                    {row.name}
+                    <span class="ml-1.5 font-mono text-xs font-normal text-subtle">
+                      {row.count}
+                    </span>
+                  </th>
+                  <td class="hidden py-4 pr-6 align-top text-sm text-subtle sm:table-cell">
+                    {row.measures}
+                  </td>
+                  {
+                    engines.map((engine) => {
+                      const isLeader = row.leader === engine.key;
+                      const cell = isLeader
+                        ? 'text-foreground font-semibold'
+                        : 'text-muted';
+                      return (
+                        <td class={`py-4 pl-6 text-right font-mono tabular-nums ${engine.subject ? 'bg-surface' : ''}`}>
+                          <span class={cell}>{row.scores[engine.key]}</span>
+                        </td>
+                      );
+                    })
+                  }
+                </tr>
+              ))
+            }
+            <tr class="border-t-2 border-border-strong">
+              <th scope="row" class="py-5 pr-4 text-left font-semibold text-foreground">
+                Global
+              </th>
+              <td class="hidden py-5 pr-6 text-sm text-subtle sm:table-cell">ponderado, todas las categorías</td>
+              {
+                engines.map((engine) => {
+                  const isLeader = globalRow.leader === engine.key;
+                  return (
+                    <td class={`py-5 pl-6 text-right font-mono text-lg tabular-nums ${engine.subject ? 'bg-surface' : ''}`}>
+                      <span class={isLeader ? 'font-semibold text-foreground' : 'text-muted'}>
+                        {globalRow.scores[engine.key]}
+                      </span>
+                    </td>
+                  );
+                })
+              }
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="mt-5 text-sm leading-relaxed text-subtle">
+        La negrita marca la mejor puntuación de cada fila. Embedding e5 gana en casi todas las
+        categorías, pero necesita una base de datos vectorial para funcionar. Corvusmem es gratis,
+        offline y sin servidor, gana sin discusión en las preguntas adversariales (saber cuándo
+        abstenerse) y casi duplica a mem0 en razonamiento temporal — lo ves abajo.
+      </p>
+    </div>
+  </section>
+
+  <!-- Temporal highlight -->
+  <section class="border-b border-border bg-surface">
+    <div class="mx-auto max-w-5xl px-6 py-20 sm:px-8 lg:px-12">
+      <p class="font-mono text-xs tracking-wider text-accent uppercase">
+        Donde saca ventaja · razonamiento temporal (cat2)
+      </p>
+      <div data-reveal class="mt-6 flex flex-wrap items-end gap-x-12 gap-y-6">
+        <div>
+          <p class="font-mono text-5xl tabular-nums text-accent">
+            <span data-count="16.2" data-dec="1" data-suffix="%">16.2%</span>
+          </p>
+          <p class="mt-2 text-sm text-muted">Corvusmem</p>
+        </div>
+        <div>
+          <p class="font-mono text-5xl tabular-nums text-foreground">
+            <span data-count="5.3" data-dec="1" data-suffix="%">5.3%</span>
+          </p>
+          <p class="mt-2 text-sm text-muted">mem0</p>
+        </div>
+        <p class="pb-2 font-mono text-lg font-semibold text-accent">
+          +<span data-count="206" data-dec="0" data-suffix="%">206%</span> vs mem0
+        </p>
+      </div>
+      <p class="mt-8 max-w-3xl leading-relaxed text-muted">
+        Corvusmem guarda cada hecho con su fecha explícita y su contexto temporal. Por eso casi duplica a mem0 cuando una pregunta depende de <em class="text-foreground not-italic">cuándo</em> pasó algo — el tipo de recuerdo que necesitan los agentes de larga duración, no solo <em class="text-foreground not-italic">qué</em> pasó.
+      </p>
+    </div>
+  </section>
+
+  <!-- Context footprint -->
+  <section id="footprint" class="scroll-mt-20 border-b border-border">
+    <div class="mx-auto max-w-5xl px-6 py-20 sm:px-8 lg:px-12">
+      <p class="font-mono text-xs tracking-wider text-accent uppercase">Huella de contexto</p>
+      <h2 class="mt-4 font-display text-3xl text-foreground sm:text-4xl">No infla tu contexto</h2>
+      <p class="mt-5 max-w-3xl text-lg leading-relaxed text-muted">
+        La precisión es un eje. El otro es lo que la memoria le cuesta a la ventana de contexto de tu
+        agente en cada turno. La huella de Corvusmem está <strong class="font-semibold text-foreground">acotada</strong>:
+        un tope duro de cinco hechos por mensaje la mantiene plana tengas diez hechos guardados o diez mil
+        — O(1), no O(n).
+      </p>
+
+      <div data-reveal class="mt-10 grid gap-4 sm:grid-cols-3">
+        <div class="rounded-2xl border border-border bg-surface p-6 min-w-0">
+          <p class="font-mono text-5xl tabular-nums text-foreground">413</p>
+          <p class="mt-2 text-sm text-muted">tokens/mensaje (mediana) con <span class="text-foreground">10</span> hechos guardados</p>
+        </div>
+        <div class="rounded-2xl border border-border bg-surface p-6 min-w-0">
+          <p class="font-mono text-5xl tabular-nums text-foreground">413</p>
+          <p class="mt-2 text-sm text-muted">tokens/mensaje (mediana) con <span class="text-foreground">10.000</span> hechos guardados</p>
+        </div>
+        <div class="rounded-2xl border border-border bg-surface p-6 min-w-0">
+          <p class="font-mono text-5xl tabular-nums text-accent">0</p>
+          <p class="mt-2 text-sm text-muted">tokens de API — sin embeddings, sin red, nada sale de tu máquina</p>
+        </div>
+      </div>
+
+      <p class="mt-8 max-w-3xl leading-relaxed text-muted">
+        Medido con el código de recuerdo real de Corvusmem y el tokenizer o200k_base: ~423 tokens en el
+        percentil 95 por mensaje, ~363–477 una vez por sesión al arrancar. Una memoria con embeddings inyecta
+        pasajes recuperados más grandes y gasta tokens de API para hacerlo; Corvusmem inyecta hechos cortos y
+        acotados, y no gasta ninguno.
+      </p>
+      <div class="mt-6 max-w-sm">
+        <CopyCommand cmd="npm run bench:tokens" />
+      </div>
+      <p class="mt-3 font-mono text-xs tracking-wide text-subtle">Reprodúcelo desde el repo de Corvusmem · determinista, offline</p>
+    </div>
+  </section>
+
+  <!-- Methodology -->
+  <section class="border-b border-border">
+    <div class="mx-auto max-w-5xl px-6 py-20 sm:px-8 lg:px-12">
+      <h2 class="font-display text-3xl text-foreground sm:text-4xl">Metodología</h2>
+      <div data-reveal class="mt-8 grid gap-10 md:grid-cols-2">
+        <div>
+          <h3 class="text-sm font-semibold text-foreground">El mismo rasero para todos</h3>
+          <p class="mt-3 leading-relaxed text-muted">
+            Un solo modelo local, Qwen3-8B, responde cada pregunta usando el recuerdo de cada
+            memoria, y el mismo modelo juzga cada respuesta. Ningún motor tiene un juez más fuerte
+            que otro. Eso es lo que hace justa la comparación — y lo que la hace incomparable con
+            los leaderboards puntuados con GPT-4o.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold text-foreground">El dataset</h3>
+          <p class="mt-3 leading-relaxed text-muted">
+            LoCoMo: 1.986 preguntas sobre conversaciones largas de varias sesiones, repartidas en
+            cinco categorías. La precisión es la proporción de preguntas que cada motor responde
+            bien, según el juez. No se descarta ni se re-pondera nada a tu favor.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Zep note -->
+  <section class="border-b border-border bg-surface">
+    <div class="mx-auto max-w-5xl px-6 py-20 sm:px-8 lg:px-12">
+      <h2 class="font-display text-3xl text-foreground sm:text-4xl">
+        Una nota sobre Zep / Graphiti
+      </h2>
+      <p class="mt-4 max-w-3xl leading-relaxed text-muted">
+        Correr Zep sobre el dataset completo en local no era viable, así que solo tenemos una muestra de una conversación (<span class="font-mono text-sm">conv-1</span>). <strong class="font-semibold text-foreground">No</strong> es un resultado de dataset completo y se mantiene aparte para que nunca se mezcle con la tabla de arriba.
+      </p>
+
+      <div class="mt-8 max-w-md overflow-x-auto">
+        <p class="mb-3 font-mono text-xs tracking-wider text-subtle uppercase">
+          Solo muestra · conv-1
+        </p>
+        <table class="w-full border-collapse text-left">
+          <tbody>
+            {
+              zepSample.map((item) => (
+                <tr class="border-b border-border/60">
+                  <th scope="row" class="py-3 text-left font-normal text-foreground">
+                    {item.label}
+                  </th>
+                  <td class="py-3 text-right font-mono tabular-nums text-muted">
+                    {item.score}
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reproduce -->
+  <section>
+    <div class="mx-auto max-w-5xl px-6 py-20 sm:px-8 lg:px-12 lg:py-28">
+      <h2 class="font-display text-3xl text-foreground sm:text-4xl">Reprodúcelo</h2>
+      <p class="mt-4 max-w-3xl leading-relaxed text-muted">
+        La tabla de arriba no está escrita a mano — se genera desde los ficheros de resultados en
+        crudo. Desde la raíz del repo, apunta el script de comparación a los tres juegos de
+        resultados y obtienes exactamente los mismos números:
+      </p>
+
+      <div class="mt-6">
+        <CopyCommand cmd={reproduceCmd} class="max-w-full overflow-x-auto" />
+      </div>
+
+      <p class="mt-5 text-sm leading-relaxed text-subtle">
+        Fuente de verdad: los ficheros en crudo <span class="font-mono">resultados-e2e-locomo-*.json</span> y <span class="font-mono">BENCHMARK.md</span> en el repo del motor.
+      </p>
+
+      {
+        REPO_URL !== '#' && (
+          <a
+            href={REPO_URL}
+            class="mt-8 inline-flex min-h-11 items-center gap-2 rounded-md border border-border-strong px-6 text-sm font-semibold text-foreground transition-colors hover:bg-surface-raised"
+          >
+            <svg class="size-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.37-3.37-1.37-.46-1.18-1.11-1.5-1.11-1.5-.91-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05A9.3 9.3 0 0 1 12 6.84c.85 0 1.71.12 2.51.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.8-4.57 5.05.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.59.69.48A10.03 10.03 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"></path>
+            </svg>
+            Ver el código
+          </a>
+        )
+      }
+    </div>
+  </section>
+
+  <style is:global>
+    html.reveal-on [data-reveal] { opacity: 0; transform: translateY(18px); }
+    html.reveal-on [data-reveal].is-visible { opacity: 1; transform: none; transition: opacity .6s var(--ease-out, ease), transform .6s var(--ease-out, ease); }
+    @media (prefers-reduced-motion: reduce) {
+      html.reveal-on [data-reveal], html.reveal-on [data-reveal].is-visible { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+  <script is:inline>
+    (function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      document.documentElement.classList.add('reveal-on');
+      var reveals = document.querySelectorAll('[data-reveal]');
+      var counts = document.querySelectorAll('[data-count]');
+      function showAll() { reveals.forEach(function (e) { e.classList.add('is-visible'); }); counts.forEach(setFinal); }
+      function setFinal(el) { var d = +el.getAttribute('data-dec') || 0; el.textContent = (+el.getAttribute('data-count')).toFixed(d) + (el.getAttribute('data-suffix') || ''); }
+      if (reduce || !('IntersectionObserver' in window)) { showAll(); return; }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (!en.isIntersecting) return;
+          var el = en.target;
+          io.unobserve(el);
+          if (el.hasAttribute('data-reveal')) el.classList.add('is-visible');
+          if (el.hasAttribute('data-count')) animate(el);
+        });
+      }, { threshold: 0.2 });
+      reveals.forEach(function (e) { io.observe(e); });
+      counts.forEach(function (e) { e.textContent = (0).toFixed(+e.getAttribute('data-dec') || 0) + (e.getAttribute('data-suffix') || ''); io.observe(e); });
+      function animate(el) {
+        var target = +el.getAttribute('data-count'), dec = +el.getAttribute('data-dec') || 0, suf = el.getAttribute('data-suffix') || '';
+        var dur = 1100, t0 = performance.now();
+        function step(now) {
+          var p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+          el.textContent = (target * e).toFixed(dec) + suf;
+          if (p < 1) requestAnimationFrame(step); else el.textContent = target.toFixed(dec) + suf;
+        }
+        requestAnimationFrame(step);
+      }
+    })();
+  </script>
+</BaseLayout>

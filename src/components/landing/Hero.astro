@@ -7,8 +7,8 @@ import { getLang, useTranslations } from '../../i18n/utils';
 
 const lang = getLang(Astro.currentLocale);
 const t = useTranslations(lang);
-// Install command shown in the hero. Exact command is still a placeholder (D-008).
-const INSTALL_CMD = 'npx corvusmem install --claude';
+// Install command shown in the hero: global by default (hooks on in every project; memory stays per-repo).
+const INSTALL_CMD = 'npx corvusmem install --global';
 ---
 
 <section

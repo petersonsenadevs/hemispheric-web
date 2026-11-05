@@ -21,9 +21,21 @@
   </url>
   <url>
     <loc>https://corvusmem.vercel.app/benchmarks</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corvusmem.vercel.app/benchmarks"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corvusmem.vercel.app/es/benchmarks"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://corvusmem.vercel.app/benchmarks"/>
     <lastmod>2026-11-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://corvusmem.vercel.app/es/benchmarks</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corvusmem.vercel.app/benchmarks"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corvusmem.vercel.app/es/benchmarks"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://corvusmem.vercel.app/benchmarks"/>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://corvusmem.vercel.app/es/</loc>

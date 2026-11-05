@@ -4,8 +4,8 @@ import { getLang, useTranslations, localizedPath } from '../../i18n/utils';
 
 const lang = getLang(Astro.currentLocale);
 const t = useTranslations(lang);
-// Exact command still a placeholder (D-008): pending the real install story (see PLAN F12-T1).
-const INSTALL_CMD = 'npx corvusmem install --claude';
+// Install command: global by default (hooks on in every project; memory stays per-repo).
+const INSTALL_CMD = 'npx corvusmem install --global';
 // Obsidian retirado: descartado como anfitrion (no prometer lo que no hay).
 const hosts = ['Claude Code', 'Codex', 'Standalone'];
 ---

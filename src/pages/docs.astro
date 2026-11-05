@@ -5,7 +5,7 @@ import { Image } from 'astro:assets';
 import crowDocs from '../assets/brand/cuervo-b-memoria.png';
 
 // Exact install command still a placeholder (D-008), kept consistent with the rest of the site.
-const INSTALL_CMD = 'npx corvusmem install --claude';
+const INSTALL_CMD = 'npx corvusmem install --global';
 const CONTACT = 'petersonsena24@gmail.com';
 
 const toc = [
@@ -128,24 +128,26 @@ const pageDescription =
           <p class="font-mono text-sm tracking-widest text-accent uppercase">This project</p>
           <h3 class="mt-2 font-display text-xl text-foreground">Per-project</h3>
           <p class="mt-3 leading-relaxed text-muted">
-            Run it inside a project folder. Hooks register in
+            For a team repo: hooks register in
             <code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">./.claude/settings.json</code>
-            and the project memory lives in
+            and the project memory in
             <code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">.corvusmem/</code>.
+            Commit both and teammates get memory the moment they clone.
           </p>
-          <div class="mt-4"><CopyCommand cmd="npx corvusmem install --claude" /></div>
+          <div class="mt-4"><CopyCommand cmd="npx corvusmem install" /></div>
         </div>
         <div class="rounded-2xl border border-border bg-surface p-6 min-w-0">
-          <p class="font-mono text-sm tracking-widest text-accent uppercase">All projects</p>
+          <p class="font-mono text-sm tracking-widest text-accent uppercase">All projects · recommended</p>
           <h3 class="mt-2 font-display text-xl text-foreground">Global</h3>
           <p class="mt-3 leading-relaxed text-muted">
-            Add <code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">--global</code>
-            to register the hooks in your home
+            The easiest setup: <code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">--global</code>
+            registers the hooks in your home
             (<code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">~/.claude/settings.json</code>),
             so every project gets memory. Your personal memory sits in
-            <code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">~/.config/corvusmem/</code>.
+            <code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">~/.config/corvusmem/</code>,
+            and each project's memory still lives in its own <code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">.corvusmem/</code>.
           </p>
-          <div class="mt-4"><CopyCommand cmd="npx corvusmem install --claude --global" /></div>
+          <div class="mt-4"><CopyCommand cmd="npx corvusmem install --global" /></div>
         </div>
       </div>
 
