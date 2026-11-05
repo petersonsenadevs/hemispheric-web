@@ -1,0 +1,91 @@
+# Corvusmem — full overview
+
+> Deterministic, offline, zero-dependency memory for AI coding agents (Claude Code, Codex) and a standalone CLI. The whole memory is a plain file you own; recall is the same every time, in any language, with no network, no servers, no embeddings and no API key.
+
+Website: https://corvusmem.vercel.app · npm: https://www.npmjs.com/package/corvusmem · GitHub: https://github.com/petersonsenadevs/corvusmem
+
+## What it is
+
+Your coding agent forgets everything between sessions. Corvusmem is a memory it keeps: the stable facts it learns (your stack, your preferences, the client, the constraints, the decisions) live in a lightweight local graph, and are recalled by name, date and relevance — the same way every time. No embeddings, no vector database, no model runs the recall, so the same input always gives the same result.
+
+It is not a chat log or a RAG store. It stores durable facts, dates them, replaces them when they change, and injects only what is relevant into the agent's context.
+
+## Why
+
+- **Deterministic** — same input, same result. Nothing to re-index, nothing that drifts.
+- **Offline & private** — the memory is a plain file you own. No server, no cloud, no API key, no telemetry.
+- **Zero-dependency** — pure Node, identical on Windows, macOS and Linux.
+- **Any language** — keys and values in any language; recall is language-agnostic.
+- **Per-author** — on a shared project, teammates' personal facts never overwrite each other.
+- **Bounded footprint** — a hard cap keeps the context cost flat (O(1), not O(n)); it does not grow as the memory grows.
+
+## Install
+
+Corvusmem installs its hooks into the host you already use.
+
+- `npx corvusmem install --claude` — register the hooks in the current project's `.claude/settings.json` (per project).
+- `npx corvusmem install --global` — register them for every project (`~/.claude/settings.json`).
+- `npx corvusmem install --dry-run` — show what it would do, without writing.
+- `npx corvusmem uninstall` — remove Corvusmem's hooks (leaves everything else intact).
+
+The installer is merge-safe (it never overwrites your own hooks or permissions) and idempotent.
+
+**Per-project vs global only decides WHERE the hooks turn on**, not where memory lives. Project facts always land in that repo's `.corvusmem/`; your personal facts in `~/.config/corvusmem/`. You never need a per-project install just to keep memory in the repo — that happens either way.
+
+**Codex**: the hooks run through the plugin path (a marketplace in `~/.codex/config.toml`), not the project `settings.json`. On Claude Code they are active right away.
+
+## Where memory lives
+
+- **Project memory** → `<repo>/.corvusmem/` (the shared facts of that project).
+- **Your personal memory** → `~/.config/corvusmem/` (your facts across all your projects).
+
+**Sharing with a team**: commit `.corvusmem/` (the shared project memory) and, for a per-project install, `.claude/settings.json` so teammates get the hooks the moment they clone. Never commit `~/.config/corvusmem/` — that is your private memory.
+
+## Using it
+
+Once installed, the agent captures and recalls memory on its own. To look at it or steer it from the terminal:
+
+- `npx corvusmem --cortex` — your whole memory as a local HTML brain (offline).
+- `npx corvusmem --recall "stripe webhook"` — ask what it already knows.
+- `npx corvusmem --list` — list every fact.
+- `npx corvusmem --save --dimension project.stack --value "Astro + Tailwind" --scope project` — save a fact.
+- `npx corvusmem --forget <id>` — drop one fact.
+
+Flags are English with Spanish aliases (`--save`/`--guardar`, `--recall`/`--recordar`, `--list`/`--lista`, `--scope`/`--alcance`…). Keys and values work in any language — the memory is language-agnostic.
+
+## How memory works
+
+- **Families** — each fact has a `family.topic` dimension. Families: `identity`, `preference`, `project`, `goal`, `pending`, `constraint`, `note`, `fact`, `learning`, `link`. You can write them in English or Spanish; the engine normalizes to a single canonical key so the same thing always lands in the same place.
+- **Dated substitution** — a new value in the same dimension replaces the old one (which stays in history). "Varios" families (`goal`, `pending`, `note`, `fact`, `learning`, `link`) accumulate instead of replacing.
+- **Two-hop recall** — recalling "the project" also surfaces what is linked to it (its stack, client, constraints), one hop out, marked as "via link".
+- **Per-author** — personal families (`identity`, `preference`) are kept separate by author (`CORVUS_USER` > git `user.email` > OS user), so two teammates don't overwrite each other; legacy facts with no author are still read.
+- **Provenance & confidence** — a fact knows whether the user stated it, the agent inferred it, or it came from a devlog, and weighs recall accordingly; near-duplicates and contradictions are flagged when you save.
+- **Goals & todos lifecycle** — open → in progress → resolved/abandoned, with dates; the oldest open items surface first.
+
+## The Cortex
+
+`npx corvusmem --cortex` draws your whole memory as a local HTML "brain": zones by memory type, what changed recently, open items, and per-fact detail (provenance, history, links). It is a single offline HTML file. A client view (`--client`) hides anything private so you can share it.
+
+## Hooks (what fires)
+
+- SessionStart — injects the relevant memory at the start of a session (facts, open goals, notices, the memory map).
+- UserPromptSubmit — per message, surfaces what the memory already knows about it (bounded, capped).
+- On file edit / stop / session end — captures what was learned and keeps the memory reviewed.
+
+Installed on its own, Corvusmem injects only memory (English by default; set `CORVUS_LANG=es` for Spanish). It does not inject any work method.
+
+## Context footprint
+
+Because a hard cap limits how many facts are injected per message, the context cost is flat — the same whether the memory holds 10 facts or 10,000 (O(1), not O(n)). Reproduce it with `npm run bench:tokens` in the repo. Details and the live numbers are on the benchmarks page.
+
+## Benchmarks
+
+Corvusmem is measured against the standard baselines on the same corpus and metrics (recall@1/@3, abstention), plus the axes that matter for the deterministic approach (network calls, cost, latency, determinism, index size), and against public datasets and memory products — showing where it wins and where it loses. All reproducible with one command. See https://corvusmem.vercel.app/benchmarks
+
+## License
+
+Dual-licensed (© 2026 Peterson Sena):
+- **Noncommercial use** (personal, study, hobby, nonprofit, education/public sector): free under PolyForm Noncommercial 1.0.0, keeping the required credit.
+- **Commercial use**: requires a separate paid license (petersonsena24@gmail.com).
+
+This is not legal advice; for final commercial terms, consult a professional.

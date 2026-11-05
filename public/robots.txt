@@ -1,4 +1,11 @@
+# Corvusmem — memory for AI coding agents.
+# Humans and agents are both welcome here.
+
 User-agent: *
 Allow: /
 
-# Sitemap: añadir la URL absoluta cuando se fije el dominio del deploy.
+# Machine-readable overview for LLMs and agents:
+#   /llms.txt       — index (what Corvusmem is + the key links)
+#   /llms-full.txt  — the full product explanation in one file
+
+Sitemap: https://corvusmem.vercel.app/sitemap.xml

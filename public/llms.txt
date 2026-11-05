@@ -1,0 +1,26 @@
+# Corvusmem
+
+> Deterministic, offline, zero-dependency memory for AI coding agents (Claude Code, Codex) and a standalone CLI. Corvusmem stores the stable facts your agent learns, replaces and dates them, and recalls them the same way every time — in any language, with no network, no servers, no embeddings and no API key. The whole memory is a plain file you own.
+
+Corvusmem plugs into where you already work: Claude Code / Codex (via hooks) or a standalone CLI. It is free for noncommercial use under PolyForm Noncommercial 1.0.0; commercial use needs a separate paid license.
+
+## Docs
+- [Documentation](https://corvusmem.vercel.app/docs): what it is, install modes (per-project vs global), how memory works in a project, the Cortex, and the FAQ.
+- [Benchmarks](https://corvusmem.vercel.app/benchmarks): reproducible comparisons vs embeddings / BM25 / grep and memory products, plus the context-token footprint (flat, O(1)).
+- [Documentación en español](https://corvusmem.vercel.app/es/docs): the Spanish docs.
+
+## Install & source
+- [npm package](https://www.npmjs.com/package/corvusmem): `npx corvusmem install --claude` (one project) or `npx corvusmem install --global` (every project).
+- [GitHub repository](https://github.com/petersonsenadevs/corvusmem): source, README, changelog and issues.
+
+## Key facts
+- Deterministic: same input, same result. No embeddings, no vector database, no model to run recall.
+- Offline & private: the memory is a local file you own — no server, no cloud, no API key, no telemetry.
+- Zero-dependency: pure Node, identical on Windows, macOS and Linux.
+- Any language: keys and values in any language; recall is language-agnostic.
+- Per-author: on a shared project, teammates' personal facts never overwrite each other.
+- Bounded footprint: a hard cap keeps the context cost flat (O(1), not O(n)).
+- The Cortex: your whole memory drawn as a local HTML brain (`npx corvusmem --cortex`).
+
+## Optional
+- [llms-full.txt](https://corvusmem.vercel.app/llms-full.txt): the full product explanation (install, CLI, how memory works, the Cortex, benchmarks, license) in one file.
