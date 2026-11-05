@@ -188,4 +188,26 @@ const switchLabel = otherLang.toUpperCase();
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') setOpen(false);
   });
+
+  // In-page anchors: smooth-scroll to the section WITHOUT writing the hash to the URL.
+  document.addEventListener('click', (e) => {
+    const link = (e.target as HTMLElement).closest('a[href]');
+    if (!link) return;
+    const href = link.getAttribute('href');
+    if (!href) return;
+    let url: URL;
+    try {
+      url = new URL(href, window.location.href);
+    } catch {
+      return;
+    }
+    // Only same-page links that point at an on-page element.
+    if (url.origin !== window.location.origin) return;
+    if (url.pathname !== window.location.pathname) return;
+    if (url.hash.length <= 1) return;
+    const target = document.querySelector(url.hash);
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
 </script>
