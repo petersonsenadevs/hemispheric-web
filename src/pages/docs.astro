@@ -12,6 +12,7 @@ const toc = [
   { id: 'what', label: 'What it is' },
   { id: 'install', label: 'Install' },
   { id: 'use', label: 'Using it' },
+  { id: 'migrate', label: 'Migrate' },
   { id: 'how', label: 'How it works' },
   { id: 'memory', label: 'The memory' },
   { id: 'footprint', label: 'Footprint' },
@@ -238,6 +239,39 @@ const pageDescription =
         <code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">--recall</code>/<code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">--recordar</code>).
         Keys and values work in any language — the memory is language-agnostic.
       </p>
+    </div>
+  </section>
+
+  <!-- Migrate existing memory -->
+  <section id="migrate" class="scroll-mt-20 border-b border-border">
+    <div class="mx-auto max-w-5xl px-6 py-16 sm:px-8 lg:px-12" data-reveal>
+      <h2 class="font-display text-3xl text-foreground sm:text-4xl">Already have notes? Bring them in</h2>
+      <p class="mt-5 max-w-3xl text-lg leading-relaxed text-muted">
+        If your project already carries memory — a <code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">CLAUDE.md</code>,
+        an <code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">AGENTS.md</code>, Cursor or Copilot
+        rules, or plain notes in <code class="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-foreground">docs/</code> —
+        you don't start over. Corvus finds them and absorbs what matters, so a teammate adopting it keeps everything already written.
+      </p>
+
+      <div class="mt-8 max-w-3xl space-y-7">
+        <div>
+          <h3 class="font-display text-xl text-foreground">1 · See what's there</h3>
+          <p class="mt-2 leading-relaxed text-muted">
+            A deterministic, read-only scan. It lists the known agent-memory files and any other markdown in
+            subfolders that might hold memory, leaving boilerplate (README, CHANGELOG, LICENSE) out.
+          </p>
+          <div class="mt-3"><CopyCommand cmd="npx corvusmem import" /></div>
+        </div>
+        <div>
+          <h3 class="font-display text-xl text-foreground">2 · Absorb it</h3>
+          <p class="mt-2 leading-relaxed text-muted">
+            Inside Claude Code, run the command below. Your agent reads what the scan found, decides what is
+            durable memory, asks you — in your own language — about anything unclear, and saves it. Your original
+            files are left untouched.
+          </p>
+          <div class="mt-3"><CopyCommand cmd="/corvus-absorb" /></div>
+        </div>
+      </div>
     </div>
   </section>
 
