@@ -1,11 +1,13 @@
 ---
 import CopyCommand from '../CopyCommand.astro';
-import { getLang, useTranslations, localizedPath } from '../../i18n/utils';
+import { getLang, useTranslations } from '../../i18n/utils';
 
 const lang = getLang(Astro.currentLocale);
 const t = useTranslations(lang);
-// Install command: global by default (hooks on in every project; memory stays per-repo).
-const INSTALL_CMD = 'npx corvusmem install --global';
+// Native plugin first (Claude Code / Codex). npx is the fallback for agents without plugins.
+const CLAUDE_MKT = '/plugin marketplace add petersonsenadevs/corvusmem';
+const CLAUDE_INSTALL = '/plugin install corvusmem@corvusmem';
+const NPX_CMD = 'npx corvusmem install --global';
 // Obsidian retirado: descartado como anfitrion (no prometer lo que no hay).
 const hosts = ['Claude Code', 'Codex', 'Standalone'];
 ---
@@ -20,19 +22,37 @@ const hosts = ['Claude Code', 'Codex', 'Standalone'];
         {t('quick.body')}
       </p>
 
-      <div class="mt-8 w-full max-w-xl space-y-6 text-left">
-        <div>
-          <p class="font-mono text-xs tracking-widest text-accent uppercase">{t('quick.pluginLabel')}</p>
+      <div class="mt-8 w-full max-w-xl space-y-5 text-left">
+        {/* 1 — Claude Code: the native plugin, front and center */}
+        <div class="rounded-lg border border-accent/40 bg-accent/[0.04] p-5">
+          <p class="flex items-center gap-2 font-mono text-xs tracking-widest text-accent uppercase">
+            {t('quick.claudeLabel')}
+            <span class="rounded-full bg-accent px-2 py-0.5 text-[0.65rem] font-semibold tracking-normal text-on-accent normal-case">
+              {t('quick.claudeTag')}
+            </span>
+          </p>
           <div class="mt-3 space-y-2">
-            <CopyCommand cmd="/plugin marketplace add petersonsenadevs/corvusmem" />
-            <CopyCommand cmd="/plugin install corvusmem@corvusmem" />
+            <CopyCommand cmd={CLAUDE_MKT} />
+            <CopyCommand cmd={CLAUDE_INSTALL} />
           </div>
         </div>
-        <div>
-          <p class="font-mono text-xs tracking-widest text-accent uppercase">{t('quick.npxLabel')}</p>
+
+        {/* 2 — Codex: the same plugin */}
+        <div class="rounded-lg border border-border p-5">
+          <p class="font-mono text-xs tracking-widest text-accent uppercase">{t('quick.codexLabel')}</p>
+          <p class="mt-2 text-sm leading-relaxed text-muted">{t('quick.codexNote')}</p>
           <div class="mt-3">
-            <CopyCommand cmd={INSTALL_CMD} />
+            <CopyCommand cmd={CLAUDE_MKT} />
           </div>
+        </div>
+
+        {/* 3 — npx: third plane, de-emphasized */}
+        <div class="pt-1 opacity-75 transition-opacity hover:opacity-100">
+          <p class="font-mono text-[0.7rem] tracking-widest text-subtle uppercase">{t('quick.npxLabel')}</p>
+          <div class="mt-2">
+            <CopyCommand cmd={NPX_CMD} class="border-dashed text-muted" />
+          </div>
+          <p class="mt-2 text-xs leading-relaxed text-subtle">{t('quick.npxNote')}</p>
         </div>
       </div>
 

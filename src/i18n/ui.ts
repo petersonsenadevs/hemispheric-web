@@ -59,8 +59,12 @@ export const ui = {
 
     'quick.title': 'Plug it in where you already work.',
     'quick.body': 'No account, no cloud, no API key — the hook writes to a local file you own.',
-    'quick.pluginLabel': 'Claude Code & Codex — as a plugin',
+    'quick.claudeLabel': 'Claude Code — as a plugin',
+    'quick.claudeTag': 'Recommended',
+    'quick.codexLabel': 'Codex — the same plugin',
+    'quick.codexNote': 'Add the same marketplace in the Codex app and approve the hooks — Codex consumes the very same plugin.',
     'quick.npxLabel': 'Any other agent, or a quick trial',
+    'quick.npxNote': 'Fallback for agents without plugins. The plugin above is faster — no npx cold start.',
     'quick.docs': 'Full docs',
 
     'open.title': 'Free for you. Fair for everyone.',
@@ -127,8 +131,12 @@ export const ui = {
 
     'quick.title': 'Enchúfalo donde ya trabajas.',
     'quick.body': 'Sin cuenta, sin nube, sin API key — el hook escribe en un archivo local que posees.',
-    'quick.pluginLabel': 'Claude Code y Codex — como plugin',
+    'quick.claudeLabel': 'Claude Code — como plugin',
+    'quick.claudeTag': 'Recomendado',
+    'quick.codexLabel': 'Codex — el mismo plugin',
+    'quick.codexNote': 'Añade el mismo marketplace en la app de Codex y aprueba los hooks — Codex consume el mismo plugin.',
     'quick.npxLabel': 'Cualquier otro agente, o para probar',
+    'quick.npxNote': 'Alternativa para agentes sin plugins. El plugin de arriba es más rápido — sin arranque de npx.',
     'quick.docs': 'Documentación',
 
     'open.title': 'Gratis para ti. Justo para todos.',

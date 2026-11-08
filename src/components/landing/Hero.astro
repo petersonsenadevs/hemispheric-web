@@ -7,8 +7,9 @@ import { getLang, useTranslations } from '../../i18n/utils';
 
 const lang = getLang(Astro.currentLocale);
 const t = useTranslations(lang);
-// Install command shown in the hero: global by default (hooks on in every project; memory stays per-repo).
-const INSTALL_CMD = 'npx corvusmem install --global';
+// Install shown in the hero: the native Claude Code plugin (the recommended path). Codex + npx live in #install.
+const CLAUDE_MKT = '/plugin marketplace add petersonsenadevs/corvusmem';
+const CLAUDE_INSTALL = '/plugin install corvusmem@corvusmem';
 ---
 
 <section
@@ -52,7 +53,10 @@ const INSTALL_CMD = 'npx corvusmem install --global';
         {t('hero.install')}
       </a>
 
-      <CopyCommand cmd={INSTALL_CMD} />
+      <div class="flex w-full flex-col items-start gap-2">
+        <CopyCommand cmd={CLAUDE_MKT} />
+        <CopyCommand cmd={CLAUDE_INSTALL} />
+      </div>
 
       <a
         href="#demo"
