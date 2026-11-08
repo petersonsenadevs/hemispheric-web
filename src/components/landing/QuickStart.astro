@@ -20,8 +20,20 @@ const hosts = ['Claude Code', 'Codex', 'Standalone'];
         {t('quick.body')}
       </p>
 
-      <div class="mt-8">
-        <CopyCommand cmd={INSTALL_CMD} />
+      <div class="mt-8 w-full max-w-xl space-y-6 text-left">
+        <div>
+          <p class="font-mono text-xs tracking-widest text-accent uppercase">{t('quick.pluginLabel')}</p>
+          <div class="mt-3 space-y-2">
+            <CopyCommand cmd="/plugin marketplace add petersonsenadevs/corvusmem" />
+            <CopyCommand cmd="/plugin install corvusmem@corvusmem" />
+          </div>
+        </div>
+        <div>
+          <p class="font-mono text-xs tracking-widest text-accent uppercase">{t('quick.npxLabel')}</p>
+          <div class="mt-3">
+            <CopyCommand cmd={INSTALL_CMD} />
+          </div>
+        </div>
       </div>
 
       <ul class="mt-8 flex flex-wrap justify-center gap-2" aria-label="Supported hosts" data-stagger>

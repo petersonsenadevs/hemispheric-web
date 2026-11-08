@@ -58,7 +58,9 @@ export const ui = {
     'bench.full': 'See full benchmarks',
 
     'quick.title': 'Plug it in where you already work.',
-    'quick.body': 'One command. No account, no cloud, no API key — the hook writes to a local file you own.',
+    'quick.body': 'No account, no cloud, no API key — the hook writes to a local file you own.',
+    'quick.pluginLabel': 'Claude Code & Codex — as a plugin',
+    'quick.npxLabel': 'Any other agent, or a quick trial',
     'quick.docs': 'Full docs',
 
     'open.title': 'Free for you. Fair for everyone.',
@@ -124,7 +126,9 @@ export const ui = {
     'bench.full': 'Ver todos los benchmarks',
 
     'quick.title': 'Enchúfalo donde ya trabajas.',
-    'quick.body': 'Un comando. Sin cuenta, sin nube, sin API key — el hook escribe en un archivo local que posees.',
+    'quick.body': 'Sin cuenta, sin nube, sin API key — el hook escribe en un archivo local que posees.',
+    'quick.pluginLabel': 'Claude Code y Codex — como plugin',
+    'quick.npxLabel': 'Cualquier otro agente, o para probar',
     'quick.docs': 'Documentación',
 
     'open.title': 'Gratis para ti. Justo para todos.',
