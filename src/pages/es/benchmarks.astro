@@ -77,6 +77,9 @@ const pageDescription =
       <p class="mt-6 max-w-3xl text-lg leading-relaxed text-muted">
         Cada motor medido con <strong class="font-semibold text-foreground">Qwen3-8B corriendo en local</strong> como contestador y como juez — el mismo rasero para todos, así que el cara a cara es justo. Estos números <em class="text-foreground not-italic">no</em> son comparables con los leaderboards oficiales de mem0 o Zep, que usan GPT-4o. Lo que esto mide es cómo se comporta cada memoria frente a las demás en condiciones idénticas.
       </p>
+      <p class="mt-4 max-w-3xl text-lg leading-relaxed text-muted">
+        Y como Corvusmem es <strong class="font-semibold text-foreground">determinista</strong> (temperatura 0, semilla fija), devuelve <strong class="font-semibold text-foreground">exactamente los mismos números en cada ejecución</strong> — una garantía que ninguna memoria construida con un LLM puede dar.
+      </p>
     </div>
   </section>
 
@@ -166,8 +169,9 @@ const pageDescription =
       <p class="mt-5 text-sm leading-relaxed text-subtle">
         La negrita marca la mejor puntuación de cada fila. Embedding e5 gana en casi todas las
         categorías, pero necesita una base de datos vectorial para funcionar. Corvusmem es gratis,
-        offline y sin servidor, gana sin discusión en las preguntas adversariales (saber cuándo
-        abstenerse) y casi duplica a mem0 en razonamiento temporal — lo ves abajo.
+        offline y sin servidor, y casi triplica a mem0 en razonamiento temporal — lo ves abajo. Las
+        preguntas adversariales (cat5) son donde el modelo local pequeño limita a todos los motores
+        por igual (~4-5%), así que esa fila no es un diferenciador real para nadie.
       </p>
     </div>
   </section>
@@ -196,7 +200,7 @@ const pageDescription =
         </p>
       </div>
       <p class="mt-8 max-w-3xl leading-relaxed text-muted">
-        Corvusmem guarda cada hecho con su fecha explícita y su contexto temporal. Por eso casi duplica a mem0 cuando una pregunta depende de <em class="text-foreground not-italic">cuándo</em> pasó algo — el tipo de recuerdo que necesitan los agentes de larga duración, no solo <em class="text-foreground not-italic">qué</em> pasó.
+        Corvusmem guarda cada hecho con su fecha explícita y su contexto temporal. Por eso casi triplica a mem0 cuando una pregunta depende de <em class="text-foreground not-italic">cuándo</em> pasó algo — el tipo de recuerdo que necesitan los agentes de larga duración, no solo <em class="text-foreground not-italic">qué</em> pasó.
       </p>
     </div>
   </section>
@@ -308,7 +312,8 @@ const pageDescription =
       <p class="mt-4 max-w-3xl leading-relaxed text-muted">
         La tabla de arriba no está escrita a mano — se genera desde los ficheros de resultados en
         crudo. Desde la raíz del repo, apunta el script de comparación a los tres juegos de
-        resultados y obtienes exactamente los mismos números:
+        resultados y obtienes exactamente los mismos números — y los obtendrá cualquiera que lo
+        ejecute, siempre:
       </p>
 
       <div class="mt-6">

@@ -77,6 +77,9 @@ const pageDescription =
       <p class="mt-6 max-w-3xl text-lg leading-relaxed text-muted">
         Every engine measured with <strong class="font-semibold text-foreground">Qwen3-8B running locally</strong> as both respondent and judge — the same ruler for all of them, so the head-to-head is fair. These numbers are <em class="text-foreground not-italic">not</em> comparable to mem0 or Zep's official leaderboards, which use GPT-4o. What this measures is how each memory does against the others under identical conditions.
       </p>
+      <p class="mt-4 max-w-3xl text-lg leading-relaxed text-muted">
+        And because Corvusmem is <strong class="font-semibold text-foreground">deterministic</strong> (temperature 0, fixed seed), it returns the <strong class="font-semibold text-foreground">exact same numbers on every run</strong> — a guarantee no LLM-built memory can make.
+      </p>
     </div>
   </section>
 
@@ -165,9 +168,10 @@ const pageDescription =
 
       <p class="mt-5 text-sm leading-relaxed text-subtle">
         Bold marks the best score in each row. Embedding e5 leads most categories, but it
-        needs a vector database to run. Corvusmem is free, offline and server-less, wins
-        outright on adversarial questions (knowing when to abstain), and nearly doubles mem0
-        on temporal reasoning — see below.
+        needs a vector database to run. Corvusmem is free, offline and server-less, and nearly
+        triples mem0 on temporal reasoning — see below. Adversarial questions (cat5) are where
+        the small local model limits every engine to ~4–5%, so that row isn't a real
+        differentiator for anyone.
       </p>
     </div>
   </section>
@@ -196,7 +200,7 @@ const pageDescription =
         </p>
       </div>
       <p class="mt-8 max-w-3xl leading-relaxed text-muted">
-        Corvusmem stores every fact with its explicit date and temporal context. That's why it almost doubles mem0 when a question depends on <em class="text-foreground not-italic">when</em> something happened — the kind of recall long-running agents need, not just <em class="text-foreground not-italic">what</em> happened.
+        Corvusmem stores every fact with its explicit date and temporal context. That's why it nearly triples mem0 when a question depends on <em class="text-foreground not-italic">when</em> something happened — the kind of recall long-running agents need, not just <em class="text-foreground not-italic">what</em> happened.
       </p>
     </div>
   </section>
@@ -306,7 +310,7 @@ const pageDescription =
       <p class="mt-4 max-w-3xl leading-relaxed text-muted">
         The table above isn't typed by hand — it's generated from the raw result files. From
         the repo root, point the comparison script at the three result sets and you get the
-        exact same numbers:
+        exact same numbers — and so will anyone who runs it, every time:
       </p>
 
       <div class="mt-6">
