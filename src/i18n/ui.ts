@@ -66,6 +66,7 @@ export const ui = {
     'quick.npxLabel': 'Any other agent, or a quick trial',
     'quick.npxNote': 'Fallback for agents without plugins. The plugin above is faster — no npx cold start.',
     'quick.docs': 'Full docs',
+    'quick.req': 'Requires Node 18 or newer — Corvusmem will not run on older Node.',
 
     'open.title': 'Free for you. Fair for everyone.',
     'open.body': 'Free for personal and non-commercial use under PolyForm Noncommercial. Using it inside a company or a paid product needs a commercial license. Zero telemetry — your memory lives in local files you own.',
@@ -138,6 +139,7 @@ export const ui = {
     'quick.npxLabel': 'Cualquier otro agente, o para probar',
     'quick.npxNote': 'Alternativa para agentes sin plugins. El plugin de arriba es más rápido — sin arranque de npx.',
     'quick.docs': 'Documentación',
+    'quick.req': 'Requiere Node 18 o superior — Corvusmem no arranca con un Node anterior.',
 
     'open.title': 'Gratis para ti. Justo para todos.',
     'open.body': 'Gratis para uso personal y no comercial bajo PolyForm Noncommercial. Usarlo dentro de una empresa o un producto de pago necesita una licencia comercial. Cero telemetría — tu memoria vive en archivos locales que posees.',
